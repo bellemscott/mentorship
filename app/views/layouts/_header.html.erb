@@ -3,8 +3,10 @@
         <%= link_to "home", '/', id: "logo" %>
         <nav>
           <% if logged_in? %>
-            <ul class="nav navbar-right ">
-              <li><%= link_to "Log out", logout_path, class: "mx-2", method: :delete %></li> 
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+              <li><%= link_to "Mentors", mentors_path, method: :get %></li> 
+              <li><%= link_to "Mentees", mentees_path, method: :get %></li> 
             </ul>
           <% else %>
             <ul class="nav navbar-right ">

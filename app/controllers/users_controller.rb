@@ -21,13 +21,30 @@ class UsersController < ApplicationController
   def edit
   end
 
+  # def additional_mentor
+  #   render 'additional_mentor'
+  # end
+
+  # def additional_mentee
+  #   render 'additional_mentee'
+  # end
+
+  # def additional_both
+  #   render 'additional_both'
+  # end
   # POST /users or /users.json
+
   def create
+    #if logic -- redirect to respective form (in partials)
     @user = User.new(user_params)
+    # puts params #params :mentor 
+    # puts user_params
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the app!"
-      redirect_to @user
+      redirect_to root_url
+      # if params blah blah logic 
+      #   redirect_to mentor_additional_info_path
     else
       render 'new'
     end

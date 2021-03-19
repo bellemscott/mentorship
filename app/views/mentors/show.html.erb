@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Area of expertise:</strong>
+  <%= @mentor.area_of_expertise %>
+</p>
+
+<p>
+  <strong>Prefferd method of contact:</strong>
+  <%= @mentor.prefferd_method_of_contact %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @mentor.school %>
+</p>
+
+<p>
+  <strong>Current position:</strong>
+  <%= @mentor.current_position %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @mentor.location %>
+</p>
+
+<p>
+  <strong>Length of mentorship:</strong>
+  <%= @mentor.length_of_mentorship %>
+</p>
+
+<%= link_to 'Edit', edit_mentor_path(@mentor) %> |
+<%= link_to 'Back', mentors_path %>

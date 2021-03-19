@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Major:</strong>
+  <%= @mentee.major %>
+</p>
+
+<p>
+  <strong>Area of interest:</strong>
+  <%= @mentee.area_of_interest %>
+</p>
+
+<p>
+  <strong>Preffered method of contact:</strong>
+  <%= @mentee.preffered_method_of_contact %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @mentee.location %>
+</p>
+
+<p>
+  <strong>Length of mentorship:</strong>
+  <%= @mentee.length_of_mentorship %>
+</p>
+
+<p>
+  <strong>Graduation year:</strong>
+  <%= @mentee.graduation_year %>
+</p>
+
+<%= link_to 'Edit', edit_mentee_path(@mentee) %> |
+<%= link_to 'Back', mentees_path %>

@@ -1,0 +1,47 @@
+<%= form_with(model: mentor) do |form| %>
+  <% if mentor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mentor.errors.count, "error") %> prohibited this mentor from being saved:</h2>
+
+      <ul>
+        <% mentor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :area_of_expertise %>
+    <%= form.text_field :area_of_expertise %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prefferd_method_of_contact %>
+    <%= form.text_field :prefferd_method_of_contact %>
+  </div>
+
+  <div class="field">
+    <%= form.label :school %>
+    <%= form.text_field :school %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_position %>
+    <%= form.text_field :current_position %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length_of_mentorship %>
+    <%= form.number_field :length_of_mentorship %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

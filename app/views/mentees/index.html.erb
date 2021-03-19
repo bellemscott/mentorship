@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mentees</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Major</th>
+      <th>Area of interest</th>
+      <th>Preffered method of contact</th>
+      <th>Location</th>
+      <th>Length of mentorship</th>
+      <th>Graduation year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @mentees.each do |mentee| %>
+      <tr>
+        <td><%= mentee.major %></td>
+        <td><%= mentee.area_of_interest %></td>
+        <td><%= mentee.preffered_method_of_contact %></td>
+        <td><%= mentee.location %></td>
+        <td><%= mentee.length_of_mentorship %></td>
+        <td><%= mentee.graduation_year %></td>
+        <td><%= link_to 'Show', mentee %></td>
+        <td><%= link_to 'Edit', edit_mentee_path(mentee) %></td>
+        <td><%= link_to 'Destroy', mentee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Mentee', new_mentee_path %>
