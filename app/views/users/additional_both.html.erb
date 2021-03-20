@@ -1,1 +1,5 @@
-render both partial forms
+<h1>New Mentee</h1>
+<%= render 'mentee_form', mentee: @mentee %>
+<h1>New Mentor</h1>
+<%= render 'mentor_form', mentor: @mentor %>
+<%= link_to 'Back', users_path %>

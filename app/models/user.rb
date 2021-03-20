@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     attr_accessor :remember_token
+    has_many :mentors     #not sure
+    has_many :mentees
     has_secure_password
     before_save { self.email = email.downcase }
     validates :firstname, presence: true

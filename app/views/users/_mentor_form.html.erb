@@ -1,0 +1,47 @@
+<%= form_with(model: mentor) do |form| %>
+  <% if mentor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mentor.errors.count, "error") %> prohibited this mentee from being saved:</h2>
+
+      <ul>
+        <% mentor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :area_of_expertise %>
+    <%= form.text_field :area_of_expertise, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :prefferd_method_of_contact, "Preffered Method of Contact" %>
+    <%= form.text_field :prefferd_method_of_contact, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :school, "Current School or Alma Mater" %>
+    <%= form.text_field :school, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :current_position %>
+    <%= form.text_field :current_position, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length_of_mentorship, "Length of mentorship desired" %>
+    <%= form.number_field :length_of_mentorship, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: 'mb-1 form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Create account" %>
+  </div>
+<% end %>

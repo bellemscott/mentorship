@@ -21,8 +21,9 @@ class MenteesController < ApplicationController
 
   # POST /mentees or /mentees.json
   def create
+    puts mentee_params
     @mentee = Mentee.new(mentee_params)
-
+    #puts
     respond_to do |format|
       if @mentee.save
         format.html { redirect_to @mentee, notice: "Mentee was successfully created." }

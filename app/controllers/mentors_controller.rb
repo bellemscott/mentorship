@@ -4,6 +4,7 @@ class MentorsController < ApplicationController
   # GET /mentors or /mentors.json
   def index
     @mentors = Mentor.all
+    #@users = User.all
   end
 
   # GET /mentors/1 or /mentors/1.json
@@ -21,8 +22,14 @@ class MentorsController < ApplicationController
 
   # POST /mentors or /mentors.json
   def create
+    # @user = @users.last
     @mentor = Mentor.new(mentor_params)
-
+    @users = User.all
+    @user = @users.last
+    puts @user.id
+    @mentor[:user_id] = @user.id
+    # @mentor[:user_id] = @user.id
+    # puts mentor_params
     respond_to do |format|
       if @mentor.save
         format.html { redirect_to @mentor, notice: "Mentor was successfully created." }
@@ -64,6 +71,6 @@ class MentorsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mentor_params
-      params.require(:mentor).permit(:area_of_expertise, :prefferd_method_of_contact, :school, :current_position, :location, :length_of_mentorship)
+      params.require(:mentor).permit(:user_id, :area_of_expertise, :prefferd_method_of_contact, :school, :current_position, :location, :length_of_mentorship)
     end
 end
