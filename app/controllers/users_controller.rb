@@ -28,10 +28,13 @@ class UsersController < ApplicationController
   end
 
   def additional_mentee
+    @mentee = Mentee.new()
     render 'additional_mentee'
   end
 
   def additional_both
+    @mentor = Mentor.new()
+    @mentee = Mentee.new()
     render 'additional_both'
   end
   # POST /users or /users.json
