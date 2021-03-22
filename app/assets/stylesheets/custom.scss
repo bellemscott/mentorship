@@ -1,3 +1,4 @@
+$primary: #003478;
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -52,12 +53,28 @@ h1, h2, h3, h4, h5, h6 {
     float: left;
     margin-right: 10px;
     font-size: 1.7em;
-    color: grey;
+    color: rgb(255, 255, 255);
     letter-spacing: -1px;
-    padding-top: 13px;
+    text-align: center;
+    padding-top: 18px;
   }
   
   #logo:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #links {
+    float: right;
+    margin-right: 10px;
+    font-size: 1.3em;
+    color: rgb(255, 255, 255);
+    letter-spacing: -1px;
+    text-align: center;
+    padding-top: 28px;
+  }
+  
+  #links:hover {
     color: #fff;
     text-decoration: none;
   }
@@ -174,5 +191,40 @@ input, textarea, select, .uneditable-input {
     width: auto;
     margin-left: 0;
   }
+
+  .container {
+    color: #003478;
+    
+  }
+
+  header {
+    background:transparent
+  }
+
+  .change {
+    background:transparent
+  }
+
+  .btn-primary {
+    background-color: #003478 !important;
+    border-color: #003478 !important;
+  }
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-primary:visited,
+  .btn-primary:focus {
+    background-color: DarkBlue !important;
+    border-color: DarkBlue !important;
+  }
+
+  .login  {
+    background-color: #003478;
+    color: white;   
+}
+
+.login:hover {
+  background-color: white 
+  
+}
 
 }

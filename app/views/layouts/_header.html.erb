@@ -1,19 +1,23 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header style ="background:#003478" class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar-inner">
       <div class="container">
-        <%= link_to "home", '/', id: "logo" %>
+        <%= link_to "Home", '/', id: "logo" %>
         <nav>
           <% if logged_in? %>
             <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Profile", profile_path, method: :get %></li> 
               <li><%= link_to "Log out", logout_path, method: :delete %></li> 
               <li><%= link_to "Mentors", mentors_path, method: :get %></li> 
               <li><%= link_to "Mentees", mentees_path, method: :get %></li> 
             </ul>
           <% else %>
-            <ul class="nav navbar-right ">
-              <li><%= link_to "Log in", login_path, class: "mx-2" %></li> 
-              <li><%= link_to "Sign up", signup_path, class: "mx-2" %></li>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Log in", login_path  %></li> 
+              <li><%= link_to "Sign up", signup_path  %></li>
             </ul>
           <% end %>
         </nav>
+        </div>
       </div>
-    </header> 
+    </div>
+</header> 

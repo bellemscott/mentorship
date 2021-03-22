@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   # GET /users/new
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
         additional_mentee()
       else
-        redirect_to root_url
+        redirect_to profile_path
       end
     else
       render 'new'

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :mentors
   resources :users
   root 'welcome#index'
-  get  '/signup',  to: 'users#new'
+  post  '/signup',  to: 'users#new'
+  get  '/profile',  to: 'users#show'
   get    '/login',   to: 'sessions#new'
   get     '/additional-info', to: 'users#additional_info'
   post   '/login',   to: 'sessions#create'
