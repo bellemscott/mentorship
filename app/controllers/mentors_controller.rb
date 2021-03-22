@@ -28,7 +28,7 @@ class MentorsController < ApplicationController
     @user = @users.last
     @mentor[:user_id] = @user.id
     # @mentor[:user_id] = @user.id
-    # puts mentor_params
+    puts  "im in the mentor controller create"
     respond_to do |format|
       if @mentor.save
         format.html { redirect_to @mentor, notice: "Mentor was successfully created." }

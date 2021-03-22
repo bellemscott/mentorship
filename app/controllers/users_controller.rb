@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def additional_mentee
+    puts "im at additional mentee"
     @mentee = Mentee.new()
     render 'additional_mentee'
   end
