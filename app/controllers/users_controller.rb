@@ -54,7 +54,7 @@ class UsersController < ApplicationController
         additional_mentor()
         #redirect_to '/mentors/new'
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
-        @user.additional_mentee(user_params)
+        additional_mentee()
       else
         redirect_to root_url
       end

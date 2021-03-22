@@ -21,9 +21,10 @@ class MenteesController < ApplicationController
 
   # POST /mentees or /mentees.json
   def create
-    puts mentee_params
     @mentee = Mentee.new(mentee_params)
-    #puts
+    @users=User.all
+    @user=@users.last
+    @mentee[:user_id] = @user.id
     respond_to do |format|
       if @mentee.save
         format.html { redirect_to @mentee, notice: "Mentee was successfully created." }
@@ -50,7 +51,6 @@ class MenteesController < ApplicationController
 
   # DELETE /mentees/1 or /mentees/1.json
   def destroy
-    @mentee = Mentee.find(params[:id])
     @mentee.destroy
     respond_to do |format|
       format.html { redirect_to mentees_url, notice: "Mentee was successfully destroyed." }
@@ -66,6 +66,6 @@ class MenteesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mentee_params
-      params.require(:mentee).permit(:major, :area_of_interest, :preffered_method_of_contact, :location, :length_of_mentorship, :graduation_year)
+      params.require(:mentee).permit(:user_id,:major, :area_of_interest, :preffered_method_of_contact, :location, :length_of_mentorship, :graduation_year)
     end
 end

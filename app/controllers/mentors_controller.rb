@@ -26,7 +26,6 @@ class MentorsController < ApplicationController
     @mentor = Mentor.new(mentor_params)
     @users = User.all
     @user = @users.last
-    puts @user.id
     @mentor[:user_id] = @user.id
     # @mentor[:user_id] = @user.id
     # puts mentor_params
