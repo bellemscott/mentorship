@@ -32,8 +32,6 @@ class MenteesController < ApplicationController
         if current_user.mentor && current_user.mentee
           @mentor = Mentor.new()
           format.html { render 'additional_mentor'}
-          #redirect_to 'mentors/mentor_form'
-          #render 'mentor_form', mentor: @mentor
         else
           format.html { redirect_to @mentee, notice: "Mentee was successfully created." }
           format.json { render :show, status: :created, location: @mentee }
