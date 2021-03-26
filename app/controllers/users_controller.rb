@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   def additional_both
     @mentor = Mentor.new()
     @mentee = Mentee.new()
+    @both = true
     render 'additional_both'
   end
   # POST /users or /users.json
@@ -50,7 +51,7 @@ class UsersController < ApplicationController
       puts user_params[:mentor]
       puts "helooooooo"
       if user_params[:mentor] == "1" && user_params[:mentee] == "1" 
-        @user.additional_both(user_params)
+        additional_both()
       elsif user_params[:mentor] == "1" && user_params[:mentee] == "0"
         additional_mentor()
         #redirect_to '/mentors/new'
