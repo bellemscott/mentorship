@@ -28,16 +28,8 @@ class MentorsController < ApplicationController
     @users = User.all
     @user = @users.last
     @mentor[:user_id] = @user.id
-    # @mentor[:user_id] = @user.id
-    puts  "im in the mentor controller create"
-    respond_to do |format|
-      if @mentor.save
-        format.html { redirect_to @mentor, notice: "Mentor was successfully created." }
-        format.json { render :show, status: :created, location: @mentor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @mentor.errors, status: :unprocessable_entity }
-      end
+    if @mentor.save
+      redirect_to matches_path
     end
   end
 

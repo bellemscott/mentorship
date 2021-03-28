@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Matches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Mentee_id</th>
+      <th>Mentor_id</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% matches_array = @matches_for_user[current_user.id] %>
+    <% matches_array.each do |match| %>
+
+      <tr>
+      <% puts match %>
+        <td><%= match.mentee_id %></td>  <%# mentee id%>
+        <td><%= match.mentor_id %></td>   <%# mentor id%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

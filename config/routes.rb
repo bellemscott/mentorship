@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
   get '/userprofile/:id', to: 'users#show', as: 'userprofile'
+  #post  '/signup',  to: 'users#new'
   get    '/login',   to: 'sessions#new'
   get    '/explore',   to: 'welcome#show'
   get     '/additional-info', to: 'users#additional_info'

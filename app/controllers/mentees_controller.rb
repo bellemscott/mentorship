@@ -1,6 +1,7 @@
 class MenteesController < ApplicationController
   before_action :set_mentee, only: %i[ show edit update destroy ]
   # GET /mentees or /mentees.json
+  require 'matches_controller.rb'
   def index
     @mentees = Mentee.all
   end
@@ -28,22 +29,16 @@ class MenteesController < ApplicationController
     puts mentee_params
     puts current_user.mentee
     puts current_user.mentor
-    respond_to do |format|
-      if @mentee.save
-        if current_user.mentor && current_user.mentee
-          @mentor = Mentor.new()
-          format.html { render 'additional_mentor'}
-          #redirect_to 'mentors/mentor_form'
-          #render 'mentor_form', mentor: @mentor
-        else
-          format.html { redirect_to @mentee, notice: "Mentee was successfully created." }
-          format.json { render :show, status: :created, location: @mentee }
-        end
+    #respond_to do |format|
+    if @mentee.save
+      if current_user.mentor && current_user.mentee
+        @mentor = Mentor.new()
+        render 'additional_mentor'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @mentee.errors, status: :unprocessable_entity }
+        redirect_to matches_path
+        end
       end
-    end
+    #end
   end
 
   # PATCH/PUT /mentees/1 or /mentees/1.json

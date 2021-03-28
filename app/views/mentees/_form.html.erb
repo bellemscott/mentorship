@@ -2,8 +2,6 @@
 <div class="row center">
   <div class="col-md-6 col-md-offset-3">
 <%= form_with(model: mentee) do |form| %>
-  <% puts "mentee form" %>
-  <% puts @both%>
   <% if mentee.errors.any? %>
     <div id=“error_explanation”>
       <h2><%= pluralize(mentee.errors.count, “error”) %> prohibited this mentee from being saved:</h2>

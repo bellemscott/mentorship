@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_214157) do
     t.bigint "mentee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
     t.index ["mentee_id"], name: "index_matches_on_mentee_id"
     t.index ["mentor_id"], name: "index_matches_on_mentor_id"
   end
@@ -57,11 +58,11 @@ ActiveRecord::Schema.define(version: 2021_03_27_214157) do
     t.string "area_of_interest"
     t.string "preffered_method_of_contact"
     t.string "location"
-    t.string "length_of_mentorship"
     t.string "graduation_year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "length_of_mentorship"
   end
 
   create_table "mentors", force: :cascade do |t|
