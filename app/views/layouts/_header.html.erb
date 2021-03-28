@@ -1,16 +1,27 @@
 <header style ="background:#003478" class="navbar navbar-fixed-top navbar-inverse">
 <div class="navbar-inner">
       <div class="container">
-        <%= link_to "Home", '/', id: "logo" %>
         <nav>
           <% if logged_in? %>
+          <%= link_to "Explore", explore_path, id: "logo" %>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Profile", profile_path, method: :get %></li> 
+            <% @mentee = Mentee.find_by(user_id: current_user.id) %>
+            <% @mentor = Mentor.find_by(user_id: current_user.id) %>
+            <% if @mentee.nil? && @mentor.nil?%>
               <li><%= link_to "Log out", logout_path, method: :delete %></li> 
-              <li><%= link_to "Mentors", mentors_path, method: :get %></li> 
-              <li><%= link_to "Mentees", mentees_path, method: :get %></li> 
+            <% elsif current_user.mentee? %>
+              <li><%= link_to "Profile", menteeprofile_path(@mentee), method: :get %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+            <% elsif current_user.mentor? %>
+              <li><%= link_to "Profile", mentorprofile_path(@mentor), method: :get %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+            <% else %>
+              <li><%= link_to "Profile", userprofile_path(current_user), method: :get %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
             </ul>
+            <% end %>
           <% else %>
+          <%= link_to "Home", '/', id: "logo" %>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Log in", login_path  %></li> 
               <li><%= link_to "Sign up", signup_path  %></li>

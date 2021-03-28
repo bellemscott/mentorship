@@ -1,3 +1,6 @@
+
+<div class="row center">
+  <div class="col-md-6 col-md-offset-3">
 <%= form_with(model: mentee) do |form| %>
   <% puts "mentee form" %>
   <% puts @both%>
@@ -11,31 +14,30 @@
       </ul>
     </div>
   <% end %>
-  <div class=“field”>
     <%= form.label :major %>
     <%= form.text_field :major %>
-  </div>
-  <div class=“field”>
+
     <%= form.label :area_of_interest %>
     <%= form.text_field :area_of_interest %>
-  </div>
-  <div class=“field”>
+
     <%= form.label :preffered_method_of_contact %>
     <%= form.text_field :preffered_method_of_contact %>
-  </div>
-  <div class=“field”>
+
     <%= form.label :location %>
     <%= form.text_field :location %>
-  </div>
-  <div class=“field”>
+
     <%= form.label :length_of_mentorship %>
     <%= form.text_field :length_of_mentorship %>
-  </div>
-  <div class=“field”>
+
     <%= form.label :graduation_year %>
     <%= form.text_field :graduation_year %>
-  </div>
+    
+    <%= form.label "Profile Photo" %>
+    <%= form.file_field :avatar %>
+
   <div class=“actions”>
     <%= form.submit %>
   </div>
 <% end %>
+</div>
+</div>

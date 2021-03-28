@@ -1,6 +1,10 @@
-<h1>Editing Mentee</h1>
+ <div class= "center jumbotron" style="background:white" >
+
+
+<h1 class='text-center'>Edit Profile</h1>
 
 <%= render 'form', mentee: @mentee %>
 
-<%= link_to 'Show', @mentee %> |
-<%= link_to 'Back', mentees_path %>
+<%= link_to 'Go to Profile', menteeprofile_path(@mentee) %>
+</div>
+</div>
