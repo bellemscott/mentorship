@@ -12,13 +12,14 @@
   </thead>
 
   <tbody>
-    <% @matches_for_user.each do |key,match| %>
-    <% if key == current_user %>
+    <% matches_array = @matches_for_user[current_user.id] %>
+    <% matches_array.each do |match| %>
+
       <tr>
-        <td><%= match.mentee_id %></td>
-        <td><%= match.mentor_id %></td>
+      <% puts match %>
+        <td><%= match.mentee_id %></td>  <%# mentee id%>
+        <td><%= match.mentor_id %></td>   <%# mentor id%>
       </tr>
-      <% end%>
     <% end %>
   </tbody>
 </table>
