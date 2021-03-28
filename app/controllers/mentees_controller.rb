@@ -29,22 +29,13 @@ class MenteesController < ApplicationController
     puts current_user.mentee
     puts current_user.mentor
     #respond_to do |format|
-      if @mentee.save
-        puts "In mentee controller, about to call match.create"
-       # match = Match.new()
-        #match.create()
+    if @mentee.save
+      if current_user.mentor && current_user.mentee
+        @mentor = Mentor.new()
+        render 'additional_mentor'
+      else
         redirect_to matches_path
-        #Match.create()
-        if current_user.mentor && current_user.mentee
-          @mentor = Mentor.new()
-          render 'additional_mentor'
-        # else
-        #   format.html { redirect_to @mentee, notice: "Mentee was successfully created." }
-          #format.json { render :show, status: :created, location: @mentee }
         end
-      # else
-      #   format.html { render :new, status: :unprocessable_entity }
-      #   format.json { render json: @mentee.errors, status: :unprocessable_entity }
       end
     #end
   end
