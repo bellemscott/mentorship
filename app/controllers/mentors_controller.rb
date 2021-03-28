@@ -31,6 +31,7 @@ class MentorsController < ApplicationController
     puts  "im in the mentor controller create"
     respond_to do |format|
       if @mentor.save
+        Match.create()
         format.html { redirect_to @mentor, notice: "Mentor was successfully created." }
         format.json { render :show, status: :created, location: @mentor }
       else
