@@ -12,11 +12,13 @@
   </thead>
 
   <tbody>
-    <% @matches_for_user.each do |match| %>
+    <% @matches_for_user.each do |key,match| %>
+    <% if key == current_user %>
       <tr>
         <td><%= match.mentee_id %></td>
         <td><%= match.mentor_id %></td>
       </tr>
+      <% end%>
     <% end %>
   </tbody>
 </table>
