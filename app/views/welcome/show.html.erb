@@ -7,7 +7,25 @@
 <body>
     <%= render 'layouts/header' %>
     <div class= "center jumbotron" style="background:white" >
-    <h1>Welcome to Brandeis Mentorship</h1>
+    <h1>Explore</h1>
+
+    <ol class="carousel-indicators">
+    <% if @user.mentee? %>
+        <% users = @mentors%>
+    <% elsif @user.mentor? %>
+        <% users = @mentees %>
+    <% end %>
+
+    <% users.each do |possible_match| %>
+        <li data-target='#MyCarousel' data-slide-to="#{n}" class="#{'active' if n == 0}"></li>    
+        <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <%= possible_match.major %>
+        </div>
+    <% end %>
+    </ol>
+
 </div>
+    </div>
 </body>
-</html>
+</html> 

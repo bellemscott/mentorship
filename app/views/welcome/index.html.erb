@@ -8,8 +8,9 @@
     <%= render 'layouts/header' %>
     <div class= "center jumbotron" style="background:white" >
     <h1>Welcome to Brandeis Mentorship</h1>
-    <%= link_to 'Sign Up', "/users/new", class: "btn btn-lg btn-primary" %> 
-    <%= link_to 'Login', login_path, class: "btn btn-lg btn-primary"%> 
+    <button class="btn btn-lg btn-primary text-light"> <%= link_to 'Sign Up', "/users/new" %> </button>
+    <button class="btn btn-lg btn-primary text-light"><%= link_to 'Login', login_path %> </button>
+
 </div>
 </body>
 </html>
