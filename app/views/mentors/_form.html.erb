@@ -2,7 +2,6 @@
   <% if mentor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(mentor.errors.count, "error") %> prohibited this mentor from being saved:</h2>
-
       <ul>
         <% mentor.errors.each do |error| %>
           <li><%= error.full_message %></li>

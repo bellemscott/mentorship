@@ -66,8 +66,8 @@
                     </div>
                       <div class="col-md-6">
                         <div class="profile-img">
-                        <% if @user.avatar.attached? %>
-                          <img src="<%=(url_for(@user.avatar))%>">
+                        <% if @mentor.avatar.attached? %>
+                          <img src="<%=(url_for(@mentor.avatar))%>" width="220" height="200">
                         <% else %>
                             <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="" style= "align:right" width="220" height="200"/>
                         <% end %>
