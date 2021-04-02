@@ -27,9 +27,9 @@
   </div>
 
   <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: 'mb-1 form-control' %>
-  </div>
+  <%= form.label :location %>
+  <%= form.select :location, options_for_select(CS.states(:us) )%>
+</div>
 
    <div class="field">
     <%= form.label :length_of_mentorship, "Length of mentorship desired" %>

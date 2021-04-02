@@ -82,6 +82,8 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     childprocess (3.0.0)
+    city-state (0.1.0)
+      rubyzip (>= 1.1)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     erubi (1.10.0)
@@ -222,6 +224,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.3.7)
   byebug
   capybara (>= 3.26)
+  city-state
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
