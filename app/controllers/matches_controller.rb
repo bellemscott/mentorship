@@ -9,7 +9,6 @@ class MatchesController < ApplicationController
     @mentees=Mentee.all
     @users=User.all
     @matches_for_user = @@matches_hash
-    puts "heres the final test"
     puts @matches_for_user
     #@users = User.all
   end
@@ -37,7 +36,7 @@ class MatchesController < ApplicationController
 
    # @major_to_curent_position #implement map
     @matches_arr=[]
-    if current_user.mentor
+    if current_user.mentor 
       @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
         if mentee.user_id != @mentor.user_id
@@ -45,6 +44,7 @@ class MatchesController < ApplicationController
             newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id)
             newMatch.save
             @matches_arr.push(newMatch)
+            puts "im in mentor"
           end
         end
       end
@@ -57,12 +57,12 @@ class MatchesController < ApplicationController
                   newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id)
                   newMatch.save
                   @matches_arr.push(@newMatch)
+                  puts "im in both"
                 end
             end
         end
       end
     else
-      puts "In the matches controller, about to fill the matches arr"
       @mentee = Mentee.find_by(user_id: current_user.id)
       @mentors.each do |mentor|
         if current_user.id != mentor.user_id
@@ -70,6 +70,7 @@ class MatchesController < ApplicationController
             newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id)
             newMatch.save
             @matches_arr.push(newMatch)
+            puts "im in mentee"
           end
         end
       end

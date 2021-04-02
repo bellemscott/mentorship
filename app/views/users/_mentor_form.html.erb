@@ -36,10 +36,10 @@
     <%= form.number_field :length_of_mentorship, class: 'mb-1 form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: 'mb-1 form-control' %>
-  </div>
+ <div class="field">
+  <%= form.label :location %>
+  <%= form.select :location, options_for_select(CS.states(:us) )%>
+</div>
 
   <div class="actions">
     <%= form.submit "Create account" %>

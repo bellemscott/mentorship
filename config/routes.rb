@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :mentees
   resources :mentors
   resources :users
+  resources :states, only: :index
   root 'welcome#index'
   get  '/signup',  to: 'users#new'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
