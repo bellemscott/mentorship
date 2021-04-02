@@ -1,34 +1,87 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class= "center jumbotron emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h1>
+                                        <%= @user.firstname + " " + @user.lastname %>
+                                    </h1>
+                                    <h6>
+                                        Mentor
+                                    </h6>
+                            <br>
+                            <br>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item active">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Details</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane active" class="fade show" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <table class= "table">
+                                      <tr>
+                                        <th>Area of expertise</th>
+                                        <td><%= @mentor.area_of_expertise %></td>
+                                      </tr>
+                                      <tr>
+                                        <th>Preffered method of contact</th>
+                                        <td><%= @mentor.prefferd_method_of_contact%></td>
+                                      </tr>
+                                      <tr>
+                                        <th>School</th>
+                                        <td><%= @mentor.school %></td>
+                                      </tr>
+                                      <tr>
+                                        <th>Current position</th>
+                                        <td><%= @mentor.current_position %></td>
+                                      </tr>
+                                      </tr>
+                                        <th>Location</th>
+                                        <td><%= @mentor.location %></td>
+                                      <tr>
+                                      </tr>
+                                        <th>Preffered Length of Mentorship</th>
+                                        <td><%= @mentor.length_of_mentorship %></td>
+                                      <tr>
+                                        <th colspan="20"></th>
+                                      </tr>
+                                  </table>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <h2>More Details Will be Added</h2>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-md-6">
+                        <div class="profile-img">
+                        <% if @mentor.avatar.attached? %>
+                          <img src="<%=(url_for(@mentor.avatar))%>" width="220" height="200">
+                        <% else %>
+                            <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="" style= "align:right" width="220" height="200"/>
+                        <% end %>
+                            <%# <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file"/>
+                            </div> %>
+                        </div>
+                        <button><%= link_to 'Edit Profile', edit_mentor_path(@mentor) %></button>
+                    </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
 
-<p>
-  <strong>Area of expertise:</strong>
-  <%= @mentor.area_of_expertise %>
-</p>
-
-<p>
-  <strong>Prefferd method of contact:</strong>
-  <%= @mentor.prefferd_method_of_contact %>
-</p>
-
-<p>
-  <strong>School:</strong>
-  <%= @mentor.school %>
-</p>
-
-<p>
-  <strong>Current position:</strong>
-  <%= @mentor.current_position %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @mentor.location %>
-</p>
-
-<p>
-  <strong>Length of mentorship:</strong>
-  <%= @mentor.length_of_mentorship %>
-</p>
-
-<%= link_to 'Edit', edit_mentor_path(@mentor) %> |
-<%= link_to 'Back', mentors_path %>
+    </body>
+    </html>

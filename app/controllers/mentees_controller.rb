@@ -8,6 +8,7 @@ class MenteesController < ApplicationController
 
   # GET /mentees/1 or /mentees/1.json
   def show
+    @user = current_user
   end
 
   # GET /mentees/new
@@ -70,6 +71,6 @@ class MenteesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mentee_params
-      params.require(:mentee).permit(:user_id,:major, :area_of_interest, :preffered_method_of_contact, :location, :length_of_mentorship, :graduation_year)
+      params.require(:mentee).permit(:user_id,:major, :area_of_interest, :preffered_method_of_contact, :location, :length_of_mentorship, :graduation_year, :avatar)
     end
 end
