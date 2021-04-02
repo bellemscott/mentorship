@@ -58,3 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #authentication gem
 gem 'bcrypt'
+
+gem 'profession', '~> 0.1.0'
