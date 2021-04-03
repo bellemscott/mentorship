@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :major %>
-    <%= form.text_field :major, class: 'mb-1 form-control' %>
+    <%= form.select :major, options_for_select(@mentee.majors().values) %>
   </div>
 
   <div class="field">

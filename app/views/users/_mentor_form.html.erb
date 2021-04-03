@@ -28,7 +28,8 @@
 
   <div class="field">
     <%= form.label :current_position %>
-    <%= form.text_field :current_position, class: 'mb-1 form-control' %>
+    <%# <%= form.text_field :search_field %> 
+    <%= form.select :current_position, options_for_select(Profession::Profession.list) %>
   </div>
 
   <div class="field">

@@ -9,4 +9,5 @@ class Mentor < ApplicationRecord
 
     def search_by_term(search_term)
         return Profession::Profession.match(search_term)
+    end
 end
