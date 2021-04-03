@@ -19,7 +19,7 @@ class MenteesTest < ApplicationSystemTestCase
     fill_in "Length of mentorship", with: @mentee.length_of_mentorship
     fill_in "Location", with: @mentee.location
     fill_in "Major", with: @mentee.major
-    fill_in "Preffered method of contact", with: @mentee.preffered_method_of_contact
+    fill_in "Preferred method of contact", with: @mentee.preferred_method_of_contact
     click_on "Create Mentee"
 
     assert_text "Mentee was successfully created"
@@ -35,7 +35,7 @@ class MenteesTest < ApplicationSystemTestCase
     fill_in "Length of mentorship", with: @mentee.length_of_mentorship
     fill_in "Location", with: @mentee.location
     fill_in "Major", with: @mentee.major
-    fill_in "Preffered method of contact", with: @mentee.preffered_method_of_contact
+    fill_in "Preferred method of contact", with: @mentee.preferred_method_of_contact
     click_on "Update Mentee"
 
     assert_text "Mentee was successfully updated"

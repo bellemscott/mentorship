@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_221502) do
+ActiveRecord::Schema.define(version: 2021_04_03_175246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_221502) do
   create_table "mentees", force: :cascade do |t|
     t.string "major"
     t.string "area_of_interest"
-    t.string "preffered_method_of_contact"
+    t.string "preferred_method_of_contact"
     t.string "location"
     t.string "graduation_year"
     t.datetime "created_at", precision: 6, null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2021_03_27_221502) do
 
   create_table "mentors", force: :cascade do |t|
     t.string "area_of_expertise"
-    t.string "prefferd_method_of_contact"
+    t.string "preferred_method_of_contact"
     t.string "school"
     t.string "current_position"
     t.string "location"

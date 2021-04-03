@@ -17,7 +17,7 @@ class MenteesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create mentee" do
     assert_difference('Mentee.count') do
-      post mentees_url, params: { mentee: { area_of_interest: @mentee.area_of_interest, graduation_year: @mentee.graduation_year, length_of_mentorship: @mentee.length_of_mentorship, location: @mentee.location, major: @mentee.major, preffered_method_of_contact: @mentee.preffered_method_of_contact } }
+      post mentees_url, params: { mentee: { area_of_interest: @mentee.area_of_interest, graduation_year: @mentee.graduation_year, length_of_mentorship: @mentee.length_of_mentorship, location: @mentee.location, major: @mentee.major, preferred_method_of_contact: @mentee.preferred_method_of_contact } }
     end
 
     assert_redirected_to mentee_url(Mentee.last)
@@ -34,7 +34,7 @@ class MenteesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update mentee" do
-    patch mentee_url(@mentee), params: { mentee: { area_of_interest: @mentee.area_of_interest, graduation_year: @mentee.graduation_year, length_of_mentorship: @mentee.length_of_mentorship, location: @mentee.location, major: @mentee.major, preffered_method_of_contact: @mentee.preffered_method_of_contact } }
+    patch mentee_url(@mentee), params: { mentee: { area_of_interest: @mentee.area_of_interest, graduation_year: @mentee.graduation_year, length_of_mentorship: @mentee.length_of_mentorship, location: @mentee.location, major: @mentee.major, preferred_method_of_contact: @mentee.preferred_method_of_contact } }
     assert_redirected_to mentee_url(@mentee)
   end
 

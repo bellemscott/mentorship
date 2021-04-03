@@ -2,7 +2,7 @@
 
 one:
   area_of_expertise: MyString
-  prefferd_method_of_contact: MyString
+  preferred_method_of_contact: MyString
   school: MyString
   current_position: MyString
   location: MyString
@@ -10,7 +10,7 @@ one:
 
 two:
   area_of_expertise: MyString
-  prefferd_method_of_contact: MyString
+  preferred_method_of_contact: MyString
   school: MyString
   current_position: MyString
   location: MyString
