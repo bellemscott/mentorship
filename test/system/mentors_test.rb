@@ -18,7 +18,7 @@ class MentorsTest < ApplicationSystemTestCase
     fill_in "Current position", with: @mentor.current_position
     fill_in "Length of mentorship", with: @mentor.length_of_mentorship
     fill_in "Location", with: @mentor.location
-    fill_in "Prefferd method of contact", with: @mentor.prefferd_method_of_contact
+    fill_in "Preferred method of contact", with: @mentor.preferred_method_of_contact
     fill_in "School", with: @mentor.school
     click_on "Create Mentor"
 
@@ -34,7 +34,7 @@ class MentorsTest < ApplicationSystemTestCase
     fill_in "Current position", with: @mentor.current_position
     fill_in "Length of mentorship", with: @mentor.length_of_mentorship
     fill_in "Location", with: @mentor.location
-    fill_in "Prefferd method of contact", with: @mentor.prefferd_method_of_contact
+    fill_in "Preferred method of contact", with: @mentor.preferred_method_of_contact
     fill_in "School", with: @mentor.school
     click_on "Update Mentor"
 

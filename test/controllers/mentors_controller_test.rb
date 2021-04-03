@@ -17,7 +17,7 @@ class MentorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create mentor" do
     assert_difference('Mentor.count') do
-      post mentors_url, params: { mentor: { area_of_expertise: @mentor.area_of_expertise, current_position: @mentor.current_position, length_of_mentorship: @mentor.length_of_mentorship, location: @mentor.location, prefferd_method_of_contact: @mentor.prefferd_method_of_contact, school: @mentor.school } }
+      post mentors_url, params: { mentor: { area_of_expertise: @mentor.area_of_expertise, current_position: @mentor.current_position, length_of_mentorship: @mentor.length_of_mentorship, location: @mentor.location, preferred_method_of_contact: @mentor.preferred_method_of_contact, school: @mentor.school } }
     end
 
     assert_redirected_to mentor_url(Mentor.last)
@@ -34,7 +34,7 @@ class MentorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update mentor" do
-    patch mentor_url(@mentor), params: { mentor: { area_of_expertise: @mentor.area_of_expertise, current_position: @mentor.current_position, length_of_mentorship: @mentor.length_of_mentorship, location: @mentor.location, prefferd_method_of_contact: @mentor.prefferd_method_of_contact, school: @mentor.school } }
+    patch mentor_url(@mentor), params: { mentor: { area_of_expertise: @mentor.area_of_expertise, current_position: @mentor.current_position, length_of_mentorship: @mentor.length_of_mentorship, location: @mentor.location, preferred_method_of_contact: @mentor.preferred_method_of_contact, school: @mentor.school } }
     assert_redirected_to mentor_url(@mentor)
   end
 
