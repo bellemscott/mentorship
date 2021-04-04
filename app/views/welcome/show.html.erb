@@ -32,32 +32,75 @@
             <% users.each_with_index do |possible_match, i| %>
             <% possible_user = User.find(possible_match.user_id) %>
                 <div class="item <%= "active " if i==0 %>">
-                <% puts possible_match%>
-                    <% if possible_match.avatar.attached? %>
-                        <img class="d-block w-100" src="<%=(url_for(possible_match.avatar))%>" width="220" height="200">
-                    <% else %>
-                        <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
-                    <% end %>
                     <div>
-                    <p><%= "Name: " + possible_user.firstname + " " + possible_user.lastname %></p>
-                    <p><%= "Email: " + possible_user.email %></p>
-                    <% if role == "mentor" %>
-                        <p><%= "Area of Expertise: " + possible_match.area_of_expertise %></p>
-                        <p><%= "University: " + possible_match.school %></p>
-                        <p><%= "Location: " + possible_match.location %></p>
-                        <p><%= "Current position: " + possible_match.current_position %></p>
-                        <p><%= "Preferred length of mentorship: " + possible_match.length_of_mentorship.to_s %></p>
-                        <p><%= "Preferred method of contact: " + possible_match.preferred_method_of_contact %></p>
-                    <% else %>
-                        <p><%= "Major: " + possible_match.major %></p>
-                        <p><%= "Area of Interest: " + possible_match.area_of_interest %></p>
-                        <p><%= "Location: " + possible_match.location %></p>
-                        <p><%= "Graduation Year: " + possible_match.graduation_year %></p>
-                        <p><%= "Preferred length of mentorship: " + possible_match.length_of_mentorship.to_s %></p>
-                        <p><%= "Preferred method of contact: " + possible_match.preferred_method_of_contact %></p>
-                    <% end %>
-
-                    
+                        <% if possible_match.avatar.attached? %>
+                            <img class="d-block w-100" src="<%=(url_for(possible_match.avatar))%>" width="220" height="200">
+                        <% else %>
+                            <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
+                        <% end %>
+                        <p><%= possible_user.firstname + " " + possible_user.lastname %></p>
+                        <p><%= possible_user.email %></p>
+                        <% if role == "mentor" %>
+                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
+                                    <tr>
+                                    <th>Area of expertise</th>
+                                    <td><%= possible_match.area_of_expertise %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Preferred method of contact</th>
+                                    <td><%= possible_match.preferred_method_of_contact%></td>
+                                    </tr>
+                                    <tr>
+                                    <th>University</th>
+                                    <td><%= possible_match.school %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Current position</th>
+                                    <td><%= possible_match.current_position %></td>
+                                    </tr>
+                                    </tr>
+                                    <th>Location</th>
+                                    <td><%= possible_match.location %></td>
+                                    <tr>
+                                    </tr>
+                                    <th>Preferred Length of Mentorship</th>
+                                    <td><%= possible_match.length_of_mentorship %></td>
+                                    <tr>
+                                    <th colspan="20"></th>
+                                    </tr>
+                                </table>
+                        <% else %>
+                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
+                                    <tr>
+                                    <th>Major</th>
+                                    <td><%= possible_match.major %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Areas of Interest</th>
+                                    <td><%= possible_match.area_of_interest%></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Location</th>
+                                    <td><%= possible_match.location %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Graduation Year</th>
+                                    <td><%= possible_match.graduation_year %></td>
+                                    </tr>
+                                    </tr>
+                                    <th>preferred Method of Contact</th>
+                                    <td><%= possible_match.preferred_method_of_contact %></td>
+                                    <tr>
+                                    </tr>
+                                    <th>preferred Length of Mentorship</th>
+                                    <td><%= possible_match.length_of_mentorship %></td>
+                                    <tr>
+                                    <th colspan="20"></th>
+                                    </tr>
+                                </table>
+                        <% end %>    
+                            <%= link_to 'Yes', root_path %>
+                            <%= link_to 'No', root_path %>         
                     </div>
                 </div>
             <% end %>
