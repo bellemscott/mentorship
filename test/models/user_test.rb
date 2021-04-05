@@ -20,6 +20,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
 
+  test "email should not be too long" do      #max length is 50
+    @user_menteetrue.email = "a" * 244 + "@example.com"
+    assert_not @user_menteetrue.valid?
+  end
+
   test "validity" do
     assert @user_menteetrue.valid?
     assert @user_mentortrue.valid?
