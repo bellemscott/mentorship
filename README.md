@@ -4,7 +4,7 @@ Heroku link: https://guarded-ridge-55783.herokuapp.com
 
 Github repo: https://github.com/bellemscott/mentorship
 
-Balsamic link: 
+Balsamic link: https://balsamiq.cloud/sz8gy6a/px60i7y
 
 Tecnhical Information:
 
@@ -117,8 +117,53 @@ Additional Info: /additional-info
 * gem rails_admin -> admin portal
 * Brandeis University subject data (db/subject.json) -> Brandeis majors data
 
-## Views 
+## Views, Implemented and Planned
 
-### Implemented
+Layout: Our layout folder contains a few partials and some universal views
+	_footer.html.erb
+	_header.html.erb
+	application.html.erb
+	mailer.html.erb
+	mailer.text.erb
 
-### Planned 
+Matches: Our Matches views has not been fully implemented yet, as of now we are displaying a table of the mentor and mentee id but we will later be making this page a chat
+functionality.
+	index.html.erb
+	pending: show.html.erb
+			chat.html.erb
+
+Mentees: Contains views relating to mentees: editing a profile, viewing a profile as well as creating a profile 
+	index.html.erb
+	show.html.erb
+	new.html.erb
+	edit.html.erb
+	_form.html.erb
+
+Mentors: Similar to Mentees: Contains views relating to mentees: editing a profile, viewing a profile as well as creating a profile 
+	index.html.erb
+	show.html.erb
+	new.html.erb
+	edit.html.erb
+	_form.html.erb
+
+Users 
+	index.html.erb
+	show.html.erb
+	new.html.erb
+	edit.html.erb
+	_form.html.erb
+	_mentor_form.html.erb
+	_mentee_form.html.erb
+	additional_both.html.erb
+	additional_mentee.html.erb
+	additional_mentor.html.erb
+	
+Welcome 
+	index.html.erb
+	show.html.erb
+
+Sessions
+	new.html.erb : form to log in 
+
+Shared: Includes shared partials
+	_error_messages.html.erb
