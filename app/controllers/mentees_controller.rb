@@ -71,6 +71,6 @@ class MenteesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def mentee_params
-      params.require(:mentee).permit(:user_id,:major, :area_of_interest, :preffered_method_of_contact, :location, :length_of_mentorship, :graduation_year, :avatar)
+      params.require(:mentee).permit(:user_id,:major, :area_of_interest, :preferred_method_of_contact, :location, :length_of_mentorship, :graduation_year, :avatar)
     end
 end
