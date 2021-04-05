@@ -65,3 +65,5 @@ gem 'bcrypt'
 gem 'profession', '~> 0.1.0'
 
 gem 'university_major_subjects'
+
+gem "rails_admin"

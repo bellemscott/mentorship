@@ -1,5 +1,5 @@
 class Mentee < ApplicationRecord
-    has_many :mentors
+    has_many :matches
     has_many :mentors, through: :matches
     has_one_attached :avatar
 
