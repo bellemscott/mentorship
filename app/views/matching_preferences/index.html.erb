@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Matching Preferences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Length of mentorship</th>
+      <th>Common subjects</th>
+      <th>Brandeis alumni</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @matching_preferences.each do |matching_preference| %>
+      <tr>
+        <td><%= matching_preference.location %></td>
+        <td><%= matching_preference.length_of_mentorship %></td>
+        <td><%= matching_preference.common_subjects %></td>
+        <td><%= matching_preference.brandeis_alumni %></td>
+        <td><%= link_to 'Show', matching_preference %></td>
+        <td><%= link_to 'Edit', edit_matching_preference_path(matching_preference) %></td>
+        <td><%= link_to 'Destroy', matching_preference, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Matching Preference', new_matching_preference_path %>
