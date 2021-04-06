@@ -1,11 +1,4 @@
 <header>
-<script $(window).scroll(function () {
-if ($(window).scrollTop() >= 50) {
-$('.navbar').css('background','red');
-} else {
-$('.navbar').css('background','transparent');
-}
-});></script>
 <nav class="navbar bg-transparent navbar-fixed-top py-5">
 <div class="navbar-inner">
       <div class="container">
@@ -33,7 +26,7 @@ $('.navbar').css('background','transparent');
             </ul>
             <% end %>
           <% else %>
-          <%= link_to image_tag("logo1.png", :size => "150x100", alt: "logo"), "/", class: 'navbar-brand', id: 'logo-image'%>
+            <%= link_to image_tag("logo1.png", size: "150x100", alt: "logo"), "/", id: 'logo-image'%>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "Log in", login_path  %></li> 
               <li><%= link_to "Sign up", "/users/new"  %></li>
