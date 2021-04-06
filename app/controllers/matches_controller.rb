@@ -4,19 +4,20 @@ class MatchesController < ApplicationController
   @@matches_hash = {}
   # GET /mentors or /mentors.json
   def index
-    create()
+    @all_matches = Match.all
     @mentors = Mentor.all
     @mentees=Mentee.all
     @users=User.all
     @matches_for_user = @@matches_hash
     puts @matches_for_user
-    #@users = User.all
   end
+
 
   # GET /mentors/1 or /mentors/1.json
   def show
     
   end
+
 
   # GET /mentors/new
   def new
@@ -27,23 +28,20 @@ class MatchesController < ApplicationController
   def edit
   end
 
-  def accept
-    @match_to_accept = Match.find_by(user_id: current_user.id)
-    @match_to_accept.accepted = true
-    puts @match_to_accept
-    puts "hiiiiiii"
-    redirect_to matches_path
-  end
-
-
   def is_mentor()
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
         if mentee.user_id != @mentor.user_id
           if @mentor.length_of_mentorship==mentee.length_of_mentorship
             @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
+            #@all_matches.each do |match|
+            #  if match.user_id == current_user.id && match.mentor_id == @mentor.id && match.mentee_id == mentee.id
+            #    puts "duplicate record 12 3 4"
+             # else
             @newMatch.save
             @matches_arr.push(@newMatch)
+             # end
+             #end
           end
         end
       end
@@ -56,9 +54,14 @@ class MatchesController < ApplicationController
           if mentee.user_id != mentor.user_id 
               if mentor.length_of_mentorship==mentee.length_of_mentorship
                 @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-                @newMatch.save
-                @matches_arr.push(@newMatch)
-                puts "im in both"
+                @all_matches.each do |match|
+                  if match.user_id == current_user.id && match.mentor_id == mentor.id && match.mentee_id == @mentee.id
+                    puts "duplicate record"
+                  else
+                    @newMatch.save
+                    @matches_arr.push(@newMatch)
+                  end
+                end
               end
           end
       end
@@ -74,14 +77,14 @@ class MatchesController < ApplicationController
           @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
           @newMatch.save
           @matches_arr.push(@newMatch)
-          puts "im in mentee"
         end
       end
     end
     @@matches_hash[current_user.id] = @matches_arr
   end
-  # POST /mentors or /mentors.json
+  # POST /matches or /mentors.json
   def create
+    puts "hiiii pito is talking"
     # @user = @users.last
     @mentors = Mentor.all
     @mentees= Mentee.all 
@@ -96,7 +99,7 @@ class MatchesController < ApplicationController
     else
       is_mentee()
     end
-
+    redirect_to '/matches'    #redirect to index
 end
     
 

@@ -43,4 +43,27 @@ class User < ApplicationRecord
     def forget
         update_attribute(:remember_digest, nil)
     end
+
+    def get_accepted_matches
+        all_matches = Match.all
+        matches_to_return = []
+        all_matches.each do |match|
+            if match.user_id == self.id && match.accepted == true
+                matches_to_return.push(match)
+            end
+        end
+        return matches_to_return
+    end
+
+    def get_all_matches
+        all_matches = Match.all
+        matches_to_return = []
+        all_matches.each do |match|
+            if match.user_id == self.id
+                matches_to_return.push(match)
+            end
+        end
+        return matches_to_return
+    end
+
 end
