@@ -12,7 +12,9 @@
     <h1>Explore</h1>
     <div class= "center jumbotron" style="background:white" >
     <% if @user.mentee? %>
-        <% users = @mentors%>
+        <% users = @mentors %>
+        <% puts @mentors %>
+        <% puts @mentors[0].id %>
         <% role = "mentor"%>
     <% elsif @user.mentor? %>
         <% users = @mentees %>
@@ -30,6 +32,8 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <% users.each_with_index do |possible_match, i| %>
+            <% puts "HIIIIIIIIIII"%>
+            <% puts possible_match%>
             <% possible_user = User.find(possible_match.user_id) %>
                 <div class="item <%= "active " if i==0 %>">
                     <div>
@@ -100,9 +104,13 @@
                                     <th colspan="20"></th>
                                     </tr>
                                 </table>
-                        <% end %>    
-                            <%= link_to 'Yes', root_path %>
-                            <%= link_to 'No', root_path %>         
+                        <% end %>   
+                        <button type="button" class="btn btn-success">
+                        <%= form_tag matches_accept_path, method: :post do %>
+                             <%= submit_tag 'Accept Match?' %>
+                        <% end %>
+                        </button>
+                        <button type="button" class="btn btn-danger"><%= link_to 'Reject Match?', root_path %>  </button>       
                     </div>
                 </div>
             <% end %>

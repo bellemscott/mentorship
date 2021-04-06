@@ -27,6 +27,59 @@ class MatchesController < ApplicationController
   def edit
   end
 
+  def accept
+    @match_to_accept = Match.find_by(user_id: current_user.id)
+    @match_to_accept.accepted = true
+    puts @match_to_accept
+    puts "hiiiiiii"
+    redirect_to matches_path
+  end
+
+
+  def is_mentor()
+    @mentor = Mentor.find_by(user_id: current_user.id)
+      @mentees.each do |mentee|
+        if mentee.user_id != @mentor.user_id
+          if @mentor.length_of_mentorship==mentee.length_of_mentorship
+            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
+            @newMatch.save
+            @matches_arr.push(@newMatch)
+          end
+        end
+      end
+      @@matches_hash[current_user.id] = @matches_arr
+  end
+
+  def is_both()
+    @mentors.each do |mentor|
+      @mentess.each do |mentee|
+          if mentee.user_id != mentor.user_id 
+              if mentor.length_of_mentorship==mentee.length_of_mentorship
+                @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
+                @newMatch.save
+                @matches_arr.push(@newMatch)
+                puts "im in both"
+              end
+          end
+      end
+    end
+    @@matches_hash[current_user.id] = @matches_arr
+  end
+
+  def is_mentee()
+    @mentee = Mentee.find_by(user_id: current_user.id)
+    @mentors.each do |mentor|
+      if current_user.id != mentor.user_id
+        if mentor.length_of_mentorship==@mentee.length_of_mentorship
+          @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
+          @newMatch.save
+          @matches_arr.push(@newMatch)
+          puts "im in mentee"
+        end
+      end
+    end
+    @@matches_hash[current_user.id] = @matches_arr
+  end
   # POST /mentors or /mentors.json
   def create
     # @user = @users.last
@@ -37,44 +90,11 @@ class MatchesController < ApplicationController
    # @major_to_curent_position #implement map
     @matches_arr=[]
     if current_user.mentor 
-      @mentor = Mentor.find_by(user_id: current_user.id)
-      @mentees.each do |mentee|
-        if mentee.user_id != @mentor.user_id
-          if @mentor.length_of_mentorship==mentee.length_of_mentorship
-            newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id)
-            newMatch.save
-            @matches_arr.push(newMatch)
-            puts "im in mentor"
-          end
-        end
-      end
-      @@matches_hash[current_user.id] = @matches_arr
+      is_mentor()
     elsif current_user.mentor && current_user.mentee
-      @mentors.each do |mentor|
-        @mentess.each do |mentee|
-            if mentee.user_id != mentor.user_id 
-                if mentor.length_of_mentorship==mentee.length_of_mentorship
-                  newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id)
-                  newMatch.save
-                  @matches_arr.push(@newMatch)
-                  puts "im in both"
-                end
-            end
-        end
-      end
+      is_both()
     else
-      @mentee = Mentee.find_by(user_id: current_user.id)
-      @mentors.each do |mentor|
-        if current_user.id != mentor.user_id
-          if mentor.length_of_mentorship==@mentee.length_of_mentorship
-            newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id)
-            newMatch.save
-            @matches_arr.push(newMatch)
-            puts "im in mentee"
-          end
-        end
-      end
-      @@matches_hash[current_user.id] = @matches_arr
+      is_mentee()
     end
 
 end

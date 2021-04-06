@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show]
-  #before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
   def index
@@ -28,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def additional_mentee
-    puts "im at additional mentee"
     @mentee = Mentee.new()
     render 'additional_mentee'
   end
@@ -43,18 +41,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # puts params #params :mentor 
-    # puts user_params
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the app!"
       puts user_params[:mentor]
-      puts "helooooooo"
       if user_params[:mentor] == "1" && user_params[:mentee] == "1" 
         additional_both()
       elsif user_params[:mentor] == "1" && user_params[:mentee] == "0"
         additional_mentor()
-        #redirect_to '/mentors/new'
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
         additional_mentee()
       else

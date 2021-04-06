@@ -26,19 +26,14 @@ class MenteesController < ApplicationController
     @users=User.all
     @user=@users.last
     @mentee[:user_id] = @user.id
-    puts mentee_params
-    puts current_user.mentee
-    puts current_user.mentor
-    #respond_to do |format|
     if @mentee.save
       if current_user.mentor && current_user.mentee
         @mentor = Mentor.new()
         render 'additional_mentor'
       else
         redirect_to matches_path
-        end
       end
-    #end
+    end
   end
 
   # PATCH/PUT /mentees/1 or /mentees/1.json

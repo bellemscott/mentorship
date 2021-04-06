@@ -1,27 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Matches</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Mentee_id</th>
-      <th>Mentor_id</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  
     <% matches_array = @matches_for_user[current_user.id] %>
-    <% matches_array.each do |match| %>
+    <% at_least_one = false %>
+      <% matches_array.each do |match| %>
+        <% if match.accepted %>
+          <table>
+            <thead>
+            <tr>
+              <th>Mentee_id</th>
+              <th>Mentor_id</th>
+              <th colspan="3"></th>
+              </tr>
+              </thead>
+            <tr>
+            <% at_least_one = true %>
+            <% puts match %>
+            <tbody>
+            <td><%= match.mentee_id %></td>  <%# mentee id%>
+            <td><%= match.mentor_id %></td>   <%# mentor id%>
+          </tr>
+          </tbody>
+        <% end %>
+      <% end %>
 
-      <tr>
-      <% puts match %>
-        <td><%= match.mentee_id %></td>  <%# mentee id%>
-        <td><%= match.mentor_id %></td>   <%# mentor id%>
-      </tr>
-    <% end %>
-  </tbody>
+      <% if at_least_one == false %>
+        <div class= "center jumbotron" style="background:white" >
+          <h1>Welcome, <%= current_user.firstname %>!</h1>
+          <p>Check back here for matches after you explore.</p>
+          <%= %>
+          <br>
+        <button class="btn btn-lg btn-primary text-light"> <%= link_to 'Explore matches', explore_path %> </button>
+        </div>
+      <% end %>
+    
 </table>
 
 <br>

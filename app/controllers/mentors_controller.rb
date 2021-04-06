@@ -4,7 +4,6 @@ class MentorsController < ApplicationController
   # GET /mentors or /mentors.json
   def index
     @mentors = Mentor.all
-    #@users = User.all
   end
 
   # GET /mentors/1 or /mentors/1.json
@@ -29,7 +28,7 @@ class MentorsController < ApplicationController
     @user = @users.last
     @mentor[:user_id] = @user.id
     if @mentor.save
-      redirect_to matches_path
+      redirect_to matches_path    
     end
   end
 
