@@ -1,15 +1,126 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Matches</h1>
-<%#   
-    <% matches_array = @matches_for_user[current_user.id] %>
-    
+<head>
+    <title>Mentorship App</title>
+    <meta charset="utf-8">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <%= render 'layouts/header' %>
+    <h1>Matches</h1>
     <% accepted_matches_for_user = current_user.get_accepted_matches() %>
-    <% accepted_matches_for_user.each do |match| %>
-    <%= match.id%>
-    <% end%>
+    <% if accepted_matches_for_user.length > 0 %>
+    <div class= "center jumbotron" style="background:white" >
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
+            <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <% accepted_matches_for_user.each_with_index do |possible_match, i| %>
+            <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
+            <% end %>
+        </ol>
 
-      <%# <% if at_least_one == false %> %>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <% accepted_matches_for_user.each_with_index do |match, i| %>
+            <% if current_user.mentee? %>
+            <% mentor_record = Mentor.find_by(id: match.mentor_id) %>
+            <% user_record = mentor_record%>
+            <% user = User.find(mentor_record.user_id) %>
+            <%elsif current_user.mentor?%>
+              <% mentee_record = Mentee.find_by(id: match.mentee_id)%>
+              <% user_record = mentee_record%>
+              <% user = User.find(mentee_record.user_id) %>
+            <%else%>
+            <% puts "they are both, ignore for now" %>
+            <%end%>
+                <div class="item <%= "active " if i==0 %>">
+                    <div>
+                        <% if user_record.avatar.attached? %>
+                            <img class="d-block w-100" src="<%=(url_for(user_record.avatar))%>" width="220" height="200">
+                        <% else %>
+                            <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
+                        <% end %>
+                        <br>
+                        <br>
+                        <p><%= user.firstname + " " + user.lastname %></p>
+                        <p><%= user.email %></p>
+                        <% if current_user.mentee? %>
+                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
+                                    <tr>
+                                    <th>Area of expertise</th>
+                                    <td><%= mentor_record.area_of_expertise %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Preferred method of contact</th>
+                                    <td><%= mentor_record.preferred_method_of_contact%></td>
+                                    </tr>
+                                    <tr>
+                                    <th>University</th>
+                                    <td><%= mentor_record.school %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Current position</th>
+                                    <td><%= mentor_record.current_position %></td>
+                                    </tr>
+                                    </tr>
+                                    <th>Location</th>
+                                    <td><%= mentor_record.location %></td>
+                                    <tr>
+                                    </tr>
+                                    <th>Preferred Length of Mentorship</th>
+                                    <td><%= mentor_record.length_of_mentorship %></td>
+                                    <tr>
+                                    <th colspan="20"></th>
+                                    </tr>
+                                </table>
+                        <% else %>
+                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
+                                    <tr>
+                                    <th>Major</th>
+                                    <td><%= mentee_record.major %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Areas of Interest</th>
+                                    <td><%= mentee_record.area_of_interest%></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Location</th>
+                                    <td><%= mentee_record.location %></td>
+                                    </tr>
+                                    <tr>
+                                    <th>Graduation Year</th>
+                                    <td><%= mentee_record.graduation_year %></td>
+                                    </tr>
+                                    </tr>
+                                    <th>preferred Method of Contact</th>
+                                    <td><%= mentee_record.preferred_method_of_contact %></td>
+                                    <tr>
+                                    </tr>
+                                    <th>preferred Length of Mentorship</th>
+                                    <td><%= mentee_record.length_of_mentorship %></td>
+                                    <tr>
+                                    <th colspan="20"></th>
+                                    </tr>
+                                </table>
+                        <% end %>
+
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </div>
+    </div>
+</body>
+      <% else %>
+      <%# <% if at_least_one == false %> 
         <div class= "center jumbotron" style="background:white" >
           <h1>Welcome, <%= current_user.firstname %>!</h1>
           <p>Check back here for matches after you explore.</p>
@@ -18,9 +129,15 @@
           <%= form_tag matches_create_path, method: :post do %>
               <%= submit_tag 'Make matches' %>
           <% end %>
+
+           <script>
+            $("form").submit(function(){
+              $(this).hide();
+            })
+          </script>
         <%# <button class="btn btn-lg btn-primary text-light"> <%= link_to 'Explore matches', explore_path %>
         </div>
-      <%# <% end %>
+      <% end %>
     
 </table>
 

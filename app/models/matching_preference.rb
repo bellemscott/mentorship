@@ -1,0 +1,2 @@
+class MatchingPreference < ApplicationRecord
+end

@@ -1,0 +1,37 @@
+<%= form_with(model: matching_preference) do |form| %>
+  <% if matching_preference.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(matching_preference.errors.count, "error") %> prohibited this matching_preference from being saved:</h2>
+
+      <ul>
+        <% matching_preference.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :location %>
+    <%= form.check_box :location %>
+  </div>
+
+  <div class="field">
+    <%= form.label :length_of_mentorship %>
+    <%= form.check_box :length_of_mentorship %>
+  </div>
+
+  <div class="field">
+    <%= form.label :common_subjects %>
+    <%= form.check_box :common_subjects %>
+  </div>
+
+  <div class="field">
+    <%= form.label :brandeis_alumni %>
+    <%= form.check_box :brandeis_alumni %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

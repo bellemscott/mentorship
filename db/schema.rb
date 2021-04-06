@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_235459) do
+ActiveRecord::Schema.define(version: 2021_04_06_184044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(version: 2021_04_05_235459) do
     t.boolean "accepted", default: false
     t.index ["mentee_id"], name: "index_matches_on_mentee_id"
     t.index ["mentor_id"], name: "index_matches_on_mentor_id"
+  end
+
+  create_table "matching_preferences", force: :cascade do |t|
+    t.boolean "location"
+    t.boolean "length_of_mentorship"
+    t.boolean "common_subjects"
+    t.boolean "brandeis_alumni"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "mentees", force: :cascade do |t|

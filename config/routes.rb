@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :matching_preferences
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :matches
   resources :mentees
