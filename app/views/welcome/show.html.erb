@@ -104,14 +104,14 @@
                                     <th colspan="20"></th>
                                     </tr>
                                 </table>
-                        <% end %>   
-                        <button type="button" class="btn btn-success">
+                        <% end %>     
+                    </div>
+                        <button type="button" class="btn btn-outline-success">
                         <%= form_tag matches_accept_path, method: :post do %>
                              <%= submit_tag 'Accept Match?' %>
                         <% end %>
                         </button>
-                        <button type="button" class="btn btn-danger"><%= link_to 'Reject Match?', root_path %>  </button>       
-                    </div>
+                        <button type="button" class="btn btn-danger"><%= link_to 'Reject Match?', root_path %>  </button>     
                 </div>
             <% end %>
         </div>
