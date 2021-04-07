@@ -62,6 +62,14 @@ Matches
 * reference mentee id, to join mentor and mentee
 * user id, used to join match record with corresponding user record
 
+Matching preferences - created but not integrated with functionality yet
+user can select preferences on which to match to other users on, ex: user A wanted to match based on being located in the state of california, but did not care whether they were a brandeis_alumni, A would uncheck brandeis_alumni checkbox, which are default true
+* boolean brandeis_alumni
+* boolean location
+* boolean length of mentorship
+* boolean common_subjects
+* integer user_id
+
 Active Storage Tables
 * adds editing and uploading user profile photos functionality 
 
