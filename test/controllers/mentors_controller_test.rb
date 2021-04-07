@@ -15,19 +15,6 @@ class MentorsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create mentor" do
-    assert_difference('Mentor.count') do
-      post mentors_url, params: { mentor: { area_of_expertise: @mentor.area_of_expertise, current_position: @mentor.current_position, length_of_mentorship: @mentor.length_of_mentorship, location: @mentor.location, preferred_method_of_contact: @mentor.preferred_method_of_contact, school: @mentor.school } }
-    end
-
-    assert_redirected_to mentor_url(Mentor.last)
-  end
-
-  test "should show mentor" do
-    get mentor_url(@mentor)
-    assert_response :success
-  end
-
   test "should get edit" do
     get edit_mentor_url(@mentor)
     assert_response :success

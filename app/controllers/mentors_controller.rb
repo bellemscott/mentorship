@@ -27,7 +27,7 @@ class MentorsController < ApplicationController
     @user = @users.last
     @mentor[:user_id] = @user.id
     if @mentor.save
-      redirect_to matches_path    
+      redirect_to matches_path
     end
   end
 

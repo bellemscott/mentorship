@@ -123,25 +123,17 @@
       <%# <% if at_least_one == false %> 
         <div class= "center jumbotron" style="background:white" >
           <h1>Welcome, <%= current_user.firstname %>!</h1>
-          <%= %>
           <br>
-          <% puts "HEYYY belleeee"%>
-          <% puts @matches_for_user.length%>
-          <% if @matches_for_user.length == 0 %>
-            <div class = "match_creation">
+          <% if @matches_for_user.key?(current_user.id) %>
+            <button type="button" class="btn btn-success"><%= link_to 'Explore matches?', explore_path %></button>
+          <% else %>
+             <div class = "match_creation">
               <%= form_tag matches_create_path, method: :post, id: 'match_creation_form'  do %>
                 <%= submit_tag 'Make matches', data: { disable_with: "Please wait..." } %>
             <% end %>
-          <% else %>
-             <button type="button" class="btn btn-success"><%= link_to 'Explore matches?', explore_path %></button>
           <%end%>
           </div>
-           <%# <script>
-            $("form").submit(function(){
-              $('.match_creation_form').hide();
-            })
-          </script> %>
-        <%# <button class="btn btn-lg btn-primary text-light"> <%= link_to 'Explore matches', explore_path %>
+
         </div>
       <% end %>
     
