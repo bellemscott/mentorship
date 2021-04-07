@@ -36,8 +36,6 @@ class WelcomeController < ApplicationController
         @match = Match.find_by(id: params[:match_id].to_i)
         accepted = true
         @match.accept(accepted)
-        puts @match.accepted
-        puts "hello HOTTIE"
         redirect_to matches_path
     end
 end

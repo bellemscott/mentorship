@@ -15,7 +15,6 @@ class MatchesController < ApplicationController
 
   # GET /mentors/1 or /mentors/1.json
   def show
-    
   end
 
 
@@ -42,7 +41,7 @@ class MatchesController < ApplicationController
       @@matches_hash[current_user.id] = @matches_arr
   end
 
-  def is_both()
+  def is_both()   #NOT fully implemented yet!!!
     @mentors.each do |mentor|
       @mentess.each do |mentee|
           if mentee.user_id != mentor.user_id 
@@ -78,12 +77,9 @@ class MatchesController < ApplicationController
   end
   # POST /matches or /mentors.json
   def create
-    puts "hiiii pito is talking"
     @mentors = Mentor.all
     @mentees= Mentee.all 
     puts @mentees.length()
-
-   # @major_to_curent_position #implement map
     @matches_arr=[]
     if current_user.mentor 
       is_mentor()

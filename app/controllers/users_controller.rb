@@ -21,7 +21,6 @@ class UsersController < ApplicationController
   end
 
   def additional_mentor
-    # redirect_to '/mentors/new'
     @mentor = Mentor.new()
     render 'additional_mentor'
   end
