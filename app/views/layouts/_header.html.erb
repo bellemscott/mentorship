@@ -2,9 +2,11 @@
 <nav class="navbar bg-transparent navbar-fixed-top py-5">
 <div class="navbar-inner">
       <div class="container">
-        <nav >
+        <nav class= "py-5">
           <% if logged_in? %>
-            <%= link_to image_tag("logo1.png", size: "150x100", alt: "logo"), explore_path, id: 'logo-image' %>
+          <div class="col-sm-2">
+            <%= link_to image_tag("logo1.png", size: "150x100", alt: "logo"), explore_path, class: 'nav navbar-brand navbar-left', id: 'logo-image' %>
+            </div>
             <ul class="nav navbar-nav navbar-right">
             <% @mentee = Mentee.find_by(user_id: current_user.id) %>
             <% @mentor = Mentor.find_by(user_id: current_user.id) %>
