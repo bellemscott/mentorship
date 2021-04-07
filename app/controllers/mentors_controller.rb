@@ -22,7 +22,6 @@ class MentorsController < ApplicationController
 
   # POST /mentors or /mentors.json
   def create
-    # @user = @users.last
     @mentor = Mentor.new(mentor_params)
     @users = User.all
     @user = @users.last
