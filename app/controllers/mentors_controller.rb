@@ -9,6 +9,7 @@ class MentorsController < ApplicationController
   # GET /mentors/1 or /mentors/1.json
   def show
     @user = current_user
+    @matching_preference = MatchingPreference.new
   end
 
   # GET /mentors/new

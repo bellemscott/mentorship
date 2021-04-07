@@ -1,3 +1,5 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
 <%= form_with(model: matching_preference) do |form| %>
   <% if matching_preference.errors.any? %>
     <div id="error_explanation">
@@ -31,7 +33,9 @@
     <%= form.check_box :brandeis_alumni %>
   </div>
 
-  <div class="actions">
+<%#   <div class="actions">
     <%= form.submit %>
-  </div>
+ <%# </div>  %>
 <% end %>
+</div>
+</div>
