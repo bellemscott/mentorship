@@ -17,6 +17,7 @@ class MatchingPreferencesController < ApplicationController
 
   # GET /matching_preferences/1/edit
   def edit
+    redirect_to "#"
   end
 
   # POST /matching_preferences or /matching_preferences.json
@@ -25,7 +26,7 @@ class MatchingPreferencesController < ApplicationController
 
     respond_to do |format|
       if @matching_preference.save
-        format.html { redirect_to @matching_preference, notice: "Matching preference was successfully created." }
+        format.html { redirect_to "#", notice: "Matching preference was successfully created." } # we will have to change this redirect to 
         format.json { render :show, status: :created, location: @matching_preference }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class MatchingPreferencesController < ApplicationController
   def update
     respond_to do |format|
       if @matching_preference.update(matching_preference_params)
-        format.html { redirect_to @matching_preference, notice: "Matching preference was successfully updated." }
+        format.html { redirect_to "#", notice: "Matching preference was successfully updated." }
         format.json { render :show, status: :ok, location: @matching_preference }
       else
         format.html { render :edit, status: :unprocessable_entity }

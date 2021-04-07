@@ -389,20 +389,13 @@ body{
 
 header {
   position: relative;
-  width: 100%;
-  height: calc(100vh - 151px); //footer = 100, topmenu = 50
+  width: 100%;//footer = 100, topmenu = 50
   max-width: 100%;
   min-height: auto;
   text-align: center;
   color: #fff; 
-  background-position: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
 
+  padding-bottom: 65px;
 }
 
 }
