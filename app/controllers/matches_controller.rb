@@ -9,7 +9,9 @@ class MatchesController < ApplicationController
     @mentees=Mentee.all
     @users=User.all
     @matches_for_user = @@matches_hash
-    puts @matches_for_user
+    @match=Match.first
+    puts @match.get_hash()
+    puts "hiii im here "
   end
 
 
