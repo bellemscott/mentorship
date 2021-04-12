@@ -75,6 +75,7 @@
                                     <th colspan="20"></th>
                                     </tr>
                                 </table>
+                                <% other_party = Mentor.find_by(match.mentor_id) %>
                         <% else %>
                             <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
                                     <tr>
@@ -104,8 +105,10 @@
                                     <th colspan="20"></th>
                                     </tr>
                                 </table>
+                                <% other_party = Mentee.find_by(match.mentor_id) %>
                         <% end %>
-                    <button type="button" class="btn btn-light">Chat</button>
+                    
+                    <%# <% if match.accepted<button type="button" class="btn btn-light">Chat</button>%>
                     </div>
                 </div>
             <% end %>
