@@ -10,127 +10,93 @@
 <body>
     <%= render 'layouts/header' %>
     <h1>Explore</h1>
-    <div class= "center jumbotron" style="background:white" >
-    <% if @user.mentee? %>
-        <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
-        <% users = @mentor_matches %> 
-        <% role = "mentor"%>
-    <% elsif @user.mentor? %>
-        <% @mentor_id = Mentor.find_by(user_id: @user.id).id %>
-        <% users = @mentee_matches%> 
-        <% role = "mentee"%>
-    <% end %>
+    <div class= "container" style="background:white" >
+        <% if @user.mentee? %>
+            <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
+            <% users = @mentor_matches %> 
+            <% role = "mentor"%>
+        <% elsif @user.mentor? %>
+            <% @mentor_id = Mentor.find_by(user_id: @user.id).id %>
+            <% users = @mentee_matches%>
+            <% role = "mentee"%>
+        <% end %>
 
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
-            <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <% users.each_with_index do |possible_match, i| %>
-            <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
-            <% end %>
-        </ol>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" style="background:white;">
+                <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <% users.each_with_index do |possible_match, i| %>
+                <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
+                <% end %>
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <% users.each_with_index do |possible_match, i| %>
-            <% possible_user = User.find(possible_match.user_id) %>
-                <div class="item <%= "active " if i==0 %>">
-                    <div>
-                        <% if possible_match.avatar.attached? %>
-                            <img class="d-block w-100" src="<%=(url_for(possible_match.avatar))%>" width="220" height="200">
-                        <% else %>
-                            <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
-                        <% end %>
-                        <br>
-                        <br>
-                        <p><%= possible_user.firstname + " " + possible_user.lastname %></p>
-                        <p><%= possible_user.email %></p>
-                        <% if role == "mentor" %>
-                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
-                                    <tr>
-                                    <th>Area of expertise</th>
-                                    <td><%= possible_match.area_of_expertise %></td>
-                                    </tr>
-                                    <tr>
-                                    <th>Preferred method of contact</th>
-                                    <td><%= possible_match.preferred_method_of_contact%></td>
-                                    </tr>
-                                    <tr>
-                                    <th>University</th>
-                                    <td><%= possible_match.school %></td>
-                                    </tr>
-                                    <tr>
-                                    <th>Current position</th>
-                                    <td><%= possible_match.current_position %></td>
-                                    </tr>
-                                    </tr>
-                                    <th>Location</th>
-                                    <td><%= possible_match.location %></td>
-                                    <tr>
-                                    </tr>
-                                    <th>Preferred Length of Mentorship</th>
-                                    <td><%= possible_match.length_of_mentorship %></td>
-                                    <tr>
-                                    <th colspan="20"></th>
-                                    </tr>
-                                </table>
-                        <% else %>
-                            <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
-                                    <tr>
-                                    <th>Major</th>
-                                    <td><%= possible_match.major %></td>
-                                    </tr>
-                                    <tr>
-                                    <th>Areas of Interest</th>
-                                    <td><%= possible_match.area_of_interest%></td>
-                                    </tr>
-                                    <tr>
-                                    <th>Location</th>
-                                    <td><%= possible_match.location %></td>
-                                    </tr>
-                                    <tr>
-                                    <th>Graduation Year</th>
-                                    <td><%= possible_match.graduation_year %></td>
-                                    </tr>
-                                    </tr>
-                                    <th>preferred Method of Contact</th>
-                                    <td><%= possible_match.preferred_method_of_contact %></td>
-                                    <tr>
-                                    </tr>
-                                    <th>preferred Length of Mentorship</th>
-                                    <td><%= possible_match.length_of_mentorship %></td>
-                                    <tr>
-                                    <th colspan="20"></th>
-                                    </tr>
-                                </table>
-                        <% end %>
-                        <% if role == "mentee" %>
-                            <% @match = Match.find_by(user_id: 125, mentor_id: 9, mentor_id: 55) %>
-                        <% else %>
-                            <% @match = Match.find_by(user_id: current_user.id, mentee_id: possible_match.id, mentor_id: @mentor_id) %>
-                        <% end %>
-                        <%= form_tag welcome_update_path, method: :patch do %>
-                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                            <% end %>
-                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                            <%end%>
-                            <% puts @match %>
-                            <% puts "match was found "%>
-                            <%= hidden_field_tag :match_id, @match.id %>
-                            <%= submit_tag 'Accept Match?' %>
-                        <% end %>
-
-                    </div>
-                </div>
-            <% end %>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <% users.each_with_index do |possible_match, i| %>
+                    <% possible_user = User.find(possible_match.user_id) %>          
+                    <div class="item <%= "active " if i==0 %>">    
+                        <div>    
+                            <div class="card container center jumbotron" style="width:60rem;">
+                                <% if possible_match.avatar.attached? %>
+                                    <img class="card-img-top" src="<%=(url_for(possible_match.avatar))%>" width="220" height="200">
+                                <% else %>
+                                    <img class="card-img-top" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
+                                <% end %>
+                                <% if role == "mentor" %>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h5>
+                                        <p class="card-text text-muted"><%= possible_user.email %></p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Area of expertise: <%= possible_match.area_of_expertise %></li>
+                                        <li class="list-group-item">Preferred method of contact: <%= possible_match.preferred_method_of_contact%></li>
+                                        <li class="list-group-item">University: <%= possible_match.school %></li>
+                                        <li class="list-group-item">Current Position: <%= possible_match.current_position %></li>
+                                        <li class="list-group-item">Location: <%= possible_match.location %></li>
+                                        <li class="list-group-item">Preferred Length of Mentorship: <%= possible_match.length_of_mentorship %></li>
+                                    </ul>
+                                <% else %>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h5>
+                                        <p class="card-text text-muted"><%= possible_user.email %></p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Major: <%= possible_match.major %></li>
+                                        <li class="list-group-item">Areas of Interest: <%= possible_match.area_of_interest%></li>
+                                        <li class="list-group-item">Location: <%= possible_match.location %></li>
+                                        <li class="list-group-item">Graduation Year: <%= possible_match.graduation_year %></li>
+                                        <li class="list-group-item">Preferred Method of Contact: <%= possible_match.preferred_method_of_contact %></li>
+                                        <li class="list-group-item">Preferred Length of Mentorship: <%= possible_match.length_of_mentorship %></li>
+                                    </ul>
+                                <% end %>
+                                <div class="card-body">
+                                    <% if role == "mentee" %>
+                                        <% @match = Match.find_by(user_id: 125, mentor_id: 9, mentor_id: 55) %>
+                                    <% else %>
+                                        <% @match = Match.find_by(user_id: current_user.id, mentee_id: possible_match.id, mentor_id: @mentor_id) %>
+                                    <% end %>
+                                    <%= form_tag welcome_update_path, method: :patch do %>
+                                        <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                        <% end %>
+                                        <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                                        <%end%>
+                                        <% puts @match %>
+                                        <% puts "match was found "%>
+                                        <%= hidden_field_tag :match_id, @match.id %>
+                                        <%= submit_tag 'Accept Match?' %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>   
+                <% end %>         
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:white;">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:white;">
+                <span class="icon-next"></span>
+            </a>
         </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
     </div>
-    </div>
-
 </body>
 </html> 
