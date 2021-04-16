@@ -28,7 +28,6 @@
                 <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
                 <% end %>
             </ol>
-
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <% users.each_with_index do |possible_match, i| %>
@@ -69,21 +68,32 @@
                                     </ul>
                                 <% end %>
                                 <div class="card-body">
-                                    <% if role == "mentee" %>
-                                        <% @match = Match.find_by(user_id: 125, mentor_id: 9, mentor_id: 55) %>
-                                    <% else %>
-                                        <% @match = Match.find_by(user_id: current_user.id, mentee_id: possible_match.id, mentor_id: @mentor_id) %>
-                                    <% end %>
-                                    <%= form_tag welcome_update_path, method: :patch do %>
-                                        <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                                        <% end %>
-                                        <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                                        <%end%>
-                                        <% puts @match %>
-                                        <% puts "match was found "%>
-                                        <%= hidden_field_tag :match_id, @match.id %>
-                                        <%= submit_tag 'Accept Match?' %>
-                                    <% end %>
+                                  <% if role == "mentee" %>
+                                      <% @match = Match.find_by(user_id: 125, mentor_id: 9, mentor_id: 55) %>
+                                  <% else %>
+                                      <% @match = Match.find_by(user_id: current_user.id, mentee_id: possible_match.id, mentor_id: @mentor_id) %>
+                                  <% end %>
+                                  <%= form_tag welcome_update_path, method: :patch do %>
+                                      <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                      <% end %>
+                                      <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                                      <%end%>
+                                      <% puts @match %>
+                                      <% puts "match was found "%>
+                                      <%= hidden_field_tag :match_id, @match.id %>
+                                      <%= submit_tag 'Accept Match?' %>
+                                  <% end %>
+
+                                  <%= form_tag welcome_reject_path, method: :patch do %>
+                                      <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                      <% end %>
+                                      <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                                      <%end%>
+                                      <% puts @match %>
+                                      <% puts "match was found "%>
+                                      <%= hidden_field_tag :match_id, @match.id %>
+                                      <%= submit_tag 'Reject Match?' %>
+                                  <% end %>
                                 </div>
                             </div>
                         </div>

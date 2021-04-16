@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
         @all_matches = Match.all
         @user_matches = []          #array of all matches for current user
         @all_matches.each do |match|
-            if match.user_id == current_user.id
+            if match.user_id == current_user.id && match.accepted == false    # && match.rejected == false   #to have the accepted ones not show up again in for u page
                 @user_matches.push(match)
             end
         end
@@ -37,5 +37,12 @@ class WelcomeController < ApplicationController
         accepted = true
         @match.accept(accepted)
         redirect_to matches_path
+    end
+
+    def reject
+        @match = Match.find_by(id: params[:match_id].to_i)
+        rejected = true
+        @match.reject(rejected)
+        redirect_to explore_path
     end
 end
