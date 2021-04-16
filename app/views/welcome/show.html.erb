@@ -119,6 +119,16 @@
                             <%= submit_tag 'Accept Match?' %>
                         <% end %>
 
+                        <%= form_tag welcome_reject_path, method: :patch do %>
+                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                            <% end %>
+                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                            <%end%>
+                            <% puts @match %>
+                            <% puts "match was found "%>
+                            <%= hidden_field_tag :match_id, @match.id %>
+                            <%= submit_tag 'Reject Match?' %>
+                        <% end %>
                     </div>
                 </div>
             <% end %>
