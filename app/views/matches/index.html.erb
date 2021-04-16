@@ -75,7 +75,10 @@
                                     <th colspan="20"></th>
                                     </tr>
                                 </table>
-                                <% other_party = Mentor.find_by(match.mentor_id) %>
+                               <% other_party = Mentor.find_by(match.mentor_id) %>
+                            <% other_user_id = mentor_record.user_id%>
+                            <% search_record = Mentee.find_by(user_id: current_user.id) %>
+                            <% other_match = Match.find_by(user_id: other_user_id, mentee_id: search_record.id) %>
                         <% else %>
                             <table class= "table center" style="width:500px; margin-left:auto;margin-right:auto;">
                                     <tr>
@@ -109,6 +112,21 @@
                         <% end %>
                     
                     <%# <% if match.accepted<button type="button" class="btn btn-light">Chat</button>%>
+                            <% other_user_id = mentee_record.user_id%>
+                            <% search_record = Mentor.find_by(user_id: current_user.id) %>
+                            <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
+                        <% end %>
+                    <% puts "Should be dexters id "%>
+                    <% puts other_user_id %>
+                    <% puts search_record.id %>
+                    <%if other_match != nil %>
+                        <%if other_match.accepted %> 
+                            Match Accepted
+                            <button type="button" class="btn btn-light">Chat</button>
+                        <%end%>
+                    <% else%>
+                        Match Pending Acceptance ...
+                    <%end%>
                     </div>
                 </div>
             <% end %>
@@ -121,7 +139,6 @@
         </a>
     </div>
     </div>
-</body>
       <% else %>
         <div class= "center jumbotron" style="background:white" >
           <h1>Welcome, <%= current_user.firstname %>!</h1>
@@ -140,6 +157,7 @@
       <% end %>
     
 </table>
+</body>
 
 <br>
 

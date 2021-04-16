@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :mentors
   resources :users
   resources :states, only: :index
-  root 'welcome#index'
+  root 'welcome#home'
   get  '/signup',  to: 'users#new'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
