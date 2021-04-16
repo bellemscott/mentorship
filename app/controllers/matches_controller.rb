@@ -9,7 +9,9 @@ class MatchesController < ApplicationController
     @mentees=Mentee.all
     @users=User.all
     @matches_for_user = @@matches_hash
-    puts @matches_for_user
+    @match=Match.first
+    #puts @match.get_hash()
+    puts "hiii im here "
   end
 
 
@@ -34,6 +36,18 @@ class MatchesController < ApplicationController
           if @mentor.length_of_mentorship==mentee.length_of_mentorship
             @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
             @newMatch.save
+
+
+            @newMatch.make_map()
+            temp_map = @newMatch.get_hash()
+            puts "Full map so far"
+            puts temp_map   #comment out soon when the map gets too big
+            temp_map.each do |major,list_of_jobs|
+              if list_of_jobs.include? @mentor.current_position
+                puts "found in the hash"
+                puts major
+              end
+            end
             @matches_arr.push(@newMatch)
           end
         end
