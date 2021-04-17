@@ -5,7 +5,9 @@
         <nav class= "py-5">
           <% if logged_in? %>
           <div class="col-sm-2">
-            <%= link_to image_tag("logo1.png", size: "150x100", alt: "logo"), homeloggedin_path, class: 'nav navbar-brand navbar-left', id: 'logo-image' %>
+          <ul class="nav navbar-nav navbar-left">
+            <li><%= link_to image_tag("logo1.png", size: "150x150", alt: "logo"), homeloggedin_path, class: 'nav navbar-brand navbar-left', id: 'logo-image' %></li>
+            </ul>
             </div>
             <ul class="nav navbar-nav navbar-right">
             <% @mentee = Mentee.find_by(user_id: current_user.id) %>
