@@ -1,7 +1,7 @@
 class AddAllTables < ActiveRecord::Migration[6.1]
   def change
     create_table :users do |t|
-      t.string :firstname
+      t.string :filename
       t.string :lastname
       t.string :email
       t.string :password
@@ -14,7 +14,7 @@ class AddAllTables < ActiveRecord::Migration[6.1]
 
     create_table :mentors do |t|
       t.string :area_of_expertise
-      t.string :preffered_method_of_contact
+      t.string :preferred_method_of_contact
       t.string :school
       t.string :current_position
       t.string :location
@@ -26,7 +26,7 @@ class AddAllTables < ActiveRecord::Migration[6.1]
     create_table :mentees do |t|
       t.string :major
       t.string :area_of_interest
-      t.string :preffered_method_of_contact
+      t.string :preferred_method_of_contact
       t.string :location
       t.integer :length_of_mentorship
       t.string :graduation_year
@@ -37,12 +37,10 @@ class AddAllTables < ActiveRecord::Migration[6.1]
     create_table :matches do |t|
       t.references :mentor
       t.references :mentee
-      t.integer   :user_id
-      t.boolean   :accepted, default: false
-      t.boolean   :rejected, default: false
+      t.integer :user_id
+      t.boolean :accepted, default: false
+      t.boolean :rejected, default: false
       t.timestamps
     end
-
-
-  end
+  end 
 end
