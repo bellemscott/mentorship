@@ -10,8 +10,6 @@ class MatchesController < ApplicationController
     @users=User.all
     @matches_for_user = @@matches_hash
     @match=Match.first
-    #puts @match.get_hash()
-    puts "hiii im here "
   end
 
 
@@ -106,7 +104,10 @@ class MatchesController < ApplicationController
     redirect_to '/matches'    #redirect to index
 end
     
-
+#PATCH /matches
+def update
+  
+end
 
 
   def set_match
