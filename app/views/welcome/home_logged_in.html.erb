@@ -4,31 +4,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/vendor/modernizr-2.7.1.min.js"></script>    
-    <div style="height:1000px;background-color:white;font-size:36px;background-size: cover;max-height: 700px;">
-    <div style="font-size:100px">
-        <br><br><br><br><br><br>
-        <%= link_to "Explore", explore_path  %> 
-        <br><br><br><br><br><br>
-        <%= link_to "", "/users/new"  %>
+    <div style="height:1000px;background-color:white;font-size:80px;background-size: cover;max-height: 700px;">
+        <br>
+        <%= link_to "Explore", explore_path, class: "r-link ai-element ai-element3"%> 
+        <br>
+        <%= link_to "", "/users/new", class: "r-link ai-element ai-element3"  %>
         <% @mentee = Mentee.find_by(user_id: current_user.id) %>
         <% @mentor = Mentor.find_by(user_id: current_user.id) %>
         <% if @mentee.nil? && @mentor.nil?%>
-            <%= link_to "Log out", logout_path, method: :delete %>
+            <%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %>
         <% elsif current_user.mentee? %>
-            <%= link_to "Profile", menteeprofile_path(@mentee), method: :get %>
+            <%= link_to "Profile", menteeprofile_path(@mentee), method: :get, class: "r-link ai-element ai-element3"%>
             <% elsif current_user.mentor? %>
-            <%= link_to "Profile", mentorprofile_path(@mentor), method: :get %>
+            <%= link_to "Profile", mentorprofile_path(@mentor), method: :get, class: "r-link ai-element ai-element3" %>
             <% else %>
-            <%= link_to "Profile", userprofile_path(current_user), method: :get %>
+            <%= link_to "Profile", userprofile_path(current_user), method: :get, class: "r-link ai-element ai-element3" %>
         <% end %>
-        <br><br><br><br><br><br>
-        <%= link_to "Matches", matches_path, method: :get %>
-        <br><br><br><br><br><br>
-        <%= link_to "Log out", logout_path, method: :delete %>
-    </div>
+        <br>
+        <%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %>
+        <br>
+        <%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %>
     </div>
 
 </body>

@@ -11,31 +11,25 @@
             <% @mentee = Mentee.find_by(user_id: current_user.id) %>
             <% @mentor = Mentor.find_by(user_id: current_user.id) %>
             <% if @mentee.nil? && @mentor.nil?%>
-              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
             <% elsif current_user.mentee? %>
-              <li><%= link_to "Explore", explore_path, method: :get %></li> 
-              <li><%= link_to "Profile", menteeprofile_path(@mentee), method: :get %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3"%></li> 
+              <li><%= link_to "Profile", menteeprofile_path(@mentee), method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
             <% elsif current_user.mentor? %>
-              <li><%= link_to "Explore", explore_path, method: :get %></li> 
-              <li><%= link_to "Profile", mentorprofile_path(@mentor), method: :get %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Profile", mentorprofile_path(@mentor), method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
             <% else %>
-              <li><%= link_to "Explore", explore_path, method: :get %></li> 
-              <li><%= link_to "Profile", userprofile_path(current_user), method: :get %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get %></li> 
-              <li><%= link_to "Profile", profile_path, method: :get %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete %></li> 
+              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Profile", userprofile_path(current_user), method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Profile", profile_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
             </ul>
             <% end %>
-          <% else %>
-<%#             <%= link_to image_tag("logo1.png", size: "150x100", alt: "logo"), "/", id: 'logo-image'%>
-  <%#         <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Log in", login_path  %> <%# </li> 
-   <%#           <li><%= link_to "Sign up", "/users/new"  %></li>
-     <%#       </ul> %>
           <% end %>
         </nav>
         </div>

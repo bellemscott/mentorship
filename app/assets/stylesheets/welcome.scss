@@ -4,14 +4,148 @@
 .parallax {
     /* The image used */
     background-image: url("home.png");
-
     /* Set a specific height */
-    min-height: 800px; 
-
+    min-height: 800px;
     padding-top: 0px;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+
+/*
+=====
+DEMO DEPENDENCIES
+=====
+*/
+
+
+/* The component will reset browser's styles of link */
+
+.r-link {
+    --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
+    --uirLinkTextColor: var(--rLinkTextColor);
+    --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+    display: var(--uirLinkDisplay) !important;
+    color: grey !important;
+    text-decoration: var(--uirLinkTextDecoration) !important;
+    font-size: 50;
+}
+
+
+/*
+  =====
+  CORE STYLES
+  =====
+  */
+
+.ai-element {
+    --uiaiElementDisplay: var(--aiElementDisplay, inline-flex);
+    --uiaiElementPadding: var(--aiElementPadding, var(--aiElementPaddingTop, 0) var(--aiElementPaddingRight, 0) var(--aiElementPaddingBottom, 0) var(--aiElementPaddingLeft, 0));
+    --uiaiElementColor: var(--aiElementColor);
+    display: var(--uiaiElementDisplay);
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-element__label {
+    color: grey;
+}
+
+.ai-element_type2 {
+    --uiaiElementLineWeight: var(--aiElementLineWeight, 2px);
+    --uiaiElementLineColor: var(--aiElementLineColor, grey);
+    --aiElementPaddingBottom: var(--uiaiElementLineWeight);
+    position: relative;
+}
+
+.ai-element_type2::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #0087ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+
+/* 
+  Styles of elements with background
+  */
+
+.ai-element_text::before {
+    content: attr(data-ai-element-text);
+    color: grey;
+    position: absolute;
+}
+
+.ai-element_text::before,
+.ai-element_text .ai-element__label {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(.86, .6, .08, 1.01);
+    transition-duration: .4s;
+}
+
+.ai-element_text:hover::before,
+.ai-element_text:hover .ai-element__label {
+    transition-duration: .3s;
+}
+
+
+/*
+  =====
+  EFFECTS
+  =====
+  */
+
+
+/* effect 3 */
+
+.ai-element3::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #003478;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.ai-element3:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+/*
+  =====
+  DEMO STYLES
+  =====
+  */
+
+.ai-element__label {
+    --uiaiElementColorHover: var(--aiElementColorHover);
+    font-weight: 400;
+    font-size: 80px;
+}
+
+.ai-element:hover .ai-element__label {
+    color: grey;
+    font-size: 60px;
+}
+
+.ai-element {
+    --aiElementLineWeight: 3px;
+    --aiElementLineColor: #003478;
+    --aiElementColor: #003478;
+    --aiElementColorHover: #003478;
 }
