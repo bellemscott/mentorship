@@ -457,7 +457,7 @@ class Match < ApplicationRecord
                  end
             end
 
-            if j.include? "Archaeologist"  or j.include? "China Restorer" or j.include "Museum"
+            if j.include? "Archaeologist"  or j.include? "China Restorer" or j.include? "Museum"
                 if @major_map.has_key?("History")
                    @major_map["History"].push(j)
                  else 
@@ -498,10 +498,10 @@ class Match < ApplicationRecord
                     @major_map["Romance"].push(j)
                   else 
                      @major_map["Romance"]=[]
-                     @major_map["Roance"].push(j)
+                     @major_map["Romance"].push(j)
                   end
             end
-            j.include? "Installer" or j.include? "Restorer" or j.include? "Site Engenieer" or j.include? "Scaffolder" or  j.include? "Build"  or j.include? "Contracter" or j.include? "Fixer" or j.include? "Fitter" and j!= "Body Fitter"
+            if j.include? "Installer" or j.include? "Restorer" or j.include? "Site Engenieer" or j.include? "Scaffolder" or  j.include? "Build"  or j.include? "Contracter" or j.include? "Fixer" or j.include? "Fitter" and j!= "Body Fitter"
                 if @major_map.has_key?("Architectural Studies")
                     @major_map["Architectural Studies"].push(j)
                 else 
@@ -513,23 +513,24 @@ class Match < ApplicationRecord
             if j.include? "Architect"  
                 if @major_map.has_key?("Physics")
                    @major_map["Physics"].push(j)
-                 else 
+                else 
                     @major_map["Physics"]=[]
                     @major_map["Physics"].push(j)
-                 end
-                 if @major_map.has_key?("Studio Art")
+                end
+                if @major_map.has_key?("Studio Art")
                     @major_map["Studio Art"].push(j)
-                  else 
+                else 
                      @major_map["Studio Art"]=[]
                      @major_map["Studio Art"].push(j)
-                  end
-                  if @major_map.has_key?("Architectural Studies")
+                end
+                if @major_map.has_key?("Architectural Studies")
                     @major_map["Architectural Studies"].push(j)
-                  else 
+                else 
                      @major_map["Architectural Studies"]=[]
                      @major_map["Architectural Studies"].push(j)
-                  end
+                end
             end
+
             if j.include? "Archivist" 
                 if @major_map.has_key?("History")
                    @major_map["History"].push(j)
