@@ -3,6 +3,7 @@ class User < ApplicationRecord
     has_one_attached :avatar
     has_many :mentors 
     has_many :mentees
+    has_many :notifications
     has_secure_password
     before_save { self.email = email.downcase }
     validates :firstname, presence: true
