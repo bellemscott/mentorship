@@ -149,7 +149,9 @@
             <% end %>
           <%end%>
           </div>
-
+            <%= form_tag matches_update_path, method: :post do %>
+                <%= submit_tag 'Refresh Matches', data: { disable_with: "Please wait..." } %>
+            <% end %>
         </div>
       <% end %>
     

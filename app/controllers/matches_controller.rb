@@ -27,26 +27,24 @@ class MatchesController < ApplicationController
   def edit
   end
 
+  def check_duplicate(newMatch)
+    @all_matches.each do |match|
+      if match.user_id == newMatch.user_id && match.mentor_id == newMatch.mentor_id && match.mentee_id == newMatch.mentee_id
+        puts "duplicate record"
+      else
+        newMatch.save
+        @matches_arr.push(newMatch)
+      end
+    end
+  end
+
   def is_mentor()
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
         if mentee.user_id != @mentor.user_id
           if @mentor.length_of_mentorship==mentee.length_of_mentorship
-            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
-            @newMatch.save
-
-
-            @newMatch.make_map()
-            temp_map = @newMatch.get_hash()
-            puts "Full map so far"
-            puts temp_map   #comment out soon when the map gets too big
-            temp_map.each do |major,list_of_jobs|
-              if list_of_jobs.include? @mentor.current_position
-                puts "found in the hash"
-                puts major
-              end
-            end
-            @matches_arr.push(@newMatch)
+            newMatch = Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
+            check_duplicate(newMatch)
           end
         end
       end
@@ -79,9 +77,8 @@ class MatchesController < ApplicationController
     @mentors.each do |mentor|
       if current_user.id != mentor.user_id
         if mentor.length_of_mentorship==@mentee.length_of_mentorship
-          @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-          @newMatch.save
-          @matches_arr.push(@newMatch)
+          newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
+          check_duplicate(newMatch)
         end
       end
     end
@@ -106,7 +103,18 @@ end
     
 #PATCH /matches
 def update
-  
+  @mentors = Mentor.all
+  @mentees= Mentee.all 
+  @all_matches = Match.all
+  @matches_arr=[]
+  if current_user.mentor == true && current_user.mentee == false
+    is_mentor()
+  elsif current_user.mentee  && current_user.mentor == false
+    is_mentee()
+  else
+    is_both()
+  end
+  redirect_to '/matches'    #redirect to index
 end
 
 
