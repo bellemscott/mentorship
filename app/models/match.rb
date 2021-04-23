@@ -601,7 +601,7 @@ class Match < ApplicationRecord
 
             if j.include? "Assesor" or j.include? "Bank"
                 if @major_map.has_key?("Business")
-                    @maor_map["Business"].push(j)
+                    @major_map["Business"].push(j)
                  else 
                     @major_map["Business"]=[]
                     @major_map["Business"].push(j)
@@ -1118,7 +1118,7 @@ class Match < ApplicationRecord
                 helper("Independant Interdisciplanary Major",j)
             end
           
-           if j.include? "Nanny" or j.include "Nursery"
+           if j.include? "Nanny" or j.include? "Nursery"
               helper("Education",j)
            end
 
@@ -1368,7 +1368,7 @@ class Match < ApplicationRecord
     end
 end 
 end
-
+end
 
 
 
