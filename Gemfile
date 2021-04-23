@@ -66,3 +66,4 @@ gem 'profession', '~> 0.1.0'
 
 
 gem "rails_admin"
+gem "noticed", "~> 1.3"
