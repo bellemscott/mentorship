@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-    before_action :set_match, only: %i[ show edit update destroy ]
+  before_action :set_match, only: %i[ show edit update destroy ]
 
   @@matches_hash = {}
   # GET /mentors or /mentors.json
@@ -32,7 +32,7 @@ class MatchesController < ApplicationController
       if match.user_id == newMatch.user_id && match.mentor_id == newMatch.mentor_id && match.mentee_id == newMatch.mentee_id
         puts "duplicate record"
       else
-        @newMatch.save
+        newMatch.save
         @matches_arr.push(newMatch)
       end
     end
