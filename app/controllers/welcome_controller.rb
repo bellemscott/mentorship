@@ -7,10 +7,10 @@ class WelcomeController < ApplicationController
         @user_matches = []          #array of all matches for current user
         @all_matches.each do |match|
             if match.user_id == current_user.id && match.accepted == false    # && match.rejected == false   #to have the accepted ones not show up again in for u page
-                if match.rejected != nil
-                    if match.rejected == false
-                        @user_matches.push(match)
-                    end
+                puts match.accepted
+                puts "yoyo"
+                if match.rejected == false
+                    @user_matches.push(match)
                 else
                     @user_matches.push(match)
                 end

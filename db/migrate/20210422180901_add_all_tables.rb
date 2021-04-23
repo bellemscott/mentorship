@@ -10,8 +10,8 @@ class AddAllTables < ActiveRecord::Migration[6.1]
       t.boolean :mentee
       t.string :remember_digest
       t.timestamps
-    end
-
+    end 
+    
     create_table :mentors do |t|
       t.string :area_of_expertise
       t.string :preferred_method_of_contact

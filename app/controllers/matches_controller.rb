@@ -106,6 +106,7 @@ class MatchesController < ApplicationController
   def create
     @mentors = Mentor.all
     @mentees= Mentee.all 
+    @all_matches = Match.all
     puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
