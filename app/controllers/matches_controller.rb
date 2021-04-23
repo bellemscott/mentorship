@@ -39,10 +39,16 @@ class MatchesController < ApplicationController
   end
 
   def is_mentor()
+    @mentor1=Mentor.first
+    @mentee1=Mentee.first
+    @m= Match.new(:user_id => current_user.id, :mentor_id => @mentor1.id, :mentee_id => @mentee1.id, :accepted => false)
+    @m.save
+    @m.make_map()
+    @final_map=@m.get_map()
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
         if mentee.user_id != @mentor.user_id
-          if @mentor.length_of_mentorship==mentee.length_of_mentorship
+          if (@mentor.length_of_mentorship==mentee.length_of_mentorship) or (@final_map[mentee.major].include? @mentor.current_position)
             newMatch = Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
             check_duplicate(newMatch)
           end
@@ -52,10 +58,16 @@ class MatchesController < ApplicationController
   end
 
   def is_both()   #NOT fully implemented yet!!!
+    @mentor1=Mentor.first
+    @mentee1=Mentee.first
+    @m= Match.new(:user_id => current_user.id, :mentor_id => @mentor1.id, :mentee_id => @mentee1.id, :accepted => false)
+    @m.save
+    @m.make_map()
+    @final_map=@m.get_map()
     @mentors.each do |mentor|
       @mentess.each do |mentee|
           if mentee.user_id != mentor.user_id 
-              if mentor.length_of_mentorship==mentee.length_of_mentorship
+              if (mentor.length_of_mentorship==mentee.length_of_mentorship) or (@final_map[mentee.major].include? mentor.current_position)
                 @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
                 @all_matches.each do |match|
                   if match.user_id == current_user.id && match.mentor_id == mentor.id && match.mentee_id == @mentee.id
@@ -73,10 +85,16 @@ class MatchesController < ApplicationController
   end
 
   def is_mentee()
+    @mentor1=Mentor.first
+    @mentee1=Mentee.first
+    @m= Match.new(:user_id => current_user.id, :mentor_id => @mentor1.id, :mentee_id => @mentee1.id, :accepted => false)
+    @m.save
+    @m.make_map()
+    @final_map=@m.get_map()
     @mentee = Mentee.find_by(user_id: current_user.id)
     @mentors.each do |mentor|
       if current_user.id != mentor.user_id
-        if mentor.length_of_mentorship==@mentee.length_of_mentorship
+        if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@final_map[@mentee.major].include? mentor.current_position)
           newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
           check_duplicate(newMatch)
         end

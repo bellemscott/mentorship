@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_04_22_173503) do
+=======
+ActiveRecord::Schema.define(version: 2021_04_22_191230) do
+>>>>>>> b129dd188c862505e9300063aa7093b9531cff49
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_04_22_173503) do
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -98,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_04_22_173503) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["read_at"], name: "index_notifications_on_read_at"
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
+=======
+>>>>>>> b129dd188c862505e9300063aa7093b9531cff49
   end
 
   create_table "users", force: :cascade do |t|
