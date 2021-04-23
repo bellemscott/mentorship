@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-    before_action :set_match, only: %i[ show edit update destroy ]
+  before_action :set_match, only: %i[ show edit update destroy ]
 
   @@matches_hash = {}
   # GET /mentors or /mentors.json
@@ -45,6 +45,7 @@ class MatchesController < ApplicationController
     @m.save
     @m.make_map()
     @final_map=@m.get_map()
+    puts @final_map
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
         if mentee.user_id != @mentor.user_id
