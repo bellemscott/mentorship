@@ -391,8 +391,29 @@ class Match < ApplicationRecord
                  if @major_map.has_key?("Chemistry")
                     @major_map["Chemistry"].push(j)
                   else 
-                     @major_map["Chemistry"]=[]
-                     @major_map["Chemistry"].push(j)
+                     @major_map["Sculpture"]=[]
+                     @major_map["Sculpture"].push(j)
+                  end
+            end
+
+            if j.include? "Assesor" or j.include? "Bank"
+                if @major_map.has_key?("Business")
+                    @major_map["Business"].push(j)
+                 else 
+                    @major_map["Business"]=[]
+                    @major_map["Business"].push(j)
+                 end
+                 if @major_map.has_key?("Economics")
+                    @major_map["Economics"].push(j)
+                 else 
+                    @major_map["Economics"]=[]
+                    @major_map["Economics"].push(j)
+                 end
+                 if @major_map.has_key?("International Business School")
+                    @major_map["International Business School"].push(j)
+                 else 
+                    @major_map["International Business School"]=[]
+                    @major_map["International Business School"].push(j)
                   end
              end
            
@@ -1158,9 +1179,12 @@ class Match < ApplicationRecord
                 helper("Postbaccalaureate Premed Studies",j)
             end
  
-            if j.include? "News"
+        if j.include? "News"
              helper("Journalism",j)
              helper("International and Global Studies",j)
+        end 
+           if j.include? "Nanny" or j.include? "Nursery"
+              helper("Education",j)
            end
  
            if j.include? "Nutrition"
