@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<head>
+    <title>Mentorship App</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <script src="js/vendor/modernizr-2.7.1.min.js"></script>  
+    <%= render 'layouts/header' %>
+    <% accepted_matches_for_user = current_user.get_accepted_matches() %>
+    <% if accepted_matches_for_user.length == 0 %>
+        <div class= "center jumbotron" style="background:white" >
+          <h1>Hi, <%= current_user.firstname %>!</h1>
+          <br>
+          <% if @matches_for_user.key?(current_user.id) %>
+            <h2>It looks like you haven't matched with anyone yet, click the button below to explore possible matches.</h2>
+            <button type="button" class="btn btn-success"><%= link_to 'Explore', explore_path %></button>
+          <% else %>
+            <h2>Click the button below to generate possible matches to explore based on your interests.</h2>
+             <div class = "match_creation">
+              <%= form_tag matches_create_path, method: :post, id: 'match_creation_form'  do %>
+                <%= submit_tag 'Make matches', data: { disable_with: "Please wait..." }, class: "btn"%>
+              </div>
+            <% end %>
+          <%end%>
+        </div>
+    <% else %>
+        <div style="height:1000px;background-color:white;font-size:80px;background-size: cover;max-height: 700px;">
+            <br>
+            <%= link_to "Explore", explore_path, class: "r-link ai-element ai-element3"%> 
+            <br>
+            <%= link_to "", "/users/new", class: "r-link ai-element ai-element3"  %>
+            <% @mentee = Mentee.find_by(user_id: current_user.id) %>
+            <% @mentor = Mentor.find_by(user_id: current_user.id) %>
+            <% if @mentee.nil? && @mentor.nil?%>
+                <%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %>
+            <% elsif current_user.mentee? %>
+                <%= link_to "Profile", menteeprofile_path(@mentee), method: :get, class: "r-link ai-element ai-element3"%>
+                <% elsif current_user.mentor? %>
+                <%= link_to "Profile", mentorprofile_path(@mentor), method: :get, class: "r-link ai-element ai-element3" %>
+                <% else %>
+                <%= link_to "Profile", userprofile_path(current_user), method: :get, class: "r-link ai-element ai-element3" %>
+            <% end %>
+            <br>
+            <%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %>
+            <br>
+            <%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %>
+        </div>
+      <% end %>   
+</body>

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :states, only: :index
   root 'welcome#home'
   get  '/signup',  to: 'users#new'
-  get  '/homeloggedin',  to: 'welcome#home_logged_in'
+  get  '/homeloggedin',  to: 'matches#homeloggedin'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
   get '/userprofile/:id', to: 'users#show', as: 'userprofile'

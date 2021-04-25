@@ -1,6 +1,7 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$fontfamily: "Open Sans";
 .parallax {
     /* The image used */
     background-image: url("home.png");
@@ -21,6 +22,7 @@ DEMO DEPENDENCIES
 =====
 */
 
+$fontfamily: "verdana, arial, helvatica, sans-serif";
 
 /* The component will reset browser's styles of link */
 
@@ -90,6 +92,7 @@ DEMO DEPENDENCIES
     transition-property: transform;
     transition-timing-function: cubic-bezier(.86, .6, .08, 1.01);
     transition-duration: .4s;
+    font-family: $fontfamily
 }
 
 .ai-element_text:hover::before,
@@ -148,4 +151,65 @@ DEMO DEPENDENCIES
     --aiElementLineColor: #003478;
     --aiElementColor: #003478;
     --aiElementColorHover: #003478;
+}
+
+$color-button-red: #e74c3c;
+$color-button-green: #2ecc71;
+$color-text: #ecf0f1;
+$font-family: Arial,
+helvetica,
+sans-serif;
+$font-size: 100%;
+// button --qa
+.btn-red-qa,
+.btn-green-qa,
+.btn-blue-qa {
+    min-width: 100px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 15px;
+    margin: 30px 25px;
+    font-size: $font-size;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.btn-red-qa {
+    border: 5px solid $color-button-red;
+    color: $color-button-red;
+}
+
+.btn-green-qa {
+    border: 5px solid $color-button-green;
+    color: $color-button-green;
+}
+
+.btn-red-qa:hover {
+    cursor: pointer;
+    &::before {
+        border: 0px;
+    }
+}
+
+.btn-green-qa:hover {
+    cursor: pointer;
+    &::before {
+        border: 0px;
+    }
+}
+
+.btn-red-qa:hover {
+    background-color: darken($color-button-red, 5%);
+    border: 5px solid lighten($color-button-red, 5%);
+    color: $color-text;
+    cursor: pointer;
+}
+
+.btn-green-qa:hover {
+    background-color: darken($color-button-green, 5%);
+    border: 3px solid lighten($color-button-green, 5%);
+    color: $color-text;
+    cursor: pointer;
 }

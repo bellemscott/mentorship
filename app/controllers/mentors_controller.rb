@@ -30,7 +30,7 @@ class MentorsController < ApplicationController
     if @mentor.save
       puts "Should be accountant"
       puts @mentor[:current_position]
-      redirect_to matches_path
+      redirect_to homeloggedin_path
     end
   end
 

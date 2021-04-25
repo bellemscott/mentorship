@@ -69,14 +69,11 @@
                         <% if @mentee.avatar.attached? %>
                           <img src="<%=(url_for(@mentee.avatar))%>" width="220" height="200">
                         <% else %>
-                            <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="" style= "align:right" width="220" height="200"/>
+                            <img src="defaultpic.png" alt="" style= "align:right" width="220" height="200"/>
                         <% end %>
-                            <%# <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div> %>
                         </div>
-                        <button><%= link_to 'Edit Profile', edit_mentee_path(@mentee) %></button>
+                        <br>
+                        <%= link_to 'Edit Profile', edit_mentee_path(@mentee), class: "btn btn-svg" %>
                     </div>
                     </div>
                 </div>
