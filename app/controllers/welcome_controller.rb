@@ -11,9 +11,10 @@ class WelcomeController < ApplicationController
                 puts "yoyo"
                 if match.rejected == false
                     @user_matches.push(match)
-                else
-                    @user_matches.push(match)
                 end
+                # else          #wont show rejected ones?
+                #     @user_matches.push(match)
+                # end
             end
         end
         @mentor_matches = fill_mentor_matches()     #array of Mentors

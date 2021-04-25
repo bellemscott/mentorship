@@ -67,3 +67,7 @@ gem 'profession', '~> 0.1.0'
 
 gem "rails_admin"
 gem "noticed", "~> 1.3"
+
+gem "redis", "~> 4.2"
+gem "cable_ready", "~> 4.5"
+gem "stimulus_reflex", "~> 3.4"
