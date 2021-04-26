@@ -78,7 +78,6 @@
                             <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
                         <% end %>
                 
-                    <% puts "Should be dexters id "%>
                     <% puts other_user_id %>
                     <% puts search_record.id %>
                     <%if other_match != nil %>

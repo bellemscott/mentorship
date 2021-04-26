@@ -10,9 +10,16 @@
 <body>
     <%= render 'layouts/header' %>
     <h1>Explore</h1>
-    
-    <div id="matching">
-        <%= render partial: "carosel"%>
-    </div>
+    <% if @user.mentee? %>
+        <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
+        <% @user_matches = @mentor_matches %> 
+    <% elsif @user.mentor? %>
+        <% @mentor_id = Mentor.find_by(user_id: @user.id).id %>
+        <% @user_matches = @mentee_matches%>
+    <% end %>
+    <% puts @user_matches.length%>
+    <%div id= "matching"%>
+    <%= render partial: "carosel"%>
+    <%end%>
 </body>
 </html> 
