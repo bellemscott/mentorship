@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         reset_session
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         log_in user
-          redirect_to explore_path
+          redirect_to homeloggedin_path
         # log_in user
         # redirect_back_or user
       else

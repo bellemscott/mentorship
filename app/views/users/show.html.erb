@@ -47,14 +47,10 @@
                         <% if @user.avatar.attached? %>
                           <img src="<%=(url_for(@user.avatar))%>">
                         <% else %>
-                            <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="" style= "align:right" width="220" height="200"/>
+                            <img src="default.png" alt="" style= "align:right" width="220" height="200"/>
                         <% end %>
-                            <%# <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div> %>
                         </div>
-                        <button><%= link_to 'Edit Profile', edit_user_path(@user) %></button>
+                        <%= link_to 'Edit Profile', edit_user_path(@user), class: "button2" %>
                     </div>
                     </div>
                 </div>

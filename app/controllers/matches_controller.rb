@@ -12,6 +12,15 @@ class MatchesController < ApplicationController
     @match=Match.first
   end
 
+  def homeloggedin
+    @all_matches = Match.all
+    @mentors = Mentor.all
+    @mentees=Mentee.all
+    @users=User.all
+    @matches_for_user = @@matches_hash
+    @match=Match.first
+  end
+
 
   # GET /mentors/1 or /mentors/1.json
   def show
@@ -44,7 +53,8 @@ class MatchesController < ApplicationController
         if mentee.user_id != @mentor.user_id
           if @mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[mentee.major].include? @mentor.current_position)
             newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
-            check_duplicate(newMatch)
+            #check_duplicate(newMatch)
+            newMatch.save
           end
         end
       end
@@ -71,7 +81,8 @@ class MatchesController < ApplicationController
       if current_user.id != mentor.user_id
         if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@common_subjects_map[@mentee.major].include? mentor.current_position)
           newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-          check_duplicate(newMatch)
+          #check_duplicate(newMatch)
+          newMatch.save
         end
       end
     end
@@ -86,7 +97,6 @@ class MatchesController < ApplicationController
     @first_match.make_map()
     @common_subjects_map = @first_match.get_hash()
     puts @common_subjects_map.length()
-    puts "HIIIIIIIIIIII"
     puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
@@ -97,7 +107,7 @@ class MatchesController < ApplicationController
       is_mentee()
     end
     @created = true
-    redirect_to '/matches'    #redirect to index
+    redirect_to homeloggedin_path    #redirect to index
 end
     
 #PATCH /matches

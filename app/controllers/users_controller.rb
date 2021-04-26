@@ -30,12 +30,6 @@ class UsersController < ApplicationController
     render 'additional_mentee'
   end
 
-  def additional_both
-    @mentor = Mentor.new()
-    @mentee = Mentee.new()
-    @both = true
-    render 'additional_both'
-  end
   # POST /users or /users.json
 
   def create
@@ -51,7 +45,7 @@ class UsersController < ApplicationController
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
         additional_mentee()
       else
-        redirect_to explore_path
+        redirect_to homeloggedin_path
       end
     else
       render 'new'

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Mentorship App</title>
     <meta charset="utf-8">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <%= render 'layouts/header' %>
     <h1>Explore</h1>
-    <div class= "container" style="background:white" >
+    <div class= "container" style="background:white;" >
         <% if @user.mentee? %>
             <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
             <% users = @mentor_matches %> 
@@ -34,63 +31,95 @@
                     <% possible_user = User.find(possible_match.user_id) %>          
                     <div class="item <%= "active " if i==0 %>">    
                         <div>    
-                            <div class="card container center jumbotron" style="width:60rem;">
-                                <% if possible_match.avatar.attached? %>
-                                    <img class="card-img-top" src="<%=(url_for(possible_match.avatar))%>" width="220" height="200">
-                                <% else %>
-                                    <img class="card-img-top" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
-                                <% end %>
-                                <% if role == "mentor" %>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h5>
-                                        <p class="card-text text-muted"><%= possible_user.email %></p>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Area of expertise: <%= possible_match.area_of_expertise %></li>
-                                        <li class="list-group-item">Preferred method of contact: <%= possible_match.preferred_method_of_contact%></li>
-                                        <li class="list-group-item">University: <%= possible_match.school %></li>
-                                        <li class="list-group-item">Current Position: <%= possible_match.current_position %></li>
-                                        <li class="list-group-item">Location: <%= possible_match.location %></li>
-                                        <li class="list-group-item">Preferred Length of Mentorship: <%= possible_match.length_of_mentorship %></li>
-                                    </ul>
-                                <% else %>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h5>
-                                        <p class="card-text text-muted"><%= possible_user.email %></p>
-                                    </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Major: <%= possible_match.major %></li>
-                                        <li class="list-group-item">Areas of Interest: <%= possible_match.area_of_interest%></li>
-                                        <li class="list-group-item">Location: <%= possible_match.location %></li>
-                                        <li class="list-group-item">Graduation Year: <%= possible_match.graduation_year %></li>
-                                        <li class="list-group-item">Preferred Method of Contact: <%= possible_match.preferred_method_of_contact %></li>
-                                        <li class="list-group-item">Preferred Length of Mentorship: <%= possible_match.length_of_mentorship %></li>
-                                    </ul>
-                                <% end %>
-                                <div class="card-body">
-                                  <%= form_tag welcome_update_path, method: :patch do %>
-                                      <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                                      <% end %>
-                                      <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                                      <%end%>
-                                      <% puts @match %>
-                                      <% puts "match was found "%>
-                                      <%= hidden_field_tag :match_id, @match.id %>
-                                      <%= submit_tag 'Accept Match?' %>
-                                      <% notification = AcceptedNotification.with(match: @match) %>
-                                  <% end %>
-
-                                  <%= form_tag welcome_reject_path, method: :patch do %>
-                                      <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                                      <% end %>
-                                      <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                                      <%end%>
-                                      <% puts @match %>
-                                      <% puts "match was found "%>
-                                      <%= hidden_field_tag :match_id, @match.id %>
-                                      <%= submit_tag 'Reject Match?' %>
-                                  <% end %>
+                        <div class="container flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front center">
+                                    <% if possible_match.avatar.attached? %>
+                                        <img class="card-img-top" src="<%=(url_for(possible_match.avatar))%>" width="300" height="300">
+                                    <% else %>
+                                        <img class="card-img-top" src=<% url_for("/assets/defaultpic.png") %> width="300" height="300"/>
+                                    <% end %>
+                                    <h1 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h1>
+                                    <h2 class="card-text text-muted"><%= possible_user.email %></h2>
+                                    <h3 class="card-text text-muted">**Hover over me**</h3>
                                 </div>
+                                <div class="flip-card-back center jumbotron">
+                                    <% if role == "mentee" %>
+                                        <div>
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                <td>Major</td>
+                                                <td><%= possible_match.major %></td>
+                                                </tr>
+                                                <tr>
+                                                <td>Areas of Interest</td>
+                                                <td><%= possible_match.area_of_interest%></td>
+                                                </tr>
+                                                <td>Location</td>
+                                                <td><%= possible_match.location%></td>
+                                                </tr>
+                                                <td>Graduation Year</td>
+                                                <td><%= possible_match.graduation_year%></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <%else %>
+                                        <div>
+                                            <table>
+                                                <tbody>
+                                                <tr>
+                                                <td>Area of expertise</td>
+                                                <td><%= possible_match.area_of_expertise %></td>
+                                                </tr>
+                                                <tr>
+                                                <td>Preferred Method of Contact</td>
+                                                <td><%= possible_match.preferred_method_of_contact %></td>
+                                                </tr>
+                                                <tr>
+                                                <td>Alma Matter</td>
+                                                <td><%= possible_match.school %></td>
+                                                </tr>
+                                                <td>Current Position</td>
+                                                <td><%= possible_match.current_position%></td>
+                                                </tr>
+                                                <td>Location</td>
+                                                <td><%= possible_match.location%></td>
+                                                </tr>
+                                                </tr>
+                                                <td>Preferred Length of Mentorship</td>
+                                                <td><%= possible_match.length_of_mentorship%></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <% end %>
+                                        <div class="card-body">
+                                        <%= form_tag welcome_update_path, method: :patch, class: "form" do %>
+                                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                            <% end %>
+                                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                                            <%end%>
+                                            <% puts @match %>
+                                            <% puts "match was found "%>
+                                            <%= hidden_field_tag :match_id, @match.id %>
+                                            <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
+                                            <% notification = AcceptedNotification.with(match: @match) %>
+                                        <% end %>
+                                        <%= form_tag welcome_reject_path, method: :patch, class: "form" do %>
+                                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                            <% end %>
+                                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
+                                            <%end%>
+                                            <% puts @match %>
+                                            <% puts "match was found "%>
+                                            <%= hidden_field_tag :match_id, @match.id %>
+                                            <%= submit_tag 'Reject Match?', class: "btn-red-qa"%>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>   
