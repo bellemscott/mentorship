@@ -29,54 +29,48 @@ class MatchesController < ApplicationController
   end
 
   #user is mentor : identifier 0 mentee : identifier 1 both : identifier 2
-  def check_duplicate(newMatch, identifier)
+  def check_duplicate(identifier)
     duplicate = false
     matches = Match.all
     matches.each do |match|
-      if match.user_id == newMatch.user_id && match.mentor_id == newMatch.mentor_id && match.mentee_id == newMatch.mentee_id
+      if match.user_id == @newMatch.user_id && match.mentor_id == @newMatch.mentor_id && match.mentee_id == @newMatch.mentee_id
         duplicate = true
       end
     end
     if duplicate == false
-      newMatch.save
-      if identifier == 0
-        make_mentee_match(newMatch)
-      elsif identifier == 1
-        make_mentor_match(newMatch)
+      @newMatch.save
+      if identifier == 0    #need a mentee record
+        make_mentee_match()
+      elsif identifier == 1   #need a mentor record
+        make_mentor_match()
       end
     end
-    @matches_arr.push(newMatch)
+    @matches_arr.push(@newMatch)
   end
 
-  def make_mentee_match(newMatch)
+  def make_mentee_match()
     @users = User.all
-    other_party = @mentees.find_by(id: newMatch.mentee_id)
-    other_party_user_id = other_party.user_id
+    @other_party = @mentees.find_by(id: @newMatch.mentee_id)
+    other_party_user_id = @other_party.user_id
     other_user = @users.find_by(id: other_party_user_id)
-    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => newMatch.mentor_id, :mentee_id => newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
+    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
     @otherMatch.save
+    @test_party = @mentors.find_by(id: @newMatch.mentor_id)
     puts "here belle!!! making other mentee match"
+    puts @otherMatch.id
   end
 
-  def make_mentor_match(newMatch)
+  def make_mentor_match()
     @users = User.all
-    other_party = @mentors.find_by(id: newMatch.mentor_id)
-    other_party_user_id = other_party.user_id
+    @other_party = @mentors.find_by(id: @newMatch.mentor_id)
+    other_party_user_id = @other_party.user_id
     other_user = @users.find_by(id: other_party_user_id)
-    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => newMatch.mentor_id, :mentee_id => newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
+    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
     @otherMatch.save
-
+    @test_party = @mentees.find_by(id: @newMatch.mentee_id)
     puts "here belle!!! making other mentor match"
+    puts @otherMatch.id
   end
-
-  # def make_other_match(newMatch)
-  #   @users = User.all
-  #   other_party = @mentees.find_by(id: newMatch.mentee_id)
-  #   other_party_user_id = other_party.user_id
-  #   other_user = @users.find_by(id: other_party_user_id)
-  #   otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => newMatch.mentor_id, :mentee_id => newMatch.mentee_id, :accepted => false)    #creates the other match
-  #   otherMatch.save
-  # end
 
   def is_mentor()
     @mentor = Mentor.find_by(user_id: current_user.id)
@@ -84,17 +78,13 @@ class MatchesController < ApplicationController
         if mentee.user_id != @mentor.user_id
           if (@common_subjects_map[mentee.major]) != nil    #if theres a record in map for particular job/major
             if @mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[mentee.major].include? @mentor.current_position)
-              newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
-              check_duplicate(newMatch, 0)
-              #newMatch.save
-              #make_other_match(newMatch)
+              @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
+              check_duplicate(0)
             end
           else
             if @mentor.length_of_mentorship==mentee.length_of_mentorship 
-              newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
-              check_duplicate(newMatch, 0)
-              #newMatch.save
-              #make_other_match(newMatch, 0)
+              @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
+              check_duplicate(0)
             end
           end
         end
@@ -123,14 +113,13 @@ class MatchesController < ApplicationController
       if current_user.id != mentor.user_id
         if (@common_subjects_map[@mentee.major]) != nil
           if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@common_subjects_map[@mentee.major].include? mentor.current_position)
-            newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
-            check_duplicate(newMatch, 1)
-            newMatch.save
+            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
+            check_duplicate(1)
           end
         else
           if (mentor.length_of_mentorship==@mentee.length_of_mentorship)
-            newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
-            check_duplicate(newMatch, 1)
+            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
+            check_duplicate(1)
           end
         end
       end
@@ -151,17 +140,19 @@ class MatchesController < ApplicationController
     @matches_arr=[]
     if current_user.mentor 
       is_mentor()
-    elsif current_user.mentor && current_user.mentee
-      is_both()
+    # elsif current_user.mentor && current_user.mentee
+    #   is_both()
     else
       is_mentee()
     end
     @created = true
-    cable_ready["matching"].insert_adjacent_html(
-      selector: "#matching",
-      position: "afterbegin",
-      html: {partial:'welcome/carosel', locals: {potential_match:@otherMatch}}
-    )
+    if @otherMatch != nil
+      cable_ready["matching"].insert_adjacent_html(
+        selector: "#matching",
+        position: "afterbegin",
+        html: render_to_string(partial:"welcome/carosel", locals: {user_match:@test_party})
+      )
+    end
 
     puts "readyness1"
     cable_ready.broadcast

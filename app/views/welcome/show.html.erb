@@ -10,6 +10,7 @@
 <body>
     <%= render 'layouts/header' %>
     <h1>Explore</h1>
+    <% puts @user_matches.length%>
     <% if @user.mentee? %>
         <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
         <% @user_matches = @mentor_matches %> 
@@ -17,9 +18,31 @@
         <% @mentor_id = Mentor.find_by(user_id: @user.id).id %>
         <% @user_matches = @mentee_matches%>
     <% end %>
-    <% puts @user_matches.length%>
-    <%div id= "matching"%>
-    <%= render partial: "carosel"%>
-    <%end%>
-</body>
+
+<div id="matching">
+    <div class= "container" style="background:white" >
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" style="background:white;">
+                <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <% @user_matches.each_with_index do |possible_match, i| %>
+                <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
+                <% end %>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <%# <% @user_matches.each_with_index do |potential_match, i| %> 
+             
+            <%= render partial: "carosel", collection: @user_matches, :as => :user_match%>
+
+            </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:white;color:#003478">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:white;color:#003478">
+                <span class="icon-next"></span>
+            </a>
+        </div>
+    </div>
+    </div>
+    </body>
 </html> 
