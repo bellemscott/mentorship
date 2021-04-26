@@ -7,10 +7,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <%= render 'layouts/header' %>
+
     <% accepted_matches_for_user = current_user.get_accepted_matches() %>
+    
     <% if accepted_matches_for_user.length > 0 %>
-        <div class= "center jumbotron" style="background:white" >
+    <h1>Matches</h1>
+        <div class= "container" style="background:white" >
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
                     <!-- Indicators -->
                 <ol class="carousel-indicators">
@@ -45,7 +47,7 @@
                                 <% if current_user.mentee? %>
                                     <div class="card-body">
                                         <h5 class="card-title"><%= user.firstname + " " + user.lastname %></h5>
-                                        <p class="card-text text-muted"><%= user.email %></p>
+                                        <p class="text-muted"><%= user.email %></p>
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Area of expertise: <%= mentor_record.area_of_expertise %></li>
@@ -81,11 +83,12 @@
                             <% puts search_record.id %>
                             <%if other_match != nil %>
                                 <%if other_match.accepted %> 
-                                    Match Accepted
-                                    <button type="button" class="btn btn-light">Chat</button>
+                                    Status: It's a match! You can now chat with this user
+                                    <br>
+                                    <button type="button" class="button2">Chat</button>
                                 <%end%>
                             <% else%>
-                                Match Pending Acceptance ...
+                                Status: This user has not matched with you yet, check back later
                             <%end%>
                             
                             </div>
@@ -102,7 +105,7 @@
         </div>
     <% else %>
         <h1>No Matches yet, check back later!</h1>
-        <div class="center" ><%= link_to "Explore", logout_path, method: :delete, class: "btn" %> </div>
+        <div class="center" ><%= link_to "Explore", explore_path, method: :get, class: "button2" %> </div>
     <% end %>
 </table>
 </body>

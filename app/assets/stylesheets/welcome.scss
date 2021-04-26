@@ -174,15 +174,16 @@ $font-size: 100%;
     font-size: $font-size;
     font-weight: 600;
     transition: 0.5s;
+    background-color: transparent
 }
 
 .btn-red-qa {
-    border: 5px solid $color-button-red;
+    border: 1.5px solid $color-button-red;
     color: $color-button-red;
 }
 
 .btn-green-qa {
-    border: 5px solid $color-button-green;
+    border: 1.5px solid $color-button-green;
     color: $color-button-green;
 }
 
@@ -202,14 +203,60 @@ $font-size: 100%;
 
 .btn-red-qa:hover {
     background-color: darken($color-button-red, 5%);
-    border: 5px solid lighten($color-button-red, 5%);
+    border: 2px solid lighten($color-button-red, 5%);
     color: $color-text;
     cursor: pointer;
 }
 
 .btn-green-qa:hover {
     background-color: darken($color-button-green, 5%);
-    border: 3px solid lighten($color-button-green, 5%);
+    border: 2px solid lighten($color-button-green, 5%);
     color: $color-text;
     cursor: pointer;
+}
+
+.form {
+    display: inline-block;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 500px;
+    height: 500px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: transparent;
+    color: #003478;
+}
+
+.flip-card-back {
+    position: center;
+    background-color: #003478;
+    color: white;
+    transform: rotateY(180deg);
 }

@@ -5,8 +5,8 @@
     <meta charset="utf-8">
 </head>
 <body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <script src="js/vendor/modernizr-2.7.1.min.js"></script>  
-    <%= render 'layouts/header' %>
     <% accepted_matches_for_user = current_user.get_accepted_matches() %>
     <% if accepted_matches_for_user.length == 0 %>
         <div class= "center jumbotron" style="background:white" >
@@ -14,19 +14,18 @@
           <br>
           <% if @matches_for_user.key?(current_user.id) %>
             <h2>It looks like you haven't matched with anyone yet, click the button below to explore possible matches.</h2>
-            <button type="button" class="btn btn-success"><%= link_to 'Explore', explore_path %></button>
+            <button class="button2"><%= link_to 'Explore', explore_path %></button>
           <% else %>
             <h2>Click the button below to generate possible matches to explore based on your interests.</h2>
              <div class = "match_creation">
               <%= form_tag matches_create_path, method: :post, id: 'match_creation_form'  do %>
-                <%= submit_tag 'Make matches', data: { disable_with: "Please wait..." }, class: "btn"%>
+                <%= submit_tag 'Make matches', data: { disable_with: "Please wait..." }, class: "button2"%>
               </div>
             <% end %>
           <%end%>
         </div>
     <% else %>
-        <div style="height:1000px;background-color:white;font-size:80px;background-size: cover;max-height: 700px;">
-            <br>
+        <div class = "center jumbotron" style="background-color:white;font-size:80px;">
             <%= link_to "Explore", explore_path, class: "r-link ai-element ai-element3"%> 
             <br>
             <%= link_to "", "/users/new", class: "r-link ai-element ai-element3"  %>

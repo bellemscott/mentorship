@@ -97,7 +97,6 @@ class MatchesController < ApplicationController
     @first_match.make_map()
     @common_subjects_map = @first_match.get_hash()
     puts @common_subjects_map.length()
-    puts "HIIIIIIIIIIII"
     puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
@@ -108,7 +107,7 @@ class MatchesController < ApplicationController
       is_mentee()
     end
     @created = true
-    redirect_to '/matches'    #redirect to index
+    redirect_to homeloggedin_path    #redirect to index
 end
     
 #PATCH /matches
