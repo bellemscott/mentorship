@@ -6,11 +6,11 @@ class Match < ApplicationRecord
     def accept(accepted)
         if self.update_attribute(:accepted, accepted)
             puts "Success! accepted"
-            cable_ready["accepted"].set_property(
-               name:       "accepted",   # required - string containing a valid property
-               value:      "true",   # [null]   - the value to assign to the property
-             )
-            cable_ready.broadcast
+            # cable_ready["accepted"].set_property(
+            #    name:       "accepted",   # required - string containing a valid property
+            #    value:      "true",   # [null]   - the value to assign to the property
+            #  )
+            # cable_ready.broadcast
         else
            puts "Failed to update record. Handle the error."
         end
