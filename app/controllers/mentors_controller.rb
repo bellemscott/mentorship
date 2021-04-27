@@ -29,7 +29,7 @@ class MentorsController < ApplicationController
     @mentor[:user_id] = @user.id
     if @mentor.save
       puts @mentor[:current_position]
-      redirect_to homeloggedin_path
+      redirect_to home_path
     end
   end
 

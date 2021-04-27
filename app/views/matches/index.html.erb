@@ -25,72 +25,103 @@
                 <div class="carousel-inner" role="listbox">
                     <% accepted_matches_for_user.each_with_index do |match, i| %>
                     <% if current_user.mentee? %>
-                    <% mentor_record = Mentor.find_by(id: match.mentor_id) %>
-                    <% user_record = mentor_record%>
-                    <% user = User.find(mentor_record.user_id) %>
-                    <%elsif current_user.mentor?%>
+                        <% mentor_record = Mentor.find_by(id: match.mentor_id) %>
+                        <% user_record = mentor_record%>
+                        <% user = User.find(mentor_record.user_id) %>
+                    <%else %>
                         <% mentee_record = Mentee.find_by(id: match.mentee_id)%>
                         <% user_record = mentee_record%>
                         <% user = User.find(mentee_record.user_id) %>
-                    <%else%>
-                    <% puts "they are both, ignore for now" %>
                     <%end%>
                         <div class="item <%= "active " if i==0 %>">
-                            <div class="card container center jumbotron" style="width:60rem;">
-                                <% if user_record.avatar.attached? %>
-                                    <img class="d-block w-100" src="<%=(url_for(user_record.avatar))%>" width="220" height="200">
-                                <% else %>
-                                    <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
-                                <% end %>
-                                <br>
-                                <br>
-                                <% if current_user.mentee? %>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= user.firstname + " " + user.lastname %></h5>
-                                        <p class="text-muted"><%= user.email %></p>
+                            <div>    
+                            <div class="container flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front center">
+                                        <% if user.avatar.attached? %>
+                                            <img class="card-img-top" src="<%=(url_for(user.avatar))%>" width="300" height="300">
+                                        <% else %>
+                                            <img class="card-img-top" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="300" height="300"/>
+                                        <% end %>
+                                        <h1 class="card-title"><%= user.firstname + " " + user.lastname %></h1>
+                                        <h2 class="card-text text-muted"><%= user.email %></h2>
+                                        <h3 class="card-text text-muted">**Hover over me**</h3>
                                     </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Area of expertise: <%= mentor_record.area_of_expertise %></li>
-                                        <li class="list-group-item">Preferred method of contact: <%= mentor_record.preferred_method_of_contact%></li>
-                                        <li class="list-group-item">University: <%= mentor_record.school %></li>
-                                        <li class="list-group-item">Current Position: <%= mentor_record.current_position %></li>
-                                        <li class="list-group-item">Location: <%= mentor_record.location %></li>
-                                        <li class="list-group-item">Preferred Length of Mentorship: <%= mentor_record.length_of_mentorship %></li>
-                                    </ul>
-                                        <% other_user_id = mentor_record.user_id%>
-                                    <% search_record = Mentee.find_by(user_id: current_user.id) %>
-                                    <% other_match = Match.find_by(user_id: other_user_id, mentee_id: search_record.id) %>
-                                <% else %>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><%= user.firstname + " " + user.lastname %></h5>
-                                        <p class="card-text text-muted"><%= user.email %></p>
+                                    <div class="flip-card-back">
+                                        <div class="center" style="padding:60px">
+                                            <% if current_user.mentor? %>
+                                                <div>
+                                                    <table class= "table">
+                                                        <tbody>
+                                                        <tr>
+                                                        <td>Major</td>
+                                                        <td><%= mentee_record.major %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Areas of Interest</td>
+                                                        <td><%= mentee_record.area_of_interest%></td>
+                                                        </tr>
+                                                        <td>Location</td>
+                                                        <td><%= mentee_record.location%></td>
+                                                        </tr>
+                                                        <td>Graduation Year</td>
+                                                        <td><%= mentee_record.graduation_year%></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <% other_user_id = mentee_record.user_id%>
+                                                <% search_record = Mentor.find_by(user_id: current_user.id) %>
+                                                <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
+                                            <%else %>
+                                                <div>
+                                                    <table class= "table">
+                                                        <tbody>
+                                                        <tr>
+                                                        <td>Area of expertise</td>
+                                                        <td><%= mentor_record.area_of_expertise %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Preferred Method of Contact</td>
+                                                        <td><%= mentor_record.preferred_method_of_contact %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Alma Matter</td>
+                                                        <td><%= mentor_record.school %></td>
+                                                        </tr>
+                                                        <td>Current Position</td>
+                                                        <td><%= mentor_record.current_position%></td>
+                                                        </tr>
+                                                        <td>Location</td>
+                                                        <td><%= mentor_record.location%></td>
+                                                        </tr>
+                                                        </tr>
+                                                        <td>Preferred Length of Mentorship</td>
+                                                        <td><%= mentor_record.length_of_mentorship%></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <% other_user_id = mentor_record.user_id%>
+                                                <% search_record = Mentee.find_by(user_id: current_user.id) %>
+                                                <% other_match = Match.find_by(user_id: other_user_id, mentee_id: search_record.id) %>
+                                            <% end %>                                 
+                                            <% puts "Should be dexters id "%>
+                                            <% puts other_user_id %>
+                                            <% puts search_record.id %>
+                                            <%if other_match != nil %>
+                                                <%if other_match.accepted %> 
+                                                    Status: It's a match! You can now chat with this user
+                                                    <br><br>
+                                                    <button type="button" class="button3">Chat</button>
+                                                <%end%>
+                                            <% else%>
+                                                Status: This user has not matched with you yet, check back later
+                                            <%end%>
+                                        </div>
                                     </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">Major: <%= mentee_record.major %></li>
-                                        <li class="list-group-item">Areas of Interest: <%= mentee_record.area_of_interest%></li>
-                                        <li class="list-group-item">Location: <%= mentee_record.location %></li>
-                                        <li class="list-group-item">Graduation Year: <%= mentee_record.graduation_year %></li>
-                                        <li class="list-group-item">Preferred Method of Contact: <%= mentee_record.preferred_method_of_contact %></li>
-                                        <li class="list-group-item">Preferred Length of Mentorship: <%= mentee_record.length_of_mentorship %></li>
-                                    </ul>
-                                    <% other_user_id = mentee_record.user_id%>
-                                    <% search_record = Mentor.find_by(user_id: current_user.id) %>
-                                    <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
-                                <% end %>
-                        
-                            <% puts "Should be dexters id "%>
-                            <% puts other_user_id %>
-                            <% puts search_record.id %>
-                            <%if other_match != nil %>
-                                <%if other_match.accepted %> 
-                                    Status: It's a match! You can now chat with this user
-                                    <br>
-                                    <button type="button" class="button2">Chat</button>
-                                <%end%>
-                            <% else%>
-                                Status: This user has not matched with you yet, check back later
-                            <%end%>
-                            
+                                </div>
+                            </div>                        
                             </div>
                         </div>
                     <% end %>

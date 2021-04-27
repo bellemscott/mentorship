@@ -45,7 +45,7 @@ class UsersController < ApplicationController
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
         additional_mentee()
       else
-        redirect_to homeloggedin_path
+        redirect_to home_path
       end
     else
       render 'new'

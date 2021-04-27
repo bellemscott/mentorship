@@ -37,16 +37,17 @@
                                     <% if possible_match.avatar.attached? %>
                                         <img class="card-img-top" src="<%=(url_for(possible_match.avatar))%>" width="300" height="300">
                                     <% else %>
-                                        <img class="card-img-top" src=<% url_for("/assets/defaultpic.png") %> width="300" height="300"/>
+                                        <img class="card-img-top" src=<% image_tag("defaultpic.png") %> width="300" height="300"/>
                                     <% end %>
                                     <h1 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h1>
                                     <h2 class="card-text text-muted"><%= possible_user.email %></h2>
                                     <h3 class="card-text text-muted">**Hover over me**</h3>
                                 </div>
-                                <div class="flip-card-back center jumbotron">
+                                <div class="flip-card-back">
+                                    <div class="center" style="padding:60px">
                                     <% if role == "mentee" %>
                                         <div>
-                                            <table>
+                                            <table class= "table">
                                                 <tbody>
                                                 <tr>
                                                 <td>Major</td>
@@ -67,7 +68,7 @@
                                         </div>
                                     <%else %>
                                         <div>
-                                            <table>
+                                            <table class= "table">
                                                 <tbody>
                                                 <tr>
                                                 <td>Area of expertise</td>
@@ -117,6 +118,7 @@
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Reject Match?', class: "btn-red-qa"%>
                                         <% end %>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

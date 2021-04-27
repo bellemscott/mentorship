@@ -1,7 +1,8 @@
 // Place all the styles related to the Matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.button2 {
+.button2,
+.button3 {
     display: inline-block;
     padding: 0.5em 3em;
     border: 0.16em solid #FFFFFF;
@@ -21,6 +22,12 @@
     color: #003478;
     border-color: #003478;
     background-color: transparent;
+}
+
+.button3:hover {
+    color: #003478;
+    border-color: #003478;
+    background-color: white;
 }
 
 .button2:active {

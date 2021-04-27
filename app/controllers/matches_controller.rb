@@ -12,7 +12,7 @@ class MatchesController < ApplicationController
     @match=Match.first
   end
 
-  def homeloggedin
+  def home
     @all_matches = Match.all
     @mentors = Mentor.all
     @mentees=Mentee.all
@@ -107,7 +107,7 @@ class MatchesController < ApplicationController
       is_mentee()
     end
     @created = true
-    redirect_to homeloggedin_path    #redirect to index
+    redirect_to home_path    #redirect to index
 end
     
 #PATCH /matches
