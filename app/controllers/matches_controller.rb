@@ -14,11 +14,6 @@ class MatchesController < ApplicationController
   end
 
 
-  # GET /mentors/1 or /mentors/1.json
-  def show
-  end
-
-
   # GET /mentors/new
   def new
     @match = Match.new
@@ -146,35 +141,28 @@ class MatchesController < ApplicationController
       is_mentee()
     end
     @created = true
+
+    @user = current_user
+    @mentees = Mentee.all
+    @mentors = Mentor.all
+    @all_matches = Match.all
+    @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
+    puts "Hi belle its okay"
+    @mentor_matches = fill_mentor_matches()     #array of Mentors
+    @mentee_matches = fill_mentee_matches()     #array of Mentees
+    @user_match = nil
     if @otherMatch != nil
       cable_ready["matching"].insert_adjacent_html(
         selector: "#matching",
         position: "afterbegin",
-        html: render_to_string(partial:"welcome/carosel", locals: {user_match:@test_party})
+        html: render_to_string("matches/show.html.erb", locals: {user_match:@test_party})
       )
     end
-
-    puts "readyness1"
     cable_ready.broadcast
+
     redirect_to '/matches'    #redirect to index
 end
-    
-#PATCH /matches
-def update
-  @mentors = Mentor.all
-  @mentees= Mentee.all 
-  @all_matches = Match.all
-  @matches_arr=[]
-  if current_user.mentor == true && current_user.mentee == false
-    is_mentor()
-  elsif current_user.mentee  && current_user.mentor == false
-    is_mentee()
-  else
-    is_both()
-  end
-  redirect_to '/matches'    #redirect to index
-end
-
+  
 
   def set_match
     
@@ -184,5 +172,51 @@ end
   def mentor_params
 
   end
+
+
+  def show
+    @user = current_user
+    @mentees = Mentee.all
+    @mentors = Mentor.all
+    @all_matches = Match.all
+    @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
+    puts "Hi belle its okay"
+    @mentor_matches = fill_mentor_matches()     #array of Mentors
+    @mentee_matches = fill_mentee_matches()     #array of Mentees
+    @user_match = nil
+end
+
+def fill_mentor_matches
+    temp_mentor_matches = []
+    @user_matches.each do |match|
+        mentor_record = Mentor.find_by(id: match.mentor_id)
+        temp_mentor_matches.push(mentor_record)
+    end
+    return temp_mentor_matches
+end
+
+def fill_mentee_matches
+    temp_mentee_matches = []
+    @user_matches.each do |match|
+        mentee_record = Mentee.find_by(id: match.mentee_id)
+        temp_mentee_matches.push(mentee_record)
+    end
+    return temp_mentee_matches
+end
+
+def accept
+    @match = Match.find_by(id: params[:match_id].to_i)
+    accepted = true
+    @match.accept(accepted)
+    redirect_to matches_path
+end
+
+def reject
+    puts "rejecting mathc now"
+    @match = Match.find_by(id: params[:match_id].to_i)
+    rejected = true
+    @match.reject(rejected)
+    redirect_to explore_path
+end
 
 end

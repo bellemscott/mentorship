@@ -13,13 +13,12 @@ Rails.application.routes.draw do
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
   get '/userprofile/:id', to: 'users#show', as: 'userprofile'
   get    '/login',   to: 'sessions#new'
-  get    '/explore',   to: 'welcome#show'
+  get    '/explore',   to: 'matches#show'
   get     '/additional-info', to: 'users#additional_info'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   post 'matches/create'
-  post 'matches/update'
-  patch 'welcome/update'    #for accepting matches
-  patch 'welcome/reject'    #for rejecting matches
+  post 'matches/accept', to: 'matches#accept'  #for rejecting matches
+  post 'matches/reject', to: 'matches#reject'    #for accepting matches
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

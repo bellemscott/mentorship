@@ -48,7 +48,7 @@ class User < ApplicationRecord
         all_matches = Match.all
         matches_to_return = []
         all_matches.each do |match|
-            if match.user_id == self.id && match.accepted == true
+            if match.user_id == self.id && match.accepted == true && match.rejected == false
                 matches_to_return.push(match)
             end
         end
