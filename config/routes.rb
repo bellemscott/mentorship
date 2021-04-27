@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :mentors
   resources :users
   resources :states, only: :index
-  root 'welcome#home'
+  root 'matches#home'
   get  '/signup',  to: 'users#new'
-  get  '/homeloggedin',  to: 'welcome#home_logged_in'
+  get  '/home',  to: 'matches#home'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
   get '/userprofile/:id', to: 'users#show', as: 'userprofile'

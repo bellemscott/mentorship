@@ -114,6 +114,7 @@
             </div>
         </div>
     <% else %>
+<<<<<<< HEAD
     <div class= "center jumbotron" style="background:white" >
           <h1>Welcome, <%= current_user.firstname %>!</h1>
           <br>
@@ -126,6 +127,10 @@
             <% end %>
           <%end%>
           </div>
+=======
+        <h1>No Matches yet, check back later!</h1>
+        <div class="center" ><%= link_to "Explore", explore_path, method: :get, class: "button2" %> </div>
+>>>>>>> 7cd1a5539c9aa284bc1481610729f0dda5c3d98f
     <% end %>
 </table>
 </body>

@@ -13,6 +13,15 @@ class MatchesController < ApplicationController
     @match=Match.first
   end
 
+  def home
+    @all_matches = Match.all
+    @mentors = Mentor.all
+    @mentees=Mentee.all
+    @users=User.all
+    @matches_for_user = @@matches_hash
+    @match=Match.first
+  end
+
 
   # GET /mentors/new
   def new
@@ -130,7 +139,6 @@ class MatchesController < ApplicationController
     @first_match.make_map()
     @common_subjects_map = @first_match.get_hash()
     puts @common_subjects_map.length()
-    puts "HIIIIIIIIIIII"
     puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
