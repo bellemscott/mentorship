@@ -1,3 +1,4 @@
+require_relative "job_map.rb"
 class MatchesController < ApplicationController
   before_action :set_match, only: %i[ show edit update destroy ]
 
@@ -39,8 +40,13 @@ class MatchesController < ApplicationController
   end
 
   def is_mentor()
+    #Match_preferences.findby (Curent_user id)
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
+        puts "Frog"
+        puts mentee.major
+        puts "Cow"
+        puts @common_subjects_map[mentee.major]
         if mentee.user_id != @mentor.user_id
           if @mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[mentee.major].include? @mentor.current_position)
             newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
@@ -55,7 +61,7 @@ class MatchesController < ApplicationController
     @mentors.each do |mentor|
       @mentess.each do |mentee|
           if mentee.user_id != mentor.user_id 
-              if mentor.length_of_mentorship==mentee.length_of_mentorship
+              if mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[@mentee.major].include? mentor.current_position)
                 newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
                 check_duplicate(newMatch)
               end
@@ -83,11 +89,14 @@ class MatchesController < ApplicationController
     @mentees= Mentee.all 
     @all_matches = Match.all
     @first_match = Match.new()
-    @first_match.make_map()
-    @common_subjects_map = @first_match.get_hash()
-    puts @common_subjects_map.length()
-    puts "HIIIIIIIIIIII"
-    puts @mentees.length()
+    # @first_match.make_map()
+    # @common_subjects_map = @first_match.get_hash()
+    # @first_match.write_map()
+    #@common_subjects_map = File.read("app/job_map.rb")  
+    @common_subjects_map=JobMap.new.map_method
+    puts @common_subjects_map
+     puts "HIIIIIIIIIIII"
+    # puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
       is_mentor()

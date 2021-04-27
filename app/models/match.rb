@@ -37,7 +37,10 @@ class Match < ApplicationRecord
   def get_hash
       return @major_map
   end
-
+  
+  def write_map
+    File.open("app/job_map.rb", 'w') { |file| file.write(@major_map) }
+  end
   
  
     #accepts a match
@@ -1335,7 +1338,6 @@ class Match < ApplicationRecord
  
          if j.include? "Software" or j.include? "Techni"
              helper("Computer Science",j)
-             helper("Systems",j)
          end
  
          if j.include? "Stenographer" 
