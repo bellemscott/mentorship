@@ -5,7 +5,12 @@ class Match < ApplicationRecord
    #accepts a match
     def accept(accepted)
         if self.update_attribute(:accepted, accepted)
-            puts "Success!"
+            puts "Success! accepted"
+            # cable_ready["accepted"].set_property(
+            #    name:       "accepted",   # required - string containing a valid property
+            #    value:      "true",   # [null]   - the value to assign to the property
+            #  )
+            # cable_ready.broadcast
         else
            puts "Failed to update record. Handle the error."
         end
@@ -14,7 +19,7 @@ class Match < ApplicationRecord
     #rejects a match
     def reject(rejected)
       if self.update_attribute(:rejected, rejected)
-          puts "Success!"
+          puts "Success! rejected"
       else
          puts "Failed to update record. Handle the error."
       end
@@ -37,26 +42,6 @@ class Match < ApplicationRecord
   def get_hash
       return @major_map
   end
-
-  
- 
-    #accepts a match
-     def accept(accepted)
-         if self.update_attribute(:accepted, accepted)
-             puts "Success!"
-         else
-            puts "Failed to update record. Handle the error."
-         end
-     end
- 
-     #rejects a match
-     def reject(rejected)
-       if self.update_attribute(:rejected, rejected)
-           puts "Success!"
-       else
-          puts "Failed to update record. Handle the error."
-       end
-   end
  
         
      def helper(major,job)

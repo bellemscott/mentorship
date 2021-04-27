@@ -31,7 +31,5 @@ class ExampleReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com/reflexes#reflex-classes
-  def update_matches
-    
-  end
+
 end
