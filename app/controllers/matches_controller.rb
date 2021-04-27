@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  include CableReady::Broadcaster
+  # include CableReady::Broadcaster   #not yet implemented
   before_action :set_match, only: %i[ show edit update destroy ]
 
   @@matches_hash = {}
@@ -60,8 +60,6 @@ class MatchesController < ApplicationController
     @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
     @otherMatch.save
     @test_party = @mentors.find_by(id: @newMatch.mentor_id)
-    puts "here belle!!! making other mentee match"
-    puts @otherMatch.id
   end
 
   def make_mentor_match()
@@ -72,8 +70,6 @@ class MatchesController < ApplicationController
     @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
     @otherMatch.save
     @test_party = @mentees.find_by(id: @newMatch.mentee_id)
-    puts "here belle!!! making other mentor match"
-    puts @otherMatch.id
   end
 
   def is_mentor()
@@ -95,21 +91,6 @@ class MatchesController < ApplicationController
       end
       @@matches_hash[current_user.id] = @matches_arr
   end
-
-  # def is_both()   #NOT fully implemented yet!!!
-  #   @mentors.each do |mentor|
-  #     @mentess.each do |mentee|
-  #         if mentee.user_id != mentor.user_id 
-  #             if mentor.length_of_mentorship==mentee.length_of_mentorship
-  #               newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-  #               #check_duplicate(newMatch, 2)
-  #               newMatch.save
-  #             end
-  #         end
-  #     end
-  #   end
-  #   @@matches_hash[current_user.id] = @matches_arr
-  # end
 
   def is_mentee()
     @mentee = Mentee.find_by(user_id: current_user.id)
@@ -155,18 +136,17 @@ class MatchesController < ApplicationController
     @mentors = Mentor.all
     @all_matches = Match.all
     @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
-    puts "Hi belle its okay"
     @mentor_matches = fill_mentor_matches()     #array of Mentors
     @mentee_matches = fill_mentee_matches()     #array of Mentees
     @user_match = nil
-    if @otherMatch != nil
-      cable_ready["matching"].insert_adjacent_html(
-        selector: "#matching",
-        position: "afterbegin",
-        html: render_to_string("matches/show.html.erb", locals: {user_match:@test_party})
-      )
-    end
-    cable_ready.broadcast
+    # if @otherMatch != nil
+    #   cable_ready["matching"].insert_adjacent_html(
+    #     selector: "#matching",
+    #     position: "afterbegin",
+    #     html: render_to_string("matches/show.html.erb", locals: {user_match:@test_party})
+    #   )
+    # end
+    # cable_ready.broadcast
 
     redirect_to '/matches'    #redirect to index
 end
@@ -188,7 +168,6 @@ end
     @mentors = Mentor.all
     @all_matches = Match.all
     @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
-    puts "Hi belle its okay"
     @mentor_matches = fill_mentor_matches()     #array of Mentors
     @mentee_matches = fill_mentee_matches()     #array of Mentees
     @user_match = nil
@@ -220,7 +199,6 @@ def accept
 end
 
 def reject
-    puts "rejecting mathc now"
     @match = Match.find_by(id: params[:match_id].to_i)
     rejected = true
     @match.reject(rejected)
