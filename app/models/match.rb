@@ -352,11 +352,11 @@ class Match < ApplicationRecord
                      @major_map["Health: Science, Soceity, and Policy"]=[]
                      @major_map["Health: Science, Soceity, and Policy"].push(j)
                   end
-                  if @major_map.has_key?("Neuroscince")
-                     @major_map["Neuroscince"].push(j)
+                  if @major_map.has_key?("Neuroscience")
+                     @major_map["Neuroscience"].push(j)
                   else 
-                     @major_map["Neuroscince"]=[]
-                     @major_map["Neuroscince"].push(j)
+                     @major_map["Neuroscience"]=[]
+                     @major_map["Neuroscience"].push(j)
                   end
                   if @major_map.has_key?("Postbaccalaureate Premed Studies")
                      @major_map["Postbaccalaureate Premed Studies"].push(j)
@@ -433,11 +433,11 @@ class Match < ApplicationRecord
                      @major_map["Health: Science, Soceity, and Policy"]=[]
                      @major_map["Health: Science, Soceity, and Policy"].push(j)
                   end
-                  if @major_map.has_key?("Neuroscince")
-                     @major_map["Neuroscince"].push(j)
+                  if @major_map.has_key?("Neuroscience")
+                     @major_map["Neuroscience"].push(j)
                   else 
-                     @major_map["Neuroscince"]=[]
-                     @major_map["Neuroscince"].push(j)
+                     @major_map["Neuroscience"]=[]
+                     @major_map["Neuroscience"].push(j)
                   end
                   if @major_map.has_key?("Postbaccalaureate Premed Studies")
                      @major_map["Postbaccalaureate Premed Studies"].push(j)
@@ -618,11 +618,11 @@ class Match < ApplicationRecord
                      @major_map["Health: Science, Soceity, and Policy"]=[]
                      @major_map["Health: Science, Soceity, and Policy"].push(j)
                   end
-                  if @major_map.has_key?("Physcology")
-                     @major_map["Biotechnology"].push(j)
+                  if @major_map.has_key?("Psychology")
+                     @major_map["Psychology"].push(j)
                    else 
-                      @major_map["Biotechnology"]=[]
-                      @major_map["Biotechnology"].push(j)
+                      @major_map["Psychology"]=[]
+                      @major_map["Psychology"].push(j)
                    end
              end
  
@@ -679,7 +679,7 @@ class Match < ApplicationRecord
              end
  
            
-             if j.include? "Nurse" and j.exclude? "Nursery" or j.include? "Audiologist" or "Chiro" or j.include? "Doctor" or j.include? "Practitioner" or j.include? "Gynaecologist" or j.include? "Phram" or j.include? "Medical" or j.include? "Midwive" or j.include? "Optic" or j.include? "Optometrist" 
+             if j.include? "Nurse" and j.exclude? "Nursery" or j.include? "Audiologist" or j.include? "Chiro" or j.include? "Doctor" or j.include? "Practitioner" or j.include? "Gynaecologist" or j.include? "Phram" or j.include? "Medical" or j.include? "Midwive" or j.include? "Optic" or j.include? "Optometrist" 
                  if @major_map.has_key?("Molecular and Cell Biology")
                      @major_map["Molecular and Cell Biology"].push(j)
                    else 
@@ -1058,7 +1058,7 @@ class Match < ApplicationRecord
               end
  
               if j.include? "Graphologist" 
-                 helper("Physcology",j)
+                 helper("Psychology",j)
                  helper("Creative Writng",j)
               end
  
@@ -1103,7 +1103,7 @@ class Match < ApplicationRecord
                  helper("Economics",j)
              end
  
-             if j.include? "Housing" or "Immigration"
+             if j.include? "Housing" or j.include? "Immigration"
                  helper("Social Justice and Social Policy",j)
                  helper("Sociology",j)
              end
@@ -1289,13 +1289,13 @@ class Match < ApplicationRecord
              helper("Molecular and Cell Biology",j)
              helper("Chemisty",j)
              helper("Physics",j)
-             helper("Quantitive Biology",j)
+             helper("Quantitative Biology",j)
              helper("Biotechnology",j)
              helper("Biophysics and Structural Biology",j)
         end
  
         if j.include? "Resin Caster" 
-         helper("Sculpter",j)
+         helper("Sculpture",j)
         end
  
          if j.include? "Sail" or j.include? "Sand" or j.include? "Saw" or j.include? "Seaman" or j.include? "Seam" or j.include? "Servant" or j.include? "Shelf" or j.include? "Shepard" or j.include? "Shift" or j.include? "Ship" or j.include? "Shoe"
@@ -1350,7 +1350,7 @@ class Match < ApplicationRecord
         end
  
         if j.include? "Studio" 
-             helper("Theater Studies",j)
+             helper("Theater Arts",j)
              helper("Music",j)
              helper("Fine Art",j)
              helper("Studio Art",j)

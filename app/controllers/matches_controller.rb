@@ -89,9 +89,9 @@ class MatchesController < ApplicationController
     @mentees= Mentee.all 
     @all_matches = Match.all
     @first_match = Match.new()
-    # @first_match.make_map()
+     @first_match.make_map()
     # @common_subjects_map = @first_match.get_hash()
-    # @first_match.write_map()
+   # @first_match.write_map()
     #@common_subjects_map = File.read("app/job_map.rb")  
     @common_subjects_map=JobMap.new.map_method
     puts @common_subjects_map
