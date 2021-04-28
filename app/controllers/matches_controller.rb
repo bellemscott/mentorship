@@ -1,3 +1,4 @@
+require_relative "job_map.rb"
 class MatchesController < ApplicationController
   # include CableReady::Broadcaster   #not yet implemented
   before_action :set_match, only: %i[ show edit update destroy ]
@@ -92,6 +93,7 @@ class MatchesController < ApplicationController
       @@matches_hash[current_user.id] = @matches_arr
   end
 
+
   def is_mentee()
     @mentee = Mentee.find_by(user_id: current_user.id)
     @mentors.each do |mentor|
@@ -111,6 +113,7 @@ class MatchesController < ApplicationController
     end
     @@matches_hash[current_user.id] = @matches_arr
   end
+  
   # POST /matches or /mentors.json
   def create
     @mentors = Mentor.all
@@ -118,9 +121,7 @@ class MatchesController < ApplicationController
     @all_matches = Match.all
     @first_match = Match.new()
     @first_match.make_map()
-    @common_subjects_map = @first_match.get_hash()
-    puts @common_subjects_map.length()
-    puts @mentees.length()
+    @common_subjects_map=JobMap.new.map_method
     @matches_arr=[]
     if current_user.mentor 
       is_mentor()
@@ -128,28 +129,14 @@ class MatchesController < ApplicationController
       is_mentee()
     end
     @created = true
-
     @user = current_user
-    @mentees = Mentee.all
-    @mentors = Mentor.all
-    @all_matches = Match.all
     @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
     @user_match = nil
-    # if @otherMatch != nil
-    #   cable_ready["matching"].insert_adjacent_html(
-    #     selector: "#matching",
-    #     position: "afterbegin",
-    #     html: render_to_string("matches/show.html.erb", locals: {user_match:@test_party})
-    #   )
-    # end
-    # cable_ready.broadcast
 
     redirect_to '/matches'    #redirect to index
-end
+  end
   
-
   def set_match
-    
   end
 
   # Only allow a list of trusted parameters through.
