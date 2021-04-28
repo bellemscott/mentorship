@@ -2,6 +2,7 @@ class Mentee < ApplicationRecord
     has_many :matches
     has_many :mentors, through: :matches
     has_one_attached :avatar
+    validates :major, presence: true
 
     def majors
         subjects_hash = {}
