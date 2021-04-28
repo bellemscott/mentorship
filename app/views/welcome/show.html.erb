@@ -17,7 +17,9 @@
             <% users = @mentee_matches%>
             <% role = "mentee"%>
         <% end %>
-
+        <% if users.length == 0%>
+        <h1> No matches yet. Refresh or come back later! </h1>
+        <%end%>
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" style="background:white;">
                 <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -97,7 +99,7 @@
                                         </div>
                                     <% end %>
                                         <div class="card-body">
-                                        <%= form_tag welcome_update_path, method: :patch, class: "form" do %>
+                                        <%= form_tag welcome_accept_path, method: :post, class: "form" do %>
                                             <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
                                             <% end %>
                                             <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
@@ -108,7 +110,7 @@
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
                                             <% notification = AcceptedNotification.with(match: @match) %>
                                         <% end %>
-                                        <%= form_tag welcome_reject_path, method: :patch, class: "form" do %>
+                                        <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
                                             <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
                                             <% end %>
                                             <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
