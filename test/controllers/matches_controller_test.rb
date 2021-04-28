@@ -13,11 +13,11 @@ class MatchesControllerTest < ActionDispatch::IntegrationTest
     @testing_map=@common_subjects_map
   end
 
-  # test "match on length" do
-  #   mentee.create()
-  #   @mentee1.create()
-  #   assert_equals(Match.first.)
-  # end
+  test "match on length" do
+    mentee.create()
+    @mentee1.create()
+    assert_equals(Match.first.)
+  end
 
   test "map test" do
     assert(true,@common_subjects_map["Business"].include? "Accountant")
