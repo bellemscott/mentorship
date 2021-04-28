@@ -1,4 +1,4 @@
- require "/test/models/test_helper.rb"
+ require "test_helper.rb"
 
 class MentorTest < ActiveSupport::TestCase
 

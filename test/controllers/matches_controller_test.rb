@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class MatchesControllerTest < ActionDispatch::IntegrationTest
   def setup
@@ -13,21 +13,21 @@ class MatchesControllerTest < ActionDispatch::IntegrationTest
     @testing_map=@common_subjects_map
   end
 
-  test "match on length" do
-    mentee.create()
-    @mentee1.create()
-    assert_equals(Match.first.)
-  end
+  # test "match on length" do
+  #   mentee.create()
+  #   @mentee1.create()
+  #   assert_equals(Match.first)
+  # end
 
   test "map test" do
-    assert(true,@common_subjects_map["Business"].include? "Accountant")
-    assert(true,@common_subjects_map["Computer Science"].include? "Software Engenierr")
-    assert(true,@common_subjects_map["Mathematics"].include? "Statistician")
-    assert(true,@common_subjects_map["Mathematics"].include? "Actuary")
-    assert(true,@common_subjects_map["History"].include? "Historian")
-    assert(true,@common_subjects_map["History"].include? "Art Historian")
-    assert(true,@common_subjects_map["Theater Arts"].include? "Actor")
-    assert(true,@common_subjects_map["Theater Arts"].include? "Actress")
+    assert(@common_subjects_map["Business"].include? "Accountant")
+    assert(@common_subjects_map["Computer Science"].include? "Software Engineer")
+    assert(@common_subjects_map["Mathematics"].include? "Statistician")
+    assert(@common_subjects_map["Mathematics"].include? "Actuary")
+    assert(@common_subjects_map["History"].include? "Historian")
+    assert(@common_subjects_map["History"].include? "Art Historian")
+    assert(@common_subjects_map["Theater Arts"].include? "Actor")
+    assert(@common_subjects_map["Theater Arts"].include? "Actress")
   end
 
 
