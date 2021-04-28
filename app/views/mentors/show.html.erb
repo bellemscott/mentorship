@@ -6,7 +6,7 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<div class= "center jumbotron emp-profile">
+<div class= "center jumbotron emp-profile" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
             <form method="post">
                 <div class="row">
                     <div class="col-md-6">
@@ -52,7 +52,7 @@
                                         <td><%= @mentor.location %></td>
                                       <tr>
                                       </tr>
-                                        <th>Preferred Length of Mentorship</th>
+                                        <th>Preferred Length of Mentorship in Weeks</th>
                                         <td><%= @mentor.length_of_mentorship %></td>
                                       <tr>
                                         <th colspan="20"></th>
@@ -69,14 +69,14 @@
                         <% if @mentor.avatar.attached? %>
                           <img src="<%=(url_for(@mentor.avatar))%>" width="220" height="200">
                         <% else %>
-                            <img src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" alt="" style= "align:right" width="220" height="200"/>
+                            <img src="defaultpic.png" alt="" style= "align:right" width="220" height="200"/>
                         <% end %>
                             <%# <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
                             </div> %>
                         </div>
-                        <button><%= link_to 'Edit Profile', edit_mentor_path(@mentor) %></button>
+                        <%= link_to 'Edit Profile', edit_mentor_path(@mentor), class: "button2" %>
                     </div>
                     </div>
                 </div>

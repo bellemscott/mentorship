@@ -1,5 +1,7 @@
 # Brandeis Mentorship - Authors: Belle Scott, Mahima Devanahalli, Alan Huang, Ava Harnick
 
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
+
 Heroku link: https://guarded-ridge-55783.herokuapp.com
 
 Github repo: https://github.com/bellemscott/mentorship

@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 $primary: #003478;
+$fontfamily: "verdana, arial, helvatica, sans-serif";
 body {
     padding-top: 60px;
 }
@@ -38,6 +39,7 @@ h1 {
     letter-spacing: -2px;
     margin-bottom: 30px;
     text-align: center;
+    font-family: $fontfamily
 }
 
 h2 {
@@ -47,11 +49,13 @@ h2 {
     text-align: center;
     font-weight: normal;
     color: #777;
+    font-family: $fontfamily
 }
 
 p {
     font-size: 1.1em;
     line-height: 1.7em;
+    font-family: $fontfamily
 }
 
 #slider {
@@ -110,5 +114,4 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    padding-bottom: 65px;
 }

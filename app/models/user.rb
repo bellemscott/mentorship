@@ -10,12 +10,17 @@ class User < ApplicationRecord
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
     validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, length: { maximum: 50 }
     validates :password, presence: true, length: { minimum: 6 }
+    validate :can_only_be_either_mentee_or_mentor
 
     def User.digest(string)
         cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                       BCrypt::Engine.cost
         BCrypt::Password.create(string, cost: cost)
       end
+
+    def can_only_be_either_mentee_or_mentor()
+        errors.add(:base, 'You cannot be both a mentor and a mentee, please select only one option.') if self.mentor == true && self.mentee== true
+    end
 
 
     def User.new_token
@@ -48,7 +53,7 @@ class User < ApplicationRecord
         all_matches = Match.all
         matches_to_return = []
         all_matches.each do |match|
-            if match.user_id == self.id && match.accepted == true
+            if match.user_id == self.id && match.accepted == true && match.rejected == false
                 matches_to_return.push(match)
             end
         end

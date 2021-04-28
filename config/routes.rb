@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   resources :mentors
   resources :users
   resources :states, only: :index
-  root 'welcome#home'
+  root 'matches#home'
   get  '/signup',  to: 'users#new'
-  get  '/homeloggedin',  to: 'welcome#home_logged_in'
+  get  '/home',  to: 'matches#home'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'
   get '/userprofile/:id', to: 'users#show', as: 'userprofile'
@@ -18,8 +18,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   post 'matches/create'
-  post 'matches/update'
-  patch 'welcome/update'    #for accepting matches
-  patch 'welcome/reject'    #for rejecting matches
+  post 'welcome/accept', to: 'welcome#accept'  #for rejecting matches
+  post 'welcome/reject', to: 'welcome#reject'    #for accepting matches
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

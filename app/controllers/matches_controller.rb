@@ -1,5 +1,6 @@
 require_relative "job_map.rb"
 class MatchesController < ApplicationController
+  # include CableReady::Broadcaster   #not yet implemented
   before_action :set_match, only: %i[ show edit update destroy ]
 
   @@matches_hash = {}
@@ -13,9 +14,13 @@ class MatchesController < ApplicationController
     @match=Match.first
   end
 
-
-  # GET /mentors/1 or /mentors/1.json
-  def show
+  def home
+    @all_matches = Match.all
+    @mentors = Mentor.all
+    @mentees=Mentee.all
+    @users=User.all
+    @matches_for_user = @@matches_hash
+    @match=Match.first
   end
 
 
@@ -28,111 +33,118 @@ class MatchesController < ApplicationController
   def edit
   end
 
-  def check_duplicate(newMatch)
-    @all_matches.each do |match|
-      if match.user_id == newMatch.user_id && match.mentor_id == newMatch.mentor_id && match.mentee_id == newMatch.mentee_id
-        puts "duplicate record"
-      else
-        newMatch.save
-        @matches_arr.push(newMatch)
+  #user is mentor : identifier 0 mentee : identifier 1 both : identifier 2
+  def check_duplicate(identifier)
+    duplicate = false
+    matches = Match.all
+    matches.each do |match|
+      if match.user_id == @newMatch.user_id && match.mentor_id == @newMatch.mentor_id && match.mentee_id == @newMatch.mentee_id
+        duplicate = true
       end
     end
+    if duplicate == false
+      @newMatch.save
+      if identifier == 0    #need a mentee record
+        make_mentee_match()
+      elsif identifier == 1   #need a mentor record
+        make_mentor_match()
+      end
+    end
+    @matches_arr.push(@newMatch)
+  end
+
+  def make_mentee_match()
+    @users = User.all
+    @other_party = @mentees.find_by(id: @newMatch.mentee_id)
+    other_party_user_id = @other_party.user_id
+    other_user = @users.find_by(id: other_party_user_id)
+    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
+    @otherMatch.save
+    @test_party = @mentors.find_by(id: @newMatch.mentor_id)
+  end
+
+  def make_mentor_match()
+    @users = User.all
+    @other_party = @mentors.find_by(id: @newMatch.mentor_id)
+    other_party_user_id = @other_party.user_id
+    other_user = @users.find_by(id: other_party_user_id)
+    @otherMatch= Match.new(:user_id => other_party_user_id, :mentor_id => @newMatch.mentor_id, :mentee_id => @newMatch.mentee_id, :accepted => false, :rejected => false)    #creates the other match
+    @otherMatch.save
+    @test_party = @mentees.find_by(id: @newMatch.mentee_id)
   end
 
   def is_mentor()
-    #Match_preferences.findby (Curent_user id)
     @mentor = Mentor.find_by(user_id: current_user.id)
       @mentees.each do |mentee|
-        puts "Frog"
-        puts mentee.major
-        puts "Cow"
-        puts @common_subjects_map[mentee.major]
         if mentee.user_id != @mentor.user_id
-          if @mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[mentee.major].include? @mentor.current_position)
-            newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false)
-            check_duplicate(newMatch)
+          if (@common_subjects_map[mentee.major]) != nil    #if theres a record in map for particular job/major
+            if @mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[mentee.major].include? @mentor.current_position)
+              @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
+              check_duplicate(0)
+            end
+          else
+            if @mentor.length_of_mentorship==mentee.length_of_mentorship 
+              @newMatch= Match.new(:user_id => current_user.id, :mentor_id => @mentor.id, :mentee_id => mentee.id, :accepted => false, :rejected => false)
+              check_duplicate(0)
+            end
           end
         end
       end
       @@matches_hash[current_user.id] = @matches_arr
   end
 
-  def is_both()   #NOT fully implemented yet!!!
-    @mentors.each do |mentor|
-      @mentess.each do |mentee|
-          if mentee.user_id != mentor.user_id 
-              if mentor.length_of_mentorship==mentee.length_of_mentorship or (@common_subjects_map[@mentee.major].include? mentor.current_position)
-                newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-                check_duplicate(newMatch)
-              end
-          end
-      end
-    end
-    @@matches_hash[current_user.id] = @matches_arr
-  end
 
   def is_mentee()
     @mentee = Mentee.find_by(user_id: current_user.id)
     @mentors.each do |mentor|
       if current_user.id != mentor.user_id
-        if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@common_subjects_map[@mentee.major].include? mentor.current_position)
-          newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false)
-          check_duplicate(newMatch)
+        if (@common_subjects_map[@mentee.major]) != nil
+          if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@common_subjects_map[@mentee.major].include? mentor.current_position)
+            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
+            check_duplicate(1)
+          end
+        else
+          if (mentor.length_of_mentorship==@mentee.length_of_mentorship)
+            @newMatch= Match.new(:user_id => current_user.id, :mentor_id => mentor.id, :mentee_id => @mentee.id, :accepted => false, :rejected => false)
+            check_duplicate(1)
+          end
         end
       end
     end
     @@matches_hash[current_user.id] = @matches_arr
   end
+  
   # POST /matches or /mentors.json
   def create
     @mentors = Mentor.all
     @mentees= Mentee.all 
     @all_matches = Match.all
     @first_match = Match.new()
-     @first_match.make_map()
-    # @common_subjects_map = @first_match.get_hash()
-   # @first_match.write_map()
-    #@common_subjects_map = File.read("app/job_map.rb")  
+    @first_match.make_map()
     @common_subjects_map=JobMap.new.map_method
-    puts @common_subjects_map
-     puts "HIIIIIIIIIIII"
-    # puts @mentees.length()
     @matches_arr=[]
     if current_user.mentor 
       is_mentor()
-    elsif current_user.mentor && current_user.mentee
-      is_both()
     else
       is_mentee()
     end
     @created = true
+    @user = current_user
+    @user_matches = Match.where(user_id: current_user.id, accepted: false, rejected:false)
+    @user_match = nil
+
     redirect_to '/matches'    #redirect to index
-end
-    
-#PATCH /matches
-def update
-  @mentors = Mentor.all
-  @mentees= Mentee.all 
-  @all_matches = Match.all
-  @matches_arr=[]
-  if current_user.mentor == true && current_user.mentee == false
-    is_mentor()
-  elsif current_user.mentee  && current_user.mentor == false
-    is_mentee()
-  else
-    is_both()
   end
-  redirect_to '/matches'    #redirect to index
-end
-
-
+  
   def set_match
-    
   end
 
   # Only allow a list of trusted parameters through.
   def mentor_params
 
+  end
+
+  def show
   end
 
 end

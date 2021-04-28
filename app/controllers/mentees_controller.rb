@@ -31,7 +31,7 @@ class MenteesController < ApplicationController
         @mentor = Mentor.new()
         render 'additional_mentor'
       else
-        redirect_to matches_path
+        redirect_to home_path
       end
     end
   end

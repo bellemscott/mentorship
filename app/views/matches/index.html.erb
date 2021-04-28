@@ -3,127 +3,154 @@
 <head>
     <title>Mentorship App</title>
     <meta charset="utf-8">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <%= render 'layouts/header' %>
-    <h1>Matches</h1>
-    <% accepted_matches_for_user = current_user.get_accepted_matches() %>
-    <% if accepted_matches_for_user.length > 0 %>
-    <div class= "center jumbotron" style="background:white" >
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
-            <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <% accepted_matches_for_user.each_with_index do |possible_match, i| %>
-            <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
-            <% end %>
-        </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <% accepted_matches_for_user.each_with_index do |match, i| %>
-            <% if current_user.mentee? %>
-            <% mentor_record = Mentor.find_by(id: match.mentor_id) %>
-            <% user_record = mentor_record%>
-            <% user = User.find(mentor_record.user_id) %>
-            <%elsif current_user.mentor?%>
-              <% mentee_record = Mentee.find_by(id: match.mentee_id)%>
-              <% user_record = mentee_record%>
-              <% user = User.find(mentee_record.user_id) %>
-            <%else%>
-            <% puts "they are both, ignore for now" %>
-            <%end%>
-                <div class="item <%= "active " if i==0 %>">
-                    <div class="card container center jumbotron" style="width:60rem;">
-                        <% if user_record.avatar.attached? %>
-                            <img class="d-block w-100" src="<%=(url_for(user_record.avatar))%>" width="220" height="200">
-                        <% else %>
-                            <img class="d-block w-100" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="220" height="200"/>
-                        <% end %>
-                        <br>
-                        <br>
-                        <% if current_user.mentee? %>
-                            <div class="card-body">
-                                <h5 class="card-title"><%= user.firstname + " " + user.lastname %></h5>
-                                <p class="card-text text-muted"><%= user.email %></p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Area of expertise: <%= mentor_record.area_of_expertise %></li>
-                                <li class="list-group-item">Preferred method of contact: <%= mentor_record.preferred_method_of_contact%></li>
-                                <li class="list-group-item">University: <%= mentor_record.school %></li>
-                                <li class="list-group-item">Current Position: <%= mentor_record.current_position %></li>
-                                <li class="list-group-item">Location: <%= mentor_record.location %></li>
-                                <li class="list-group-item">Preferred Length of Mentorship: <%= mentor_record.length_of_mentorship %></li>
-                            </ul>
-                             <% other_user_id = mentor_record.user_id%>
-                            <% search_record = Mentee.find_by(user_id: current_user.id) %>
-                            <% other_match = Match.find_by(user_id: other_user_id, mentee_id: search_record.id) %>
-                        <% else %>
-                            <div class="card-body">
-                                <h5 class="card-title"><%= user.firstname + " " + user.lastname %></h5>
-                                <p class="card-text text-muted"><%= user.email %></p>
-                            </div>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Major: <%= mentee_record.major %></li>
-                                <li class="list-group-item">Areas of Interest: <%= mentee_record.area_of_interest%></li>
-                                <li class="list-group-item">Location: <%= mentee_record.location %></li>
-                                <li class="list-group-item">Graduation Year: <%= mentee_record.graduation_year %></li>
-                                <li class="list-group-item">Preferred Method of Contact: <%= mentee_record.preferred_method_of_contact %></li>
-                                <li class="list-group-item">Preferred Length of Mentorship: <%= mentee_record.length_of_mentorship %></li>
-                            </ul>
-                            <% other_user_id = mentee_record.user_id%>
-                            <% search_record = Mentor.find_by(user_id: current_user.id) %>
-                            <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
-                        <% end %>
-                
-                    <% puts "Should be dexters id "%>
-                    <% puts other_user_id %>
-                    <% puts search_record.id %>
-                    <%if other_match != nil %>
-                        <%if other_match.accepted %> 
-                            Match Accepted
-                            <button type="button" class="btn btn-light">Chat</button>
-                        <%end%>
-                    <% else%>
-                        Match Pending Acceptance ...
-                    <%end%>
-                    
-                    </div>
-                </div>
-            <% end %>
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:white;color:#003478">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:white;color:#003478">
-            <span class="icon-next"></span>
-        </a>
-    </div>
-    </div>
-    <% else %>
-        <div class= "center jumbotron" style="background:white" >
-          <h1>Welcome, <%= current_user.firstname %>!</h1>
-          <br>
-          <% if @matches_for_user.key?(current_user.id) %>
-            <button type="button" class="btn btn-success"><%= link_to 'Explore matches?', explore_path %></button>
-          <% else %>
-             <div class = "match_creation">
-              <%= form_tag matches_create_path, method: :post, id: 'match_creation_form'  do %>
-                <%= submit_tag 'Make matches', data: { disable_with: "Please wait..." } %>
-            <% end %>
-          <%end%>
-          </div>
-            <%# <%= form_tag matches_update_path, method: :post do %>
-                <%# <%= submit_tag 'Refresh Matches', data: { disable_with: "Please wait..." } %>
-            <%# <% end %>
-        </div>
-      <% end %>
+    <% accepted_matches_for_user = current_user.get_accepted_matches() %>
     
+    <% if accepted_matches_for_user.length > 0 %>
+    <h1>Matches</h1>
+        <div class= "container" style="background:white" >
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
+                    <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <% accepted_matches_for_user.each_with_index do |possible_match, i| %>
+                    <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
+                    <% end %>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <% accepted_matches_for_user.each_with_index do |match, i| %>
+                    <% if current_user.mentee? %>
+                        <% mentor_record = Mentor.find_by(id: match.mentor_id) %>
+                        <% user_record = mentor_record%>
+                        <% user = User.find(mentor_record.user_id) %>
+                    <%else %>
+                        <% mentee_record = Mentee.find_by(id: match.mentee_id)%>
+                        <% user_record = mentee_record%>
+                        <% user = User.find(mentee_record.user_id) %>
+                    <%end%>
+                        <div class="item <%= "active " if i==0 %>">
+                            <div>    
+                            <div class="container flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front center">
+                                        <% if user.avatar.attached? %>
+                                            <img class="card-img-top" src="<%=(url_for(user.avatar))%>" width="300" height="300">
+                                        <% else %>
+                                            <img class="card-img-top" src="https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width="300" height="300"/>
+                                        <% end %>
+                                        <h1 class="card-title"><%= user.firstname + " " + user.lastname %></h1>
+                                        <h2 class="card-text text-muted"><%= user.email %></h2>
+                                        <h3 class="card-text text-muted">**Hover over me**</h3>
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <div class="center" style="padding:60px">
+                                            <% if current_user.mentor? %>
+                                                <div>
+                                                    <table class= "table">
+                                                        <tbody>
+                                                        <tr>
+                                                        <td>Major</td>
+                                                        <td><%= mentee_record.major %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Areas of Interest</td>
+                                                        <td><%= mentee_record.area_of_interest%></td>
+                                                        </tr>
+                                                        <td>Location</td>
+                                                        <td><%= mentee_record.location%></td>
+                                                        </tr>
+                                                        <td>Graduation Year</td>
+                                                        <td><%= mentee_record.graduation_year%></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <% other_user_id = mentee_record.user_id%>
+                                                <% search_record = Mentor.find_by(user_id: current_user.id) %>
+                                                <% other_match = Match.find_by(user_id: other_user_id, mentor_id: search_record.id) %>
+                                            <%else %>
+                                                <div>
+                                                    <table class= "table">
+                                                        <tbody>
+                                                        <tr>
+                                                        <td>Area of expertise</td>
+                                                        <td><%= mentor_record.area_of_expertise %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Preferred Method of Contact</td>
+                                                        <td><%= mentor_record.preferred_method_of_contact %></td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>Alma Matter</td>
+                                                        <td><%= mentor_record.school %></td>
+                                                        </tr>
+                                                        <td>Current Position</td>
+                                                        <td><%= mentor_record.current_position%></td>
+                                                        </tr>
+                                                        <td>Location</td>
+                                                        <td><%= mentor_record.location%></td>
+                                                        </tr>
+                                                        </tr>
+                                                        <td>Preferred Length of Mentorship</td>
+                                                        <td><%= mentor_record.length_of_mentorship%></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <% other_user_id = mentor_record.user_id%>
+                                                <% search_record = Mentee.find_by(user_id: current_user.id) %>
+                                                <% other_match = Match.find_by(user_id: other_user_id, mentee_id: search_record.id) %>
+                                            <% end %>                                 
+
+                            <%if other_match != nil %>
+                                <%if other_match.accepted %> 
+                                    Status: It's a match! You can now chat with this user
+                                    <br>
+                                    <button type="button" class="button2">Chat</button>
+                                <% elsif other_match.rejected %>
+                                    Status: Match rejected :(. Swipe to see other matches or explore for more!
+                                    <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
+                                        <%if current_user.mentee? %> 
+                                        <%temp_id = Mentee.find_by(user_id: current_user.id).id%>
+                                        <% @match_to_reject = Match.find_by(user_id: current_user.id, mentor_id: mentor_record.id, mentee_id: temp_id)%>
+                                        <% end %>
+                                        <%if current_user.mentor? %>
+                                        <%temp_id = Mentor.find_by(user_id: current_user.id).id %>
+                                        <% @match_to_reject = Match.find_by(user_id: current_user.id, mentor_id: temp_id, mentee_id: mentee_record.id)%>
+                                        <%end%>
+                                        <%= hidden_field_tag :match_id, @match_to_reject.id %>
+                                        <%= submit_tag 'Reject Match', class: "btn-red-qa"%>
+                                    <% end %>      
+                                <% else%>
+                                    Status: Match pending acceptance
+                                <%end%>
+                            <%end%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev" style="background:white;color:#003478">
+                    <span class="icon-prev"></span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next" style="background:white;color:#003478">
+                    <span class="icon-next"></span>
+                </a>
+            </div>
+        </div>
+    <% else %>
+        <h1> Click the button below to explore matches </h1>
+        <div class="center"><%= link_to "Explore", explore_path, method: :get, class: "button2" %> </div>
+    <% end %>
 </table>
 </body>
 
 <br>
-
-

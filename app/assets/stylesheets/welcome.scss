@@ -1,6 +1,7 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$fontfamily: "Open Sans";
 .parallax {
     /* The image used */
     background-image: url("home.png");
@@ -21,6 +22,7 @@ DEMO DEPENDENCIES
 =====
 */
 
+$fontfamily: "verdana, arial, helvatica, sans-serif";
 
 /* The component will reset browser's styles of link */
 
@@ -90,6 +92,7 @@ DEMO DEPENDENCIES
     transition-property: transform;
     transition-timing-function: cubic-bezier(.86, .6, .08, 1.01);
     transition-duration: .4s;
+    font-family: $fontfamily
 }
 
 .ai-element_text:hover::before,
@@ -148,4 +151,112 @@ DEMO DEPENDENCIES
     --aiElementLineColor: #003478;
     --aiElementColor: #003478;
     --aiElementColorHover: #003478;
+}
+
+$color-button-red: #e74c3c;
+$color-button-green: #2ecc71;
+$color-text: #ecf0f1;
+$font-family: Arial,
+helvetica,
+sans-serif;
+$font-size: 100%;
+// button --qa
+.btn-red-qa,
+.btn-green-qa,
+.btn-blue-qa {
+    min-width: 100px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    margin: 20px 15px;
+    font-size: $font-size;
+    font-weight: 600;
+    transition: 0.5s;
+    background-color: transparent
+}
+
+.btn-red-qa {
+    border: 1.5px solid $color-button-red;
+    color: $color-button-red;
+}
+
+.btn-green-qa {
+    border: 1.5px solid $color-button-green;
+    color: $color-button-green;
+}
+
+.btn-red-qa:hover {
+    cursor: pointer;
+    &::before {
+        border: 0px;
+    }
+}
+
+.btn-green-qa:hover {
+    cursor: pointer;
+    &::before {
+        border: 0px;
+    }
+}
+
+.btn-red-qa:hover {
+    background-color: darken($color-button-red, 5%);
+    border: 2px solid lighten($color-button-red, 5%);
+    color: $color-text;
+    cursor: pointer;
+}
+
+.btn-green-qa:hover {
+    background-color: darken($color-button-green, 5%);
+    border: 2px solid lighten($color-button-green, 5%);
+    color: $color-text;
+    cursor: pointer;
+}
+
+.form {
+    display: inline-block;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 500px;
+    height: 500px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: transparent;
+    color: #003478;
+}
+
+.flip-card-back {
+    position: center;
+    background-color: #003478;
+    color: white;
+    transform: rotateY(180deg);
 }
