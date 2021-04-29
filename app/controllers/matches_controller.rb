@@ -120,7 +120,6 @@ class MatchesController < ApplicationController
     @mentees= Mentee.all 
     @all_matches = Match.all
     @first_match = Match.new()
-   # @first_match.make_map()
     @common_subjects_map=JobMap.new.map_method
     @matches_arr=[]
     if current_user.mentor 

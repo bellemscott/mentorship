@@ -38,9 +38,7 @@ class UsersController < ApplicationController
       log_in @user
       flash[:success] = "Welcome to the app!"
       puts user_params[:mentor]
-      if user_params[:mentor] == "1" && user_params[:mentee] == "1" 
-        additional_both()
-      elsif user_params[:mentor] == "1" && user_params[:mentee] == "0"
+      if user_params[:mentor] == "1" && user_params[:mentee] == "0"
         additional_mentor()
       elsif user_params[:mentor] == "0" && user_params[:mentee] == "1"
         additional_mentee()

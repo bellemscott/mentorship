@@ -6,9 +6,6 @@ class ChannelUsersController < ApplicationController
     @channel = Channel.last
     @channel.channel_users.where(user: current_user).first_or_create
     @channel.channel_users.where(user: @second_user).first_or_create
-    puts "DUCK"
-    puts current_user
-    puts channel_user_params[:second_user]
     redirect_to @channel
   end
 
@@ -24,8 +21,6 @@ class ChannelUsersController < ApplicationController
   private
 
     def set_channel
-      puts "boom"
-
     end
 
     def channel_user_params
