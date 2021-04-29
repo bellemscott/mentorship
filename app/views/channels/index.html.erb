@@ -2,15 +2,7 @@
 
 
 <div class="row">
-  <div class="col-sm-6">
-    <h1>Channels</h1>
-  </div>
-
-  <div class="col-sm-6 text-right">
-  <%= link_to new_channel_path, class: 'btn btn-primary' do %>
-    Add New Channel
-  <% end %>
-  </div>
+    <h1 style="text-align: left;">Chats</h1>
 </div>
 
 <div class="table-responsive">
@@ -18,7 +10,7 @@
     <thead>
       <tr>
     
-        <th>Name</th>
+        <th>Channel Name</th>
     
 
             
@@ -26,13 +18,8 @@
     </thead>
     <tbody>
       <% @user_channels.each do |channel| %>
-        <%= content_tag :tr, id: dom_id(channel), class: dom_class(channel) do %>
-          
+        <%= content_tag :tr, id: dom_id(channel), class: dom_class(channel) do %> 
             <td><%= link_to channel.name, channel %></td>
-          
-
-          
-          
         <% end %>
       <% end %>
     </tbody>
