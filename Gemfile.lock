@@ -105,6 +105,12 @@ GEM
     concurrent-ruby (1.1.8)
     connection_pool (2.2.5)
     crass (1.0.6)
+    devise (4.8.0)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     erubi (1.10.0)
     execjs (2.7.0)
     faraday (1.4.1)
@@ -201,6 +207,7 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    orm_adapter (0.5.0)
     pg (1.2.3)
     popper_js (2.8.6)
     profession (0.1.0)
@@ -263,6 +270,9 @@ GEM
     redis (4.2.5)
     regexp_parser (2.1.1)
     remotipart (1.4.4)
+    responders (3.0.1)
+      actionpack (>= 5.0)
+      railties (>= 5.0)
     ruby2_keywords (0.0.4)
     rubyzip (2.3.0)
     sass (3.7.4)
@@ -313,6 +323,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -349,6 +361,7 @@ DEPENDENCIES
   cable_ready (~> 4.5)
   capybara (>= 3.26)
   city-state
+  devise (~> 4.8)
   font-awesome-sass (~> 5.6, >= 5.6.1)
   friendly_id (~> 5.2, >= 5.2.5)
   gravatar_image_tag!

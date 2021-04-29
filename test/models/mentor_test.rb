@@ -18,7 +18,7 @@ class MentorTest < ActiveSupport::TestCase
   test "should be valid" do
     assert @mentor.valid?
     assert @mentor_nullfield.valid?
-    assert @mentor_emptyform.valid?
+    assert_not @mentor_emptyform.valid?
   end
 
   test "no current position" do

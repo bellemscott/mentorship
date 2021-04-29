@@ -2,10 +2,10 @@
 
 one:
   channel: one
-  users: one
+  user_id: MyString
   body: MyText
 
 two:
   channel: two
-  users: two
+  user_id: MyString
   body: MyText
