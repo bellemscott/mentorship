@@ -216,3 +216,7 @@ Sessions
 Shared: Includes shared partials
 	_error_messages.html.erb
 	_sidebar.html.erb
+	
+## What we plan to implement
+* chats update in real time (fix bug, implementation is there but not fully functional)
+* accept matches updates in real time using stimulus reflex and action cable so users don't need to refresh
