@@ -32,6 +32,9 @@ An matching algorithm is also in place that currently matches based length of me
 ### UI
 Users can explore their potential matches, flipping through their list on the explore (home) page. The cards on the explore page contain the profile picture as well as their general information Users can also view and edit their profile, including uploading and deleting their profile picture.
 
+### Chat
+Users can chat those who they have matched and accepted match with. Once a match is accepted and chat is created, a channel will exist on their “chat” page where they can chat other users that they have chatted before.
+
 ## Database Schema 
 
 Users
@@ -77,15 +80,29 @@ user can select preferences on which to match to other users on, ex: user A want
 Active Storage Tables
 * adds editing and uploading user profile photos functionality 
 
+Channels
+* Channel name, between two users
+
+Channel_users
+* Channel Id and User Id
+
+Messages
+* Channel Id and User Id
+* Body, text, contains message
+
+
 ## URL Information
 
-We have 5 resources mentioned below: 
+We have 8 resources mentioned below: 
 
   * resources :matches
   * resources :mentees
   * resources :mentors
   * resources :users
   * resources :states, only: :index
+  * resources: channels
+  * resources: messages
+  * resource: channel_users
 
 Our root page points to the welcome#index page which displays the sign up and log in options: 
 
@@ -97,6 +114,9 @@ The following get url links are used to display our pages:
   * get    '/login',   to: 'sessions#new'
   * get    '/explore',   to: 'welcome#show'
   * get     '/additional-info', to: 'users#additional_info'
+  * get '/chat’, to: 'channel#index'
+  * get '/channelshow, to: 'channel_users#show'
+
 
 These links are specifically for the profile pages, it is different depending on if the user is a mentee or mentor or neither
 
@@ -109,7 +129,10 @@ The following links are related to the session, it will create a session on logi
   * post   '/login',   to: 'sessions#create'
   * delete '/logout',  to: 'sessions#destroy'
 
-We will be adding more URL’s once we add our chat functionality and further improve on our matching algorithm so that users will be able to message and view other people’s profiles.
+The following links are used for creating chat channels between users.
+  * post '/chat/create’, to: ‘channels#create’
+  * post ‘channel_users/create’
+
 
 ### URL Structure/Pattern
 Signup/login option page: /
@@ -170,6 +193,19 @@ Users
 	additional_mentee.html.erb
 	additional_mentor.html.erb
 	
+Channels: Contains views for displaying chat 
+	index.html.erb 
+	show.html.erb 
+	new.html.erb 
+	edit.html.erb 
+	_form.html.erb
+	
+Channel_users 
+	show.html.erb
+	
+Messages 
+	_message.html.erb
+
 Welcome 
 	index.html.erb
 	show.html.erb
@@ -179,3 +215,4 @@ Sessions
 
 Shared: Includes shared partials
 	_error_messages.html.erb
+	_sidebar.html.erb
