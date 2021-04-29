@@ -2,7 +2,7 @@
 
 [![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
 
-Heroku link: https://guarded-ridge-55783.herokuapp.com
+Heroku link: https://mysterious-brushlands-91696.herokuapp.com/
 
 Github repo: https://github.com/bellemscott/mentorship
 
