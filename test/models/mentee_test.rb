@@ -11,6 +11,10 @@ class MenteeTest < ActiveSupport::TestCase
            location: "Boston", length_of_mentorship: "", graduation_year: "2022", user_id: "15")
      @mentee_no_major = Mentee.new(major: "", area_of_interest: "Software Development",preferred_method_of_contact: "Text", 
             location: "Boston", length_of_mentorship: "", graduation_year: "2022", user_id: "16")
+    @mentee_no_location = Mentee.new(major: "", area_of_interest: "Software Development",preferred_method_of_contact: "Text", 
+          location: "", length_of_mentorship: "", graduation_year: "2022", user_id: "19")
+    @mentee_no_contact = Mentee.new(major: "", area_of_interest: "Software Development",preferred_method_of_contact: "", 
+            location: "", length_of_mentorship: "", graduation_year: "2022", user_id: "20")
   end
 
   test "general Mentee" do
@@ -25,8 +29,12 @@ class MenteeTest < ActiveSupport::TestCase
     assert_not @mentee_length_of_ment.valid?
   end
 
-  test "no major" do
-    assert_not @mentor_noMentorshipLength.valid?
+  test "no location" do
+    assert @mentee_no_location.valid?
+  end
+
+  test "no method of contact" do
+    assert @mentee_no_contact.valid?
   end
 
 end
