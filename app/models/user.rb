@@ -3,6 +3,9 @@ class User < ApplicationRecord
     has_one_attached :avatar
     has_many :mentors 
     has_many :mentees
+    has_many :channel_users, dependent: :destroy
+    has_many :channels, through: :channel_users
+    has_many :messages, dependent: :destroy
     has_secure_password
     before_save { self.email = email.downcase }
     validates :firstname, presence: true

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :matching_preferences
+  resources :channels do
+    resource :channel_user
+    resources :messages
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :matches
   resources :mentees
@@ -7,7 +10,11 @@ Rails.application.routes.draw do
   resources :users
   resources :states, only: :index
   root 'matches#home'
+  get '/chat', to: 'channels#index'
+  post 'chat/create', to: 'channels#create'
   get  '/signup',  to: 'users#new'
+  get  '/channelshow',  to: 'channnel_users#show'
+  post 'channel_users/create'
   get  '/home',  to: 'matches#home'
   get '/menteeprofile/:id', to: 'mentees#show', as: 'menteeprofile'
   get '/mentorprofile/:id', to: 'mentors#show', as: 'mentorprofile'

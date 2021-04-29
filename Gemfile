@@ -70,3 +70,15 @@ gem "rails_admin"
 gem "redis", "~> 4.2"
 gem "cable_ready", "~> 4.5"
 gem "stimulus_reflex", "~> 3.4"
+
+gem 'font-awesome-sass', '~> 5.6', '>= 5.6.1'
+gem 'friendly_id', '~> 5.2', '>= 5.2.5'
+gem 'gravatar_image_tag', github: 'mdeering/gravatar_image_tag'
+gem 'mini_magick', '~> 4.9', '>= 4.9.2'
+gem 'name_of_person', '~> 1.1'
+gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-github', '~> 1.3'
+gem 'omniauth-twitter', '~> 1.4'
+gem 'sidekiq', '~> 6.0', '>= 6.0.3'
+gem 'sitemap_generator', '~> 6.0', '>= 6.0.1'
+gem 'whenever', require: false
