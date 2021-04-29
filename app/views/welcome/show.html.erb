@@ -65,6 +65,9 @@
                                                 <td>Graduation Year</td>
                                                 <td><%= possible_match.graduation_year%></td>
                                                 </tr>
+                                                <td>Preferred Length of Mentorship</td>
+                                                <td><%= possible_match.length_of_mentorship%></td>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -108,7 +111,6 @@
                                             <% puts "match was found "%>
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
-                                            <% notification = AcceptedNotification.with(match: @match) %>
                                         <% end %>
                                         <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
                                             <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>

@@ -1,8 +1,6 @@
 class MessageChannel < ApplicationCable::Channel
   def subscribed
     stop_all_streams
-    puts "HELLO"
-    puts render_to_string(current_user)
     @channel_user = current_user.channel_users.find_by(channel_id: params["id"])
     @channel = @channel_user.channel
     stream_for @channel

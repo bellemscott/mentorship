@@ -10,12 +10,17 @@
       <div>
         <%= link_to "Leave #{@channel.name}", channel_channel_user_path(@channel), method: :delete, class: "button2" %>
       </div>
+      <br>
+      <br>
     </div>
 
     <div data-target="channel.messages">
       <%= render @channel.messages %>
     </div>
-
+      <br>
+      <br>
+      <br>
+      <br>
   </div>
 
   <div class="fixed-bottom row">

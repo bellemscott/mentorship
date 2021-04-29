@@ -4,18 +4,16 @@ require "rails/test_help"
 
 class ActiveSupport::TestCase
   include Devise::Test::IntegrationHelpers
-  
+  include Warden::Test::Helpers
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   #fixtures :all
-  def log_in( user )
-    if integration_test?
-      login_as(user, :scope => :user)
-    else
-      sign_in(user)
-    end
+  def sign_in( user:, password: )
+    post 'login/' \
+    "user[email]"    => user.email,
+    "user[password]" => user.password
   end
   # Add more helper methods to be used by all tests here...
 end

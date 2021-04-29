@@ -28,10 +28,22 @@ class ChannelsController < ApplicationController
   # POST /channels
   # POST /channels.json
   def create
-    @channel = Channel.new(channel_params)
-      if @channel.save
-        redirect_to channel_channel_user_path(@channel, :channel_user_params => {second_user: params[:second_user]})
-      end 
+    @all_channels = Channel.all
+    duplicate = false
+    @all_channels.each do |channel|
+      seconduser = User.find_by(id:params[:second_user])
+      s = "#{current_user.firstname} #{current_user.lastname} and #{seconduser.firstname} #{seconduser.lastname}"
+      if channel.name == s
+        duplicate = true
+        @channel = channel
+        puts channel.id
+      end
+    end
+    if duplicate == false
+      @channel = Channel.new(channel_params)
+      @channel.save
+    end
+    redirect_to channel_channel_user_path(@channel, :channel_user_params => {second_user: params[:second_user]})
   end
 
   # PATCH/PUT /channels/1
