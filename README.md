@@ -221,3 +221,4 @@ Shared: Includes shared partials
 * chats update in real time (fix bug, implementation is there but not fully functional)
 * accept matches updates in real time using stimulus reflex and action cable so users don't need to refresh
 * IF there is time, add in matching preferences for users so they can select what they would like to match upon
+* write more tests, nonunit and unit
