@@ -5,7 +5,7 @@ if current_user.mentor == true && current_user.mentee == false
 elsif current_user.mentee  && current_user.mentor == false
     is_mentee()
 ```
-First we check to see if the current user is a mentee or a mentor. If the current user is a mentee we iterate through the list of mentors to find a match. If the current user is a mentor we iterate through the current list of mentees inorder to find a match. 
+First we check to see if the current user is a mentee or a mentor. If the current user is a mentee we iterate through the list of mentors to find a match. If the current user is a mentor we iterate through the list of mentees inorder to find a match. 
 
 ``` xml 
  if (mentor.length_of_mentorship==@mentee.length_of_mentorship) or (@common_subjects_map[@mentee.major].include? mentor.current_position)
@@ -13,7 +13,7 @@ First we check to see if the current user is a mentee or a mentor. If the curren
           check_duplicate(newMatch)
 end
 ```
-We match based on two variables. If a mentee and a mentor indicate that they want to participate in the mentorship for the same amount of weeks, then a match will be created. The second variables we match on is the mentee's major and the mentor's occupation. When mentors sign up they can select their current position from a drop down menu that consicts of about 1,000 occupations. Mentees can select their major that from a drop down menu that consists of all of the majors offered at Brandeis. 
+We match based on two variables. If a mentee and a mentor indicate that they want to participate in the mentorship for the same amount of weeks, then a match will be created. The second variables we match on is the mentee's major and the mentor's occupation. When mentors sign up they can select their current position from a drop down menu that consists of about 1,000 occupations. Mentees can select their major that from a drop down menu that consists of all of the majors offered at Brandeis. 
 
 ``` xml 
 @common_subjects_map=JobMap.new.map_method
