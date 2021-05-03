@@ -39,7 +39,7 @@
                                     <% if possible_match.avatar.attached? %>
                                         <img class="card-img-top" src="<%=(url_for(possible_match.avatar))%>" width="300" height="300">
                                     <% else %>
-                                        <img class="card-img-top" src=<% image_tag("defaultpic.png") %> width="300" height="300"/>
+                                        <img class="card-img-top" src= "https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png" width=300 height="300"/>
                                     <% end %>
                                     <h1 class="card-title"><%= possible_user.firstname + " " + possible_user.lastname %></h1>
                                     <h2 class="card-text text-muted"><%= possible_user.email %></h2>
