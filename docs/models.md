@@ -27,19 +27,7 @@ attr_accessor :remember_token
 
 **Mentees**
 
-<p> If a user selects the mentee checkbox, they are immediately led to fill out mentee fields such as major, and length of mentorship. The schema is below </p>
-
-``` xml 
-    t.string "major"
-    t.string "area_of_interest"
-    t.string "preferred_method_of_contact"
-    t.string "location"
-    t.integer "length_of_mentorship"
-    t.string "graduation_year"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-```
+<p> If a user selects the mentee checkbox, they are immediately led to fill out mentee fields such as major, and length of mentorship.</p>
 
 <p> The associations and validations for being a mentee and filling out the fields are below. Essentially, the fields that are required are those that we eventually match on so they can get matches later on. Also in the model file is a singular method that loads the list of subjects and fills the dropdwon menu for the major field. </p>
 
