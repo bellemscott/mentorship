@@ -2,19 +2,7 @@
 
 **Users**
 
-<p> The user model is the first in the logical flow of model creation. When an individual signs up, they are brought to the user form, whose fields are that of the user schema, shown below. </p>
-``` xml 
-      t.string "firstname"
-      t.string "lastname"
-      t.string "email"
-      t.string "password"
-      t.string "password_digest"
-      t.boolean "mentor"
-      t.boolean "mentee"
-      t.string "remember_digest"
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-```
+<p> The user model is the first in the logical flow of model creation. When an individual signs up, they are brought to the user form, whose fields are that of the user schema</p>
 
 <p> As far as validation, they must have an email of valid format, a password of a length longer than 6 characters, has a secured password as well, as remember me tokens so a user can save time on sign in. The user also has many has_many assosciations, given that this model is the top of the architecture. Specific requirements are shown below for the user. </p>
 
@@ -67,18 +55,6 @@ attr_accessor :remember_token
 
 <p>Conversely, if a user selects the mentor checkbox, they are led to fill out the mentor form with fields like current position. For this particular field, we used a gem called Profession which was very helpful as it contained a list of 1000 relavent jobs with methods to assemble them neatly. This list is filled in the mode in a very simple method. </p>
 
-``` xml 
-      t.string "area_of_expertise"
-      t.string "preferred_method_of_contact"
-      t.string "school"
-      t.string "current_position"
-      t.string "location"
-      t.integer "length_of_mentorship"
-      t.integer "user_id"
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-```
-
 <p> As far as validations and associations, mentor is exactly the same as mentor except that instead of major being validated to be present, current position must be present. This is also for the purpose of matching later on. </p>
 
 
@@ -86,18 +62,6 @@ attr_accessor :remember_token
 
 <p> After a user submits the mentor or mentee form, they are taken to the matches index where they can elect to make matches with a button. The reason this was done is because users can make matches multiple times. Say there was a scenario where instead, we didn't have a button, and matches were created as soon as they could be (after the mentor/mentee info is filled out). They go through their matches, hate all of them and reject them all. Now the user cannot have more matches as there is no path to it now. So, instead, we made it easy on the user and had a button. After they click make matches, the matching algorithm is exectured (see Matching), and matches are created as a join between users, mentees, and mentors. The userid in each match corresponds to who's match it is, but during the match creation, the other party's match is also created so they have the match on their page as well. Matches can also be acccepted or rejected, in which case they will move. If accepted, a match will be taken from the explore page and put under the matches tab, and if rejected, the match will never show up in either. </p> 
 
-``` xml 
-      t.bigint "mentor_id"
-      t.bigint "mentee_id"
-      t.integer "user_id"
-      t.boolean "accepted", default: false
-      t.boolean "rejected", default: false
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-      t.index ["mentee_id"], name: "index_matches_on_mentee_id"
-      t.index ["mentor_id"], name: "index_matches_on_mentor_id"
-
-```
 <p> The access/lookup of a match is quite fast, and we are satisfied with the implementation of matches. As far as associations, a match belongs to :mentee and :mentor.</p>
 
 **Channels**
