@@ -18,4 +18,4 @@ We match based on two variables. If a mentee and a mentor indicate that they wan
 ``` xml 
 @common_subjects_map=JobMap.new.map_method
 ```
-We created a hash that maps different majors to different occupations. This is a many to many relationship. Many majors are mapped to many occupations, and many occupations are mapped to many majors. If a mentors current position is in the array of occupations that a metees major is mapped to then a match is created. This was one of the most difficult part about creating our match algorithm. 
+We created a hash that maps different majors to different occupations. This is a many to many relationship. A major is mapped to many occupations, and an occupations is mapped to many majors. If a mentor's current position is in the array of occupations that a metee's major is mapped to then a match is created. This was one of the most difficult part about creating our match algorithm. 
