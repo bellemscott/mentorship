@@ -1,8 +1,8 @@
-class InitSchema < ActiveRecord::Migration[4.2]
+class InitSchema < ActiveRecord::Migration
   def up
     # These are extensions that must be enabled in order to support this database
     enable_extension "plpgsql"
-    create_table "active_storage_attachments" do |t|
+    create_table "active_storage_attachments", id: :serial do |t|
       t.string "name", null: false
       t.string "record_type", null: false
       t.bigint "record_id", null: false
@@ -11,7 +11,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
       t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
     end
-    create_table "active_storage_blobs" do |t|
+    create_table "active_storage_blobs", id: :serial do |t|
       t.string "key", null: false
       t.string "filename", null: false
       t.string "content_type"
@@ -22,12 +22,12 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.datetime "created_at", null: false
       t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
     end
-    create_table "active_storage_variant_records" do |t|
+    create_table "active_storage_variant_records", id: :serial do |t|
       t.bigint "blob_id", null: false
       t.string "variation_digest", null: false
       t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
     end
-    create_table "channel_users" do |t|
+    create_table "channel_users", id: :serial do |t|
       t.bigint "channel_id", null: false
       t.bigint "user_id", null: false
       t.datetime "created_at", precision: 6, null: false
@@ -36,12 +36,12 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.index ["channel_id"], name: "index_channel_users_on_channel_id"
       t.index ["user_id"], name: "index_channel_users_on_user_id"
     end
-    create_table "channels" do |t|
+    create_table "channels", id: :serial do |t|
       t.string "name"
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
     end
-    create_table "matches" do |t|
+    create_table "matches", id: :serial do |t|
       t.bigint "mentor_id"
       t.bigint "mentee_id"
       t.integer "user_id"
@@ -52,7 +52,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.index ["mentee_id"], name: "index_matches_on_mentee_id"
       t.index ["mentor_id"], name: "index_matches_on_mentor_id"
     end
-    create_table "matching_preferences" do |t|
+    create_table "matching_preferences", id: :serial do |t|
       t.boolean "location", default: true
       t.boolean "length_of_mentorship", default: true
       t.boolean "common_subjects", default: true
@@ -61,7 +61,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.datetime "updated_at", precision: 6, null: false
       t.integer "user_id"
     end
-    create_table "mentees" do |t|
+    create_table "mentees", id: :serial do |t|
       t.string "major"
       t.string "area_of_interest"
       t.string "preferred_method_of_contact"
@@ -72,7 +72,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
     end
-    create_table "mentors" do |t|
+    create_table "mentors", id: :serial do |t|
       t.string "area_of_expertise"
       t.string "preferred_method_of_contact"
       t.string "school"
@@ -83,7 +83,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
     end
-    create_table "messages" do |t|
+    create_table "messages", id: :serial do |t|
       t.bigint "channel_id", null: false
       t.bigint "user_id", null: false
       t.text "body"
@@ -92,7 +92,7 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.index ["channel_id"], name: "index_messages_on_channel_id"
       t.index ["user_id"], name: "index_messages_on_user_id"
     end
-    create_table "users" do |t|
+    create_table "users", id: :serial do |t|
       t.string "firstname"
       t.string "lastname"
       t.string "email"
@@ -103,7 +103,6 @@ class InitSchema < ActiveRecord::Migration[4.2]
       t.string "remember_digest"
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
-      t.string "username"
     end
     add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
     add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
