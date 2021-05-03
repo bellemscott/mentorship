@@ -1,11 +1,13 @@
 # Bugs and Obstacles
 
+## Bugs we have fixed, or will fix
 <p> Safe to say, in a project this long and extensive, there was bound to be struggles we had to work through as developers. Arguably the first major obstacle we encountered that took a significant amount of time to fix was the issue of duplicate matches. Our matching algorithm was unfunctional, and we found that each time a page was loaded, more matches were being created that were exact duplicates. After heavily changing both how the matches were being created and adding checks in the code for duplicates before saving a record, the match creation worked perfectly.</p>
 
 <p> The next obstacle we faced was matching up common interests between mentees and mentors to get more accurate matches (major <-> current position). Ava did a great job by eventually fixing this to be a physical data structure that greatly reduced the redundencies in our code and improved code style and efficiency </p> 
   
 <p> Finally, arguably the biggest problem we faced was reactivity. Chat is still not in real time as the app is currently (could change before final presentation). The message data does get sent between the two people, but does not update in real time. Belle found a workaround where the user chatting can still see their chats send, as entering a chat automatically renders the page again quickly. We understand that this "fix" is hardly worthy of the term, and if we all have more time in our schedules, we can meet up to figure it out once and for all. The action cable sections of the app were easily the most difficult, and took the longest for our group to solve. Our first priority as it stands is making the chat reactive as we are completely concious of the negative effect reloading the page has on UI. Better communication, planning, and responsibility could have allowed us to find the answer more quickly, but our team absolutely has the ability to make the chat as technologically impressive as it can be.</p>
 
+## Blocked bugs
 <p> A bug we still can't fix (or aren't even sure about) to this day is the parallelization of the app. Meaning -- if multiple people are using it all at the same time, we've seen instances when data gets mixed up. Inituitively, we think this has something to do with the current_user variable and functionality in rails, where perhaps the current_user gets mixed around a lot. Safe to say, if we had more time, this feature would be a priority, but nothing online or in the gorails slack seemed to be of assistance to us. It's possible that no one else had the problem we were having, as we ourselves do not quite understand it. Our priorities just didn't line up with fixing this bug before the end.</p>
 
 > Fix a broken feature, two more will take it's place...
