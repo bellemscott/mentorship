@@ -1,19 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  firstname: MyString
-  lastname: MyString
-  email: MyString
-  password: MyString
-  password_digest: MyString
-  mentor: false
-  mentee: false
+# one:
+#   firstname: MyString
+#   lastname: MyString
+#   email: MyString
+#   password: MyString
+#   password_digest: MyString
+#   mentor: false
+#   mentee: false
 
-two:
-  firstname: MyString
-  lastname: MyString
-  email: MyString
-  password: MyString
-  password_digest: MyString
-  mentor: false
-  mentee: false
+# two:
+#   firstname: MyString
+#   lastname: MyString
+#   email: MyString
+#   password: MyString
+#   password_digest: MyString
+#   mentor: false
+#   mentee: false

@@ -2,7 +2,8 @@ require "test_helper"
 
 class MentorsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @mentor = mentors(:one)
+    @mentor = Mentor.create(area_of_expertise: "Software Engineering", preferred_method_of_contact: "Text", school: "Brandeis", 
+      current_position: "Manager", location: "Boston", length_of_mentorship: "2", user_id: "2")
   end
 
   test "should get index" do

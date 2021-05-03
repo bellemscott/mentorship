@@ -1,17 +1,20 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  major: MyString
-  area_of_interest: MyString
-  preferred_method_of_contact: MyString
-  location: MyString
-  length_of_mentorship: MyString
-  graduation_year: MyString
+  major: "MyString"
+  area_of_interest: "MyString"
+  preferred_method_of_contact: "MyString"
+  location: "MyString"
+  length_of_mentorship: "MyString"
+  graduation_year: "MyString"
+  user_id: "MyString"
+  created_at: "MyString"
+  updated_at: "MyString"
 
-two:
-  major: MyString
-  area_of_interest: MyString
-  preferred_method_of_contact: MyString
-  location: MyString
-  length_of_mentorship: MyString
-  graduation_year: MyString
+# two:
+#   major: MyString
+#   area_of_interest: MyString
+#   preferred_method_of_contact: MyString
+#   location: MyString
+#   length_of_mentorship: MyString
+#   graduation_year: MyString

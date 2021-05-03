@@ -26,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
   test "validity" do
     assert @user_menteetrue.valid?
     assert @user_mentortrue.valid?
-    assert @user_bothtrue.valid?
+    assert @user_bothtrue.invalid?
     assert_not @user_invalidemail.valid?
     assert_not @user_noname.valid?
     assert @user_neithertrue.valid?

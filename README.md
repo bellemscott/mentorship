@@ -27,10 +27,10 @@ Brandeis Mentorship is an app created by a team of Brandeis undergraduate studen
 Users can sign up as either a mentor, a mentee, or both. After filling in some basic information, depending on which path these choose, they will be directed to fill in additional information. This additional information is specific to either mentors or mentees, and includes fields such as, but not limited to, desired length of mentorship, location, major, and profession. Users can also elect to click the remember me token so their local system can save their login info for convenience.
 
 ### Matching
-A primitive, preliminary matching algorithm is also in place that currently matches solely based length of mentorship of the two individuals. Up next in our project is the task of matching based on both location, which will be trivial, and more complex, matching mentee majors with mentor professions. Our strategy to the matching algorithm will be making each Brandeis major, of which there are less than 100, correspond to a list of relavent key words that we will decide based on the professions dataset, which contains 1000 professions. If a profession contains one or many of the keywords, a match can be formed. 
+An matching algorithm is also in place that currently matches based length of mentorship (in weeks) desired, as well as matches mentee's majors to mentor's professions/areas of expertise. When a user clicks 'Make Matches', their matches are created upon which point they can explore them, as well as accept/reject those matches. When they accept a match, the match moves to their Matches page, and the status (accepted by other user, pending, rejected) is shown. If the status is rejected, a reject option comes up for the user in which case the match is removed from their list. Also, we have implemented that users will continue to get new matches as long as there are more users they haven't yet seen that match their criteria. Upon a new user's creation, the matches made for that user will also be added to existing users that form the other party. If a match is accepted by both users, a chat option will pop up, allowing the two to connect and message in the site.
 
 ### UI
-Users can explore their potential matches, flipping through their list on the explore (home) page. Our next step is letting them have the ability of accepting a match and beginning a conversation. We plan to use Twilio's programmable chat tool to implement mentee/mentor conversations. Users can also view and edit their profile, including uploading and deleting their profile picture.
+Users can explore their potential matches, flipping through their list on the explore (home) page. The cards on the explore page contain the profile picture as well as their general information Users can also view and edit their profile, including uploading and deleting their profile picture.
 
 ## Database Schema 
 
@@ -38,8 +38,10 @@ Users
 * first name, last name, must be present
 * email, must be of valid format and less than 50 characters
 * password, must be more than 6 characters
-* mentee or/and mentor checkboxes, can check one, both, or none if a user has yet to decide (in this case there will be no matches)
+* mentee or/and mentor checkboxes, can check one or the other 
 * remember digest, so users' local machines can save their information for convenience 
+* accepted, true or false
+* rejected, true or false
 
 Mentee
 * major, drop down list of all Brandeis subjects, must select one

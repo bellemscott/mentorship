@@ -2,7 +2,8 @@ require "test_helper"
 
 class MenteesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @mentee = mentees(:one)
+    @mentee = Mentee.create(major: "Computer Science", area_of_interest: "Software Development",preferred_method_of_contact: "Text", 
+      location: "Boston", length_of_mentorship: "1", graduation_year: "2022", user_id: "1")
   end
 
   test "should get index" do

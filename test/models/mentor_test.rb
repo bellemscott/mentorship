@@ -1,4 +1,4 @@
- require "/test/models/test_helper.rb"
+ require "test_helper.rb"
 
 class MentorTest < ActiveSupport::TestCase
 
@@ -22,7 +22,11 @@ class MentorTest < ActiveSupport::TestCase
   test "should be valid" do
     assert @mentor.valid?
     assert @mentor_nullfield.valid?
+<<<<<<< HEAD
     assert_not @mentor_emptyform.valid? #dont think this test shoud pass with new changes
+=======
+    assert_not @mentor_emptyform.valid?
+>>>>>>> edbc7a9e822ac277d07617930ab5e748f48f37af
   end
 
   test "no current position" do
