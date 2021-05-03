@@ -13,7 +13,7 @@ Schema
   end
 ```
 
- Each match contains the ids of the mentor and the mentee that are matched. Mentors and mentees are matched based on the length of the mentorship they both desire, the major of the mentee and the occupation of the mentor. Once the match is created the user can view their matches profile. Information such as area of interests, perferred method of contact, and current location can be viewed. From there, the user can choose to accept or reject the match. Once a match is accepted the mentee and the mentor can chat. 
+ Each match contains the ids of the mentor and the mentee that are matched. Mentors and mentees are matched based on the length of the mentorship they both desire, the major of the mentee and the occupation of the mentor. Once the match is created the user can view their matches profile. Information such as area of interest, perferred method of contact, and current location can be viewed. From there, the user can choose to accept or reject the match. Once a match is accepted the mentee and the mentor can chat. 
  
 ``` xml 
  create_table "mentees", force: :cascade do |t|
@@ -76,4 +76,4 @@ Schema
     t.string "username"
   end
  ```
-  When a user creates an account they are prompted to enter their first name, last names, email, and a password that they have created. Users can sign up as either a mentee or a mentor.  
+  When a user creates an account they are prompted to enter their first name, last name, email, and a password that they have created. Users can sign up as either a mentee or a mentor.  
