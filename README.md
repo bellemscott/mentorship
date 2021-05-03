@@ -2,7 +2,7 @@
 
 [![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
 
-Heroku link: https://guarded-ridge-55783.herokuapp.com
+Heroku link: https://mysterious-brushlands-91696.herokuapp.com/
 
 Github repo: https://github.com/bellemscott/mentorship
 
@@ -69,8 +69,7 @@ Matches
 * reference mentee id, to join mentor and mentee
 * user id, used to join match record with corresponding user record
 
-Matching preferences - created but not integrated with functionality yet
-user can select preferences on which to match to other users on, ex: user A wanted to match based on being located in the state of california, but did not care whether they were a brandeis_alumni, A would uncheck brandeis_alumni checkbox, which are default true
+Matching preferences: User can select preferences on which to match to other users on, ex: user A wanted to match based on being located in the state of california, but did not care whether they were a brandeis_alumni, A would uncheck brandeis_alumni checkbox, which are default true
 * boolean brandeis_alumni
 * boolean location
 * boolean length of mentorship
@@ -216,3 +215,9 @@ Sessions
 Shared: Includes shared partials
 	_error_messages.html.erb
 	_sidebar.html.erb
+	
+## What we plan to implement
+* chats update in real time (fix bug, implementation is there but not fully functional)
+* accept matches updates in real time using stimulus reflex and action cable so users don't need to refresh
+* IF there is time, add in matching preferences for users so they can select what they would like to match upon
+* write more tests, nonunit and unit
