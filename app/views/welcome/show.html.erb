@@ -99,6 +99,7 @@
                                     <%end%>
                                         <div class="card-body">
                                         <%= form_tag welcome_accept_path, method: :post, class: "form" do %>
+                                            heyyyyy belle
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
                                         <% end %>
