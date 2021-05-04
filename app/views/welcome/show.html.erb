@@ -10,7 +10,7 @@
     <div class= "container" style="background:white;" >
         <% if @users.length == 0%>
         <h1> No users to explore yet. Refresh or come back later! </h1>
-        <%end%>
+        <%else%>
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" style="background:white;">
                 <!-- Indicators -->
             <ol class="carousel-indicators">
@@ -99,7 +99,6 @@
                                     <%end%>
                                         <div class="card-body">
                                         <%= form_tag welcome_accept_path, method: :post, class: "form" do %>
-                                            heyyyyy belle
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
                                         <% end %>
@@ -124,5 +123,6 @@
             </a>
         </div>
     </div>
+    <%end%>
 </body>
 </html> 
