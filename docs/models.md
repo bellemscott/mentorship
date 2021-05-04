@@ -7,7 +7,6 @@
   * [User Interface](ui.md)
   * [Chat](chat.md)
   * [Technologies](technologies.md)
-
   * [Bugs](bugs.md)
   * [Reflection](reflection.md)
 
