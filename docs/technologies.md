@@ -12,16 +12,10 @@
 
 # Additional Technologies
 
-## City State Gem
+  * city state gem
+  * cable ready
+  * redis
+  * active storage
 
-Used to get dropdown of states for sign up form.
-
-## Squasher
-
-Used to clean migration files.
-
-## Active Storage 
-
-Used to upload profile photos. 
 
 
