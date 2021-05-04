@@ -1,0 +1,10 @@
+---
+name: Brandeis Mentorship
+blurb: Introducing the first online social platform for people to find others to work out with! With Off the Bench, you can find pick-up games or events in your area, join and search for games based on skill level, location, sport, and other filters, create games for a specific time and a place, set up a calendar to look for games while you’re away
+course: COSI166
+semester: 2021 (Spring)
+github: https://github.com/bellemscott/mentorship
+application: https://mysterious-brushlands-91696.herokuapp.coms
+presentation:  https://docs.google.com/presentation/d/1zXEOHFw54ZgYvAofwkCxYOGIRbONqBZasKKuopjf8Cw/edit?usp=sharing
+team: Belle Scott, Alan Huang, Ava Harnick and Mahima Devanahalli
+---
