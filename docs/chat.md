@@ -1,4 +1,20 @@
+# Table of contents
+
+* [General Overview](overview.md)
+  * [Schema](schema.md)
+  * [Models](models.md)
+  * [Matches](matches.md)
+  * [User Interface](ui.md)
+  * [Chat](chat.md)
+  * [Technologies](technologies.md)
+
+  * [Bugs](bugs.md)
+  * [Reflection](reflection.md)
+
+# Chat
+
 Chat is used to initiate conversation between two users: a mentor and mentee. A chat channel is created between two users after two conditions. First they are matched with another user and request to be matched. Once the corresponding user has accepted the match, the user must click the "chat" button and join chat, upon which a chat channel will be opended between the two users. 
+
 ![image](https://user-images.githubusercontent.com/70479647/116936702-3443c480-ac36-11eb-87c4-7b71fc10cd92.png)
 
 Following clicking the chat button the user will be redirected to a page to "join" a chat channel. The channel between these two users is created using the following code that references both users:
