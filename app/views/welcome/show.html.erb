@@ -8,28 +8,19 @@
 <body>
     <h1>Explore</h1>
     <div class= "container" style="background:white;" >
-        <% if @user.mentee? %>
-            <% @mentee_id = Mentee.find_by(user_id: @user.id).id %>
-            <% users = @mentor_matches %> 
-            <% role = "mentor"%>
-        <% elsif @user.mentor? %>
-            <% @mentor_id = Mentor.find_by(user_id: @user.id).id %>
-            <% users = @mentee_matches%>
-            <% role = "mentee"%>
-        <% end %>
-        <% if users.length == 0%>
+        <% if @users.length == 0%>
         <h1> No users to explore yet. Refresh or come back later! </h1>
         <%end%>
         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" style="background:white;">
                 <!-- Indicators -->
             <ol class="carousel-indicators">
-                <% users.each_with_index do |possible_match, i| %>
+                <% @users.each_with_index do |possible_match, i| %>
                 <li data-target="#mycarousel" data-slide-to=#{i) class="#{'active' if i == 0}"></li>
                 <% end %>
             </ol>
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                <% users.each_with_index do |possible_match, i| %>
+                <% @users.each_with_index do |possible_match, i| %>
                     <% possible_user = User.find(possible_match.user_id) %>          
                     <div class="item <%= "active " if i==0 %>">    
                         <div>    
@@ -47,7 +38,7 @@
                                 </div>
                                 <div class="flip-card-back">
                                     <div class="center" style="padding:60px">
-                                    <% if role == "mentee" %>
+                                    <% if @role == "mentee" %>
                                         <div>
                                             <table class= "table">
                                                 <tbody>
@@ -101,24 +92,17 @@
                                             </table>
                                         </div>
                                     <% end %>
+                                    <% if @user.mentee?%>
+                                        <% @match = Match.find_by(user_id: @user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                    <%else%>
+                                        <% @match = Match.find_by(user_id: @user.id, mentor_id: @mentor_id, mentee_id: possible_match.id)%>
+                                    <%end%>
                                         <div class="card-body">
                                         <%= form_tag welcome_accept_path, method: :post, class: "form" do %>
-                                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                                            <% end %>
-                                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                                            <%end%>
-                                            <% puts @match %>
-                                            <% puts "match was found "%>
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
                                         <% end %>
                                         <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
-                                            <%if @user.mentee? %> <% @match = Match.find_by(user_id: current_user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
-                                            <% end %>
-                                            <%if @user.mentor? %><% @match = Match.find_by(user_id: current_user.id, mentor_id: @mentor_id, mentee_id: possible_match.id) %>
-                                            <%end%>
-                                            <% puts @match %>
-                                            <% puts "match was found "%>
                                             <%= hidden_field_tag :match_id, @match.id %>
                                             <%= submit_tag 'Reject Match?', class: "btn-red-qa"%>
                                         <% end %>

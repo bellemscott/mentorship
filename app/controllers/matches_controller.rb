@@ -6,12 +6,19 @@ class MatchesController < ApplicationController
   @@matches_hash = {}
   # GET /mentors or /mentors.json
   def index
+    @user = current_user
     @all_matches = Match.all
     @mentors = Mentor.all
     @mentees=Mentee.all
     @users=User.all
     @matches_for_user = @@matches_hash
     @match=Match.first
+    if @user.mentee?
+      @temp_id = Mentee.find_by(user_id: @user.id).id
+    end
+    if @user.mentor?
+      @temp_id = Mentor.find_by(user_id: @user.id).id
+    end
   end
 
   def home

@@ -8,6 +8,16 @@ class WelcomeController < ApplicationController
         @mentor_matches = fill_mentor_matches()     # array of Mentors
         @mentee_matches = fill_mentee_matches()     # array of Mentees
         @user_match = nil
+        if @user.mentee?
+            @mentee_id = Mentee.find_by(user_id: @user.id).id
+            @users = @mentor_matches
+            @role = "mentor"
+        end
+        if @user.mentor?
+            @mentor_id = Mentor.find_by(user_id: @user.id).id
+            @users = @mentee_matches
+            @role = "mentee"
+        end
     end
 
 def fill_mentor_matches

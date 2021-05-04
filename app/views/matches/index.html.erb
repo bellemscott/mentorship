@@ -114,15 +114,8 @@
                                      <%= link_to "Chat", chat_create_path(channel: { name: "#{user.firstname} #{user.lastname} and #{current_user.firstname} #{current_user.lastname}"}, second_user: user), method: :post, class: "button3"%>
                                 <% elsif other_match.rejected %>
                                     Status: Match rejected :(. Swipe to see other matches or explore for more!
+                                    <%  @match_to_reject = Match.find_by(user_id: @user.id, mentor_id: @temp_id, mentee_id: mentee_record.id)  %>
                                     <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
-                                        <%if current_user.mentee? %> 
-                                        <%temp_id = Mentee.find_by(user_id: current_user.id).id%>
-                                        <% @match_to_reject = Match.find_by(user_id: current_user.id, mentor_id: mentor_record.id, mentee_id: temp_id)%>
-                                        <% end %>
-                                        <%if current_user.mentor? %>
-                                        <%temp_id = Mentor.find_by(user_id: current_user.id).id %>
-                                        <% @match_to_reject = Match.find_by(user_id: current_user.id, mentor_id: temp_id, mentee_id: mentee_record.id)%>
-                                        <%end%>
                                         <%= hidden_field_tag :match_id, @match_to_reject.id %>
                                         <%= submit_tag 'Reject Match', class: "btn-red-qa"%>
                                     <% end %>      
