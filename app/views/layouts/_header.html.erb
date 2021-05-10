@@ -1,36 +1,49 @@
-<header>
-<nav class="navbar bg-transparent navbar-fixed-top py-5">
+<nav class="navbar bg-transparent navbar-expand-lg navbar-fixed-top">
       <div class="container">
-          <% if logged_in? %>
-          <div class="col-sm-2">
-          <%= link_to image_tag("logo1.png", size: "150x150", alt: "logo"), home_path, class: 'nav navbar-brand navbar-left', id: 'logo' %>
-            </div>
-            <ul class="nav navbar-nav navbar-right">
-            <% @mentee = Mentee.find_by(user_id: current_user.id) %>
-            <% @mentor = Mentor.find_by(user_id: current_user.id) %>
-            <li><%= link_to "Chat", chat_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-            <% if @mentee.nil? && @mentor.nil?%>
-              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
-            <% elsif current_user.mentee? %>
-              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3"%></li> 
-              <li><%= link_to "Profile", menteeprofile_path(@mentee), method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
-            <% elsif current_user.mentor? %>
-              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Profile", mentorprofile_path(@mentor), method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
-            <% else %>
-              <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Profile", userprofile_path(current_user), method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Profile", profile_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
-              <% end %>
-            </ul>``
-          <% end %>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand"><%= link_to image_tag("logo1.png", size: "150x150", alt: "logo"), home_path, class: 'nav navbar-brand navbar-left', id: 'logo' %></a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+        <% if logged_in? %>
+            <ul class="nav navbar-nav navbar-right">
+              <% @mentee = Mentee.find_by(user_id: current_user.id) %>
+              <% @mentor = Mentor.find_by(user_id: current_user.id) %>
+              <li><%= link_to "Chat", chat_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <% if @mentee.nil? && @mentor.nil?%>
+                <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
+              <% elsif current_user.mentee? %>
+                <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3"%></li> 
+                <li><%= link_to "Profile", menteeprofile_path(@mentee), method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
+              <% elsif current_user.mentor? %>
+                <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Profile", mentorprofile_path(@mentor), method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
+              <% else %>
+                <li><%= link_to "Explore", explore_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Profile", userprofile_path(current_user), method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Matches", matches_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Profile", profile_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+                <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
+              <% end %>
+            </ul>
+            <% else %>
+            <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Explore", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Profile", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Matches", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Profile", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
+              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
+            </ul>
+          <% end %>
+        </div><!--/.nav-collapse -->
       </div>
-   </nav>
-</header> 
+    </nav>

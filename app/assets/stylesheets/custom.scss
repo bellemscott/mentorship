@@ -115,3 +115,11 @@ header {
     text-align: center;
     color: #fff;
 }
+
+.navbar-toggle {
+    border-color: #003478;
+    .icon-bar {
+        color: #003478;
+        background-color: #003478;
+    }
+}
