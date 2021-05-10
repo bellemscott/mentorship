@@ -1,5 +1,6 @@
 <nav class="navbar bg-transparent navbar-expand-lg navbar-fixed-top">
       <div class="container">
+      <% if logged_in? %>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -10,7 +11,6 @@
           <a class="navbar-brand"><%= link_to image_tag("logo1.png", size: "150x150", alt: "logo"), home_path, class: 'nav navbar-brand navbar-left', id: 'logo' %></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-        <% if logged_in? %>
             <ul class="nav navbar-nav navbar-right">
               <% @mentee = Mentee.find_by(user_id: current_user.id) %>
               <% @mentor = Mentor.find_by(user_id: current_user.id) %>
@@ -35,15 +35,7 @@
                 <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
               <% end %>
             </ul>
-            <% else %>
-            <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Explore", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Profile", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Matches", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Profile", "", method: :get, class: "r-link ai-element ai-element3" %></li> 
-              <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
-            </ul>
-          <% end %>
         </div><!--/.nav-collapse -->
+        <% end %>
       </div>
     </nav>
