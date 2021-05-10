@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <%= javascript_pack_tag 'hello_coffee' %>
+
   <%= render 'layouts/header' %>
     <title>Mentorship</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,6 +11,8 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'hello_coffee' %>
+
   </head>
 
   <body>

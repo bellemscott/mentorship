@@ -94,16 +94,26 @@
                                     <% end %>
                                     <% if @user.mentee?%>
                                         <% @match = Match.find_by(user_id: @user.id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+                                        <% @other_match = Match.find_by(user_id: possible_match.user_id, mentor_id: possible_match.id, mentee_id: @mentee_id)%>
+
                                     <%else%>
                                         <% @match = Match.find_by(user_id: @user.id, mentor_id: @mentor_id, mentee_id: possible_match.id)%>
+                                        <% @other_match = Match.find_by(user_id: possible_match.user_id, mentor_id: @mentor_id, mentee_id: possible_match.id)%>
                                     <%end%>
+                                    <% matches = []%>
+                                    <% matches.push(@match.id)%>
+                                    <% matches.push(@other_match.id)%>
+                                    <% puts "welcome show b"%>
+                                    <% puts @other_match.id%>
                                         <div class="card-body">
                                         <%= form_tag welcome_accept_path, method: :post, class: "form" do %>
-                                            <%= hidden_field_tag :match_id, @match.id %>
+                                            <%= hidden_field_tag :match_id, @match.id%>
+                                            <%= hidden_field_tag :other_id, @other_match.id%>
                                             <%= submit_tag 'Accept Match?', class: "btn-green-qa"%>
                                         <% end %>
                                         <%= form_tag welcome_reject_path, method: :post, class: "form" do %>
-                                            <%= hidden_field_tag :match_id, @match.id %>
+                                            <%= hidden_field_tag :match_id, @match.id%>
+                                            <%= hidden_field_tag :other_id, @other_match.id%>
                                             <%= submit_tag 'Reject Match?', class: "btn-red-qa"%>
                                         <% end %>
                                     </div>

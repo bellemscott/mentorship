@@ -41,7 +41,9 @@ end
 def accept
     @match = Match.find_by(id: params[:match_id].to_i)
     accepted = true
-    @match.accept(accepted)
+    other_match = Match.find_by(id: params[:other_id].to_i)
+    match = @match
+    @match.accept(accepted, match)
     redirect_to matches_path
 end
 

@@ -7,9 +7,27 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+//= require_tree .
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
 import "controllers"
+
+$( document ).ready(function() {
+    $("#accept").on("ajax:success", function(event) {
+      $('#accept')[0].reset();
+    });
+  });
+
+document.addEventListener("turbolinks:load", () => {
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+    $('.toast').toast({ autohide: false })
+    $('.toast').toast('show')
+})
+
+document.addEventListener("turbolinks:load", () => {
+    $('.toast').toast('show')
+})

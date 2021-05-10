@@ -8,6 +8,9 @@
     "@rails/webpacker": "5.2.1",
     "bootstrap": "^4.6.0",
     "cable_ready": "^4.5.0",
+    "coffee-loader": "1.0.1",
+    "coffeescript": "1.12.7",
+    "jquery": "^3.6.0",
     "stimulus": "^2.0.0",
     "stimulus_reflex": "3.4.1",
     "turbolinks": "^5.2.0"

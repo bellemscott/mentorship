@@ -86,3 +86,5 @@ gem 'whenever', require: false
 gem "devise", "~> 4.8"
 
 gem "squasher", "~> 0.6.2"
+
+gem "coffee-rails", "~> 5.0"

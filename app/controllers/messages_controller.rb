@@ -1,20 +1,23 @@
 class MessagesController < ApplicationController
-    before_action :set_channel
-  
-    def create
-      @message = @channel.messages.create(message_params)
-      MessageChannel.broadcast_to @channel, message: render_to_string(@message)
-      UnreadsChannel.broadcast_to @channel, {}
-      render '/channels/show'
+  #before_action :authenticate_user!
+  before_action :set_chatroom
+
+  def create
+    message = @chatroom.messages.new(message_params)
+    message.user = current_user
+    message.save
+    MessageRelayJob.perform_later(message)
+   # redirect_to 'chatrooms/show'
+    #render 'chatrooms/show'
+  end
+
+  private
+
+    def set_chatroom
+      @chatroom = Chatroom.find(params[:chatroom_id])
     end
-  
-    private
-  
-      def set_channel
-        @channel = current_user.channels.find(params[:channel_id])
-      end
-  
-      def message_params
-        params.require(:message).permit(:body).merge(user: current_user)
-      end
-  end  
+
+    def message_params
+      params.require(:message).permit(:body)
+    end
+end

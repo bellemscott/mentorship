@@ -1,6 +1,6 @@
-class MatchingChannel < ApplicationCable::Channel
+class NotifyChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "matching"
+    stream_from "notifs"
   end
 
   # def unsubscribed

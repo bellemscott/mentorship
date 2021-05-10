@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :channels do
-    resource :channel_user
-    resources :messages
-  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :matches
   resources :mentees
@@ -11,8 +7,8 @@ Rails.application.routes.draw do
   resources :users
   resources :states, only: :index
   root 'matches#home'
-  get '/chat', to: 'channels#index'
-  post 'chat/create', to: 'channels#create'
+  get '/chat', to: "chatrooms#index" #'channels#index'
+  post 'chat/create', to: 'chatrooms#show'
   get  '/signup',  to: 'users#new'
   get  '/channelshow',  to: 'channnel_users#show'
   post 'channel_users/create'
@@ -29,5 +25,10 @@ Rails.application.routes.draw do
   post 'welcome/accept', to: 'welcome#accept'  #for rejecting matches
   post 'welcome/reject', to: 'welcome#reject'    #for accepting matches
   devise_for :users, only: []
+  resources :direct_messages
+  resources :chatrooms do
+    resource :chatroom_users
+    resources :messages
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
