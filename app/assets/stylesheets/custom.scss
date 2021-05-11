@@ -245,3 +245,10 @@ header {
     border-right: 1px solid #eeeeee;
   }
   
+.navbar-toggle {
+    border-color: #003478;
+    .icon-bar {
+        color: #003478;
+        background-color: #003478;
+    }
+}
