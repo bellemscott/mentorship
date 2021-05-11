@@ -36,7 +36,6 @@ class ChannelsController < ApplicationController
       if channel.name == s
         duplicate = true
         @channel = channel
-        puts channel.id
       end
     end
     if duplicate == false

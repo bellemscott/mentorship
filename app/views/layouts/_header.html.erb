@@ -8,7 +8,7 @@
             <ul class="nav navbar-nav navbar-right">
             <% @mentee = Mentee.find_by(user_id: current_user.id) %>
             <% @mentor = Mentor.find_by(user_id: current_user.id) %>
-            <li><%= link_to "Chat", chat_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
+            <li><%= link_to "Chat", rooms_path, method: :get, class: "r-link ai-element ai-element3" %></li> 
             <% if @mentee.nil? && @mentor.nil?%>
               <li><%= link_to "Log out", logout_path, method: :delete, class: "r-link ai-element ai-element3" %></li> 
             <% elsif current_user.mentee? %>

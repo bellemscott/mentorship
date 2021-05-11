@@ -4,13 +4,25 @@ class RoomsController < ApplicationController
     # GET /rooms
     # GET /rooms.json
     def index
-      @rooms = Room.all
+      @all_rooms = Room.all
+      @rooms = []
+      @all_rooms.each do |room|
+        if room[:name].include? current_user.firstname
+          @rooms.push(room)
+        end
+      end
     end
   
     # GET /rooms/1
     # GET /rooms/1.json
     def show
-      @rooms = Room.all
+      @all_rooms = Room.all
+      @rooms = []
+      @all_rooms.each do |room|
+        if room[:name].include? current_user.firstname
+          @rooms.push(room)
+        end
+      end
       render 'index'
     end
   
