@@ -111,7 +111,8 @@
                                 <%if other_match.accepted %> 
                                     Status: It's a match! You can now chat with this user
                                     <br>
-                                     <%= link_to "Chat", chat_create_path(channel: { name: "#{user.firstname} #{user.lastname} and #{current_user.firstname} #{current_user.lastname}"}, second_user: user), method: :post, class: "button3"%>
+
+                                     <%= link_to "Chat", room_create_path(room: { name: "#{user.firstname} #{user.lastname} and #{current_user.firstname} #{current_user.lastname}"}), method: :post, class: "button3"%>
                                 <% elsif other_match.rejected %>
                                     Status: Match rejected :(. Swipe to see other matches or explore for more!
                                     <%  @match_to_reject = Match.find_by(user_id: @user.id, mentor_id: @temp_id, mentee_id: mentee_record.id)  %>

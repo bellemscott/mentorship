@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<div id="room-id" data-room-id="<%= @room.try(:id) %>"></div>
+<div id="user-id" data-user-id="<%= current_user.id %>"></div>
+
+    <div class="col-3">
+          <small>Logged in as</small>
+          <b><%= current_user.firstname %><br></b><br>
+      <div class="chats-header">Chats</div><br>
+      <% @rooms.each do |room| %>
+        <%= link_to room, class: 'room-link' do %>
+          <% active_class = (@room == room) ? 'active' : '' %>
+              <span class="r-link ai-element ai-element3"><%= room.name %></span><br>
+              </span>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-9">
+      <% if @room.present? %>
+        <div class="chat-room">
+            <span class="chat-room-title" href="#">
+              <h3><%= @room.name %></h3>
+            </span>
+          </nav>
+          <div id="messages" class="container">
+            <% @room.messages.each do |message| %>
+              <%= render 'messages/message', message: message %>
+            <% end %>
+          </div>
+          <div class="chat-box">
+            <%= render 'messages/form', message: Message.new, room: @room %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

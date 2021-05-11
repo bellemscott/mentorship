@@ -27,7 +27,6 @@ class MentorsController < ApplicationController
     @user = @users.last
     @mentor[:user_id] = @user.id
     if @mentor.save
-      puts @mentor[:current_position]
       redirect_to home_path
     end
   end

@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :channels do
-    resource :channel_user
-    resources :messages
-  end
+  resources :messages
+  resources :rooms
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :matches
   resources :mentees
@@ -11,8 +9,8 @@ Rails.application.routes.draw do
   resources :users
   resources :states, only: :index
   root 'matches#home'
-  get '/chat', to: 'channels#index'
-  post 'chat/create', to: 'channels#create'
+  get '/room', to: 'rooms#index'
+  post 'room/create', to: 'rooms#create'
   get  '/signup',  to: 'users#new'
   get  '/channelshow',  to: 'channnel_users#show'
   post 'channel_users/create'
