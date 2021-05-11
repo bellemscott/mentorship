@@ -27,20 +27,6 @@ class InitSchema < ActiveRecord::Migration
       t.string "variation_digest", null: false
       t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
     end
-    create_table "channel_users", id: :serial do |t|
-      t.bigint "channel_id", null: false
-      t.bigint "user_id", null: false
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-      t.datetime "last_read_at"
-      t.index ["channel_id"], name: "index_channel_users_on_channel_id"
-      t.index ["user_id"], name: "index_channel_users_on_user_id"
-    end
-    create_table "channels", id: :serial do |t|
-      t.string "name"
-      t.datetime "created_at", precision: 6, null: false
-      t.datetime "updated_at", precision: 6, null: false
-    end
     create_table "matches", id: :serial do |t|
       t.bigint "mentor_id"
       t.bigint "mentee_id"
@@ -83,14 +69,19 @@ class InitSchema < ActiveRecord::Migration
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
     end
-    create_table "messages", id: :serial do |t|
-      t.bigint "channel_id", null: false
-      t.bigint "user_id", null: false
-      t.text "body"
+    create_table "messages" do |t|
+      t.text "content"
+      t.integer "user_id", null: false
+      t.integer "room_id", null: false
       t.datetime "created_at", precision: 6, null: false
       t.datetime "updated_at", precision: 6, null: false
-      t.index ["channel_id"], name: "index_messages_on_channel_id"
+      t.index ["room_id"], name: "index_messages_on_room_id"
       t.index ["user_id"], name: "index_messages_on_user_id"
+    end
+    create_table "rooms" do |t|
+      t.string "name"
+      t.datetime "created_at", precision: 6, null: false
+      t.datetime "updated_at", precision: 6, null: false
     end
     create_table "users", id: :serial do |t|
       t.string "firstname"
@@ -106,10 +97,6 @@ class InitSchema < ActiveRecord::Migration
     end
     add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
     add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-    add_foreign_key "channel_users", "channels"
-    add_foreign_key "channel_users", "users"
-    add_foreign_key "messages", "channels"
-    add_foreign_key "messages", "users"
   end
 
   def down
