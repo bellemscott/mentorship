@@ -79,15 +79,12 @@ Matching preferences: User can select preferences on which to match to other use
 Active Storage Tables
 * adds editing and uploading user profile photos functionality 
 
-Channels
-* Channel name, between two users
-
-Channel_users
-* Channel Id and User Id
+Rooms
+* room name, between two users
 
 Messages
-* Channel Id and User Id
-* Body, text, contains message
+* Room Id and User Id
+* Content, contains message
 
 
 ## URL Information
@@ -99,9 +96,8 @@ We have 8 resources mentioned below:
   * resources :mentors
   * resources :users
   * resources :states, only: :index
-  * resources: channels
   * resources: messages
-  * resource: channel_users
+  * resource: rooms
 
 Our root page points to the welcome#index page which displays the sign up and log in options: 
 
@@ -113,8 +109,7 @@ The following get url links are used to display our pages:
   * get    '/login',   to: 'sessions#new'
   * get    '/explore',   to: 'welcome#show'
   * get     '/additional-info', to: 'users#additional_info'
-  * get '/chat’, to: 'channel#index'
-  * get '/channelshow, to: 'channel_users#show'
+  * get '/chat’, to: 'room#index'
 
 
 These links are specifically for the profile pages, it is different depending on if the user is a mentee or mentor or neither
@@ -128,10 +123,8 @@ The following links are related to the session, it will create a session on logi
   * post   '/login',   to: 'sessions#create'
   * delete '/logout',  to: 'sessions#destroy'
 
-The following links are used for creating chat channels between users.
-  * post '/chat/create’, to: ‘channels#create’
-  * post ‘channel_users/create’
-
+The following link is used for creating chat rooms between users.
+  * post '/room/create’, to: ‘rooms#create’
 
 ### URL Structure/Pattern
 Signup/login option page: /
@@ -192,18 +185,18 @@ Users
 	additional_mentee.html.erb
 	additional_mentor.html.erb
 	
-Channels: Contains views for displaying chat 
+rooms: Contains views for displaying chat 
 	index.html.erb 
 	show.html.erb 
 	new.html.erb 
 	edit.html.erb 
 	_form.html.erb
 	
-Channel_users 
-	show.html.erb
-	
 Messages 
 	_message.html.erb
+	show.html.erb
+	form.html.erb
+	new.html.erb
 
 Welcome 
 	index.html.erb
@@ -216,8 +209,3 @@ Shared: Includes shared partials
 	_error_messages.html.erb
 	_sidebar.html.erb
 	
-## What we plan to implement
-* chats update in real time (fix bug, implementation is there but not fully functional)
-* accept matches updates in real time using stimulus reflex and action cable so users don't need to refresh
-* IF there is time, add in matching preferences for users so they can select what they would like to match upon
-* write more tests, nonunit and unit
