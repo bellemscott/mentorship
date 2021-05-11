@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   resources :messages
   resources :rooms
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -26,6 +25,5 @@ Rails.application.routes.draw do
   post 'matches/create'
   post 'welcome/accept', to: 'welcome#accept'  #for rejecting matches
   post 'welcome/reject', to: 'welcome#reject'    #for accepting matches
-  devise_for :users, only: []
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
