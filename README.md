@@ -8,6 +8,8 @@ Github repo: https://github.com/bellemscott/mentorship
 
 Balsamic link: https://balsamiq.cloud/sz8gy6a/px60i7y
 
+Github Pages: https://bellemscott.github.io/mentorship/
+
 Tecnhical Information:
 
 * Ruby 2.7.2
